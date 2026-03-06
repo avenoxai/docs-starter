@@ -5,7 +5,18 @@ description: Understanding fees and how they're distributed
 
 # Trading Fees Explained
 
-Every trade on Slinq includes a dynamic fee that starts at 1% but adjusts based on market conditions. This fee is split between token creators and the platform.
+Every trade on Slinq includes a dynamic fee that starts at 1% but adjusts based on market conditions. These fees are managed by a **hook** — a smart contract plugin built into PancakeSwap V4 that runs automatically on every trade.
+
+## What Are Hooks?
+
+Hooks are PancakeSwap V4's way of letting protocols like Slinq add custom logic to every trade. Think of them as an automatic middleman that:
+
+- **Calculates the right fee** based on market conditions
+- **Protects against bots** during the first 2 minutes of a launch
+- **Splits fees** between the token creator and the protocol
+- **Adjusts for volatility** to protect against manipulation
+
+You don't need to do anything — hooks work invisibly in the background on every trade.
 
 ## Fee Breakdown
 
@@ -19,19 +30,34 @@ Every trade on Slinq includes a dynamic fee that starts at 1% but adjusts based 
 The 40% creator share is the highest in the industry. Most platforms give creators 0%.
 </Info>
 
+## Fee Beneficiaries
+
+When you launch your own token, you receive the full **40% creator share**. But when someone else helps bring your token to life (for example, through [social tokenization](/create/social-tokenization)), the fee split adjusts:
+
+| Scenario | Creator | First Buyer | Protocol |
+|----------|---------|-------------|----------|
+| **You launch your own token** | 40% | — | 60% |
+| **Someone else triggers your launch** | 30% | 10% | 60% |
+
+The "first buyer" is the person who actually executes the launch transaction on-chain. They receive a 10% share as a reward for putting your token live, while you still earn 30% as the creator.
+
+<Tip>
+Both scenarios give creators significant ongoing income. The 10% first-buyer reward incentivizes people to launch tokens they discover, creating a healthy ecosystem.
+</Tip>
+
 ## Two Types of Fees
 
 Slinq has two separate fee mechanisms that work together:
 
 ### 1. Hook Fees (Trading Fees)
 
-The **1% base fee** (plus any dynamic premiums) is the **hook fee** - this is distributed between stakeholders:
+The **1% base fee** (plus any dynamic premiums) is the **hook fee** — collected by the hook on every trade and distributed between stakeholders:
 
 | Recipient | Share | Purpose |
 |-----------|-------|---------|
-| **Token Creator/Beneficiary** | 40% | Rewards the token creator |
-| **Pool Initializer** | Variable | Rewards the launch executor |
-| **Slinq Protocol** | Remainder | Platform sustainability |
+| **Token Creator** | 40% (or 30%) | Rewards the token creator |
+| **First Buyer** | 0% (or 10%) | Rewards the person who launched the token |
+| **Slinq Protocol** | 60% | Platform sustainability |
 
 <Info>
 Hook fees are what you see deducted from your trades. These go to people, not burns.

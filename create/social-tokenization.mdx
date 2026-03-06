@@ -1,0 +1,149 @@
+---
+title: Social Tokenization
+description: Turn any viral post into a tradeable token with a simple reply
+---
+
+# Social Tokenization
+
+See a tweet or cast going viral? You can turn it into a tradeable token just by replying with a keyword. The original author automatically becomes the token creator and earns fees from every trade.
+
+## How It Works
+
+<Steps>
+  <Step title="Spot a great post">
+    Find a tweet or Farcaster cast you think deserves a token.
+  </Step>
+  <Step title="Reply with a keyword">
+    Reply to the post mentioning `@SlinqBot` (Twitter) or `@slinq` (Farcaster) with one of the trigger keywords.
+  </Step>
+  <Step title="AI generates the token">
+    Slinq's AI reads the original post and automatically generates a fitting token name, ticker, and description.
+  </Step>
+  <Step title="Token goes live">
+    The token deploys with the **original author** as the creator. They earn 40% of all trading fees.
+  </Step>
+</Steps>
+
+## Trigger Keywords
+
+Reply to any post with one of these keywords (plus the bot mention):
+
+```
+tokenize, tokenise, make this a token, coin this, launch this, mint this,
+turn this into a token, token this
+```
+
+**Example reply on Twitter:**
+```
+@SlinqBot tokenize this
+```
+
+**Example reply on Farcaster:**
+```
+@slinq coin this
+```
+
+<Tip>
+The keywords are flexible and work in multiple languages (including Chinese). As long as your reply contains one of the trigger phrases and mentions the bot, it will work.
+</Tip>
+
+## Who Becomes the Creator?
+
+This is the key difference from a normal launch:
+
+| Launch Method | Who is the Creator | Who Earns Fees |
+|---------------|-------------------|----------------|
+| **Social Tokenization** (reply) | Original post author | Original post author (40%) |
+| **Normal Launch** (direct request) | The person requesting | The person requesting (40%) |
+
+<Info>
+The person who replies with "tokenize this" is **not** the creator. The author of the original post is. This means you can gift someone a token and they'll earn from it.
+</Info>
+
+## Token Parameters
+
+Socially tokenized posts use these settings:
+
+| Parameter | Value |
+|-----------|-------|
+| Starting FDV | 5 WBNB |
+| Total Supply | 100 Billion |
+| Name & Ticker | AI-generated from the post content |
+| Description | AI-generated summary of the post |
+| Image | Auto-generated |
+
+<Info>
+The lower 5 WBNB starting FDV (compared to 10 WBNB for normal launches) makes it easy for anyone to get in early on viral moments.
+</Info>
+
+## Where Do These Tokens Appear?
+
+Socially tokenized tokens appear on the **Social Feed** page at [slinq.meme/socialfeed](https://slinq.meme/socialfeed). This is a dedicated feed showing tokens born from social posts, separate from the main homepage.
+
+## AI-Powered Token Creation
+
+When you trigger a social tokenization, Slinq's AI:
+
+1. **Reads the original post** to understand the context
+2. **Generates a token name** that captures the essence of the post
+3. **Creates a ticker** that's catchy and memorable
+4. **Writes a description** based on the post's content
+5. **Replies with a confirmation** including the trading link
+
+You don't need to specify any parameters — the AI handles everything.
+
+## Fee Sharing
+
+When someone else tokenizes your post, you earn as the creator:
+
+| Scenario | Creator Share | First Buyer Share | Protocol |
+|----------|-------------|-------------------|----------|
+| You tokenize your own post | 40% | — | 60% |
+| Someone else tokenizes your post | 30% | 10% | 60% |
+
+<Info>
+If someone else triggers the launch of your token (they're the "first buyer"), they receive a 10% share of trading fees as a reward. You still get 30% as the creator.
+</Info>
+
+## Tips
+
+<Columns cols={2}>
+  <Card title="Timing matters" icon="clock">
+    Tokenize posts while they're trending for maximum initial interest.
+  </Card>
+  <Card title="Context is key" icon="lightbulb">
+    The AI generates better names from posts with clear, memorable content.
+  </Card>
+  <Card title="Notify the author" icon="bell">
+    Let the original author know they now have a token earning fees for them.
+  </Card>
+  <Card title="Share the link" icon="share-nodes">
+    Once created, share the trading link to drive volume.
+  </Card>
+</Columns>
+
+## Common Questions
+
+<Accordion title="What if the original author doesn't have a wallet?">
+  The token is created and fees accumulate. When the author connects a wallet to Slinq (via their Twitter or Farcaster account), they can claim all accumulated fees.
+</Accordion>
+
+<Accordion title="Can I tokenize my own post?">
+  Yes! Reply to your own tweet or cast with a trigger keyword. You'll be both the author and the creator.
+</Accordion>
+
+<Accordion title="What if the post has already been tokenized?">
+  Each post can only be tokenized once. If someone already tokenized it, you'll get a reply letting you know.
+</Accordion>
+
+<Accordion title="Can the original author reject the token?">
+  Tokens are permissionless — once created, they exist on the blockchain permanently. However, the author can choose not to claim their fees.
+</Accordion>
+
+<Accordion title="Does the author need to do anything?">
+  Nothing. Fees accumulate automatically. The author just needs to connect their wallet to Slinq whenever they want to claim.
+</Accordion>
+
+<Card title="Launch your own token instead" icon="rocket" href="/create/overview">
+  Want full control? Create a token directly
+</Card>

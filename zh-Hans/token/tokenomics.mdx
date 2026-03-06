@@ -1,0 +1,215 @@
+---
+title: "$SLINQ 代币经济学"
+description: "完整了解 SLINQ 的代币经济、分配和质押机制"
+---
+
+## SLINQ 代币
+
+SLINQ 是 Slinq 生态的原生功能型代币。Slinq 本身是一个会把 40% 交易手续费分给创作者的 meme 发射平台。
+
+<CardGroup cols={3}>
+  <Card title="代币名称" icon="tag">
+    **SLINQ**
+  </Card>
+  <Card title="网络" icon="link">
+    **BNB Smart Chain**
+  </Card>
+  <Card title="总供应量" icon="coins">
+    **1,000,000,000**
+  </Card>
+</CardGroup>
+
+---
+
+## 供应分配
+
+SLINQ 的分配设计核心是：尽量把所有权留给社区，同时保证项目有长期运转空间。
+
+| 分配项 | 占比 | 数量 | 用途 |
+|--------|------|------|------|
+| **公平启动** | 55% | 550,000,000 | Bonding curve 销售，所有人都可参与 |
+| **赛季奖励** | 30% | 300,000,000 | 社区奖励和质押激励 |
+| **团队** | 10% | 100,000,000 | 核心团队，12 个月线性解锁 |
+| **创作者迁移激励** | 5% | 50,000,000 | 鼓励创作者从其他平台迁移到 Slinq |
+
+<CardGroup cols={2}>
+  <Card title="55% 公平启动" icon="rocket">
+    大部分供应通过 bonding curve 分配，没有预售，没有 VC 特权，谁都能公平参与。
+  </Card>
+  <Card title="30% 赛季奖励" icon="trophy">
+    用于多个赛季的奖励、质押排放和社区激励。
+  </Card>
+  <Card title="10% 团队份额" icon="users">
+    团队份额采用 12 个月线性解锁，确保团队和项目长期绑定。
+  </Card>
+  <Card title="5% 创作者迁移激励" icon="gift">
+    专门奖励把社区从其他平台迁移到 Slinq 的创作者。
+  </Card>
+</CardGroup>
+
+---
+
+## 创作者迁移计划
+
+<Info>
+**Welcome Bonus**：这个计划用来奖励那些从其他发币平台迁移到 Slinq 的创作者。
+</Info>
+
+我们拿出了总供应量的 5%（5000 万枚 SLINQ），专门用于奖励从其他 launchpad 迁移过来的创作者。
+
+### 为什么要迁移？
+
+<CardGroup cols={2}>
+  <Card title="40% 手续费分成" icon="money-bill-wave">
+    Slinq 会把全部交易手续费里的 40% 分给创作者，而大多数平台长期创作者分成是 0。
+  </Card>
+  <Card title="迁移奖励" icon="gift">
+    只要你在 Slinq 发出下一枚代币，就有机会拿到额外 SLINQ 奖励。
+  </Card>
+</CardGroup>
+
+### 工作流程
+
+<Steps>
+  <Step title="验证你的历史记录">
+    连接钱包，验证你曾经在其他平台发过币。
+  </Step>
+  <Step title="在 Slinq 发新币">
+    用 Slinq 发出你的下一枚 meme 币。
+  </Step>
+  <Step title="领取迁移奖励">
+    根据你过往发币表现，领取额外 SLINQ。
+  </Step>
+</Steps>
+
+---
+
+## 质押与 esSLINQ
+
+质押你的 SLINQ，可以赚到 **esSLINQ**（托管版 SLINQ）以及额外奖励。
+
+<CardGroup cols={3}>
+  <Card title="质押 SLINQ" icon="lock">
+    锁仓后即可开始赚奖励
+  </Card>
+  <Card title="赚取 esSLINQ" icon="gem">
+    获得不可转让的 esSLINQ 作为质押奖励
+  </Card>
+  <Card title="兑换为 SLINQ" icon="rotate">
+    通过线性归属或即时领取，把 esSLINQ 换成 SLINQ
+  </Card>
+</CardGroup>
+
+### esSLINQ 是什么？
+
+esSLINQ（escrowed SLINQ）是一种**不可转让**的奖励代币，你可以通过以下两种方式把它转成 SLINQ：
+
+<Tabs>
+  <Tab title="21 天归属">
+    **拿满价值的路径**。100% 领取你的 esSLINQ 对应 SLINQ。
+
+    - 锁定 esSLINQ 21 天
+    - 按线性方式逐步领取 SLINQ
+    - 无惩罚，能拿满全部额度
+    - 更适合长期持有者
+
+    ```
+    100 esSLINQ → 21 天 → 100 SLINQ
+    ```
+  </Tab>
+  <Tab title="即时领取">
+    **更快拿流动性**。立刻拿到 45%。
+
+    - 按 45% 比例即时兑换
+    - 剩余 55% 会被视作惩罚
+    - 惩罚会拆成两部分：50% 直接销毁，50% 回流到质押池
+    - 更适合短期流动性需求
+
+    ```
+    100 esSLINQ → Instant → 45 SLINQ
+                          → 27.5 Burned
+                          → 27.5 Back to Stakers
+    ```
+  </Tab>
+</Tabs>
+
+### 质押经济模型
+
+<AccordionGroup>
+  <Accordion title="奖励怎么发放？" icon="chart-line">
+    奖励会按 24 小时周期线性释放。你质押得越久，相对拿到的份额越高。如果有新的奖励注入，会和未发完的奖励合并，然后重新按新的 24 小时窗口继续发放。
+  </Accordion>
+  <Accordion title="惩罚回收机制是什么？" icon="recycle">
+    当用户按 45% 比例即时兑换 esSLINQ 时，剩下的 55% 会被拆开：
+    - **50% 直接销毁**，永久减少总供应
+    - **50% 回流奖励池**，重新分给质押用户
+
+    这会形成一个飞轮。越心急的人，越会反向补贴那些愿意长期质押的人。
+  </Accordion>
+  <Accordion title="归属期间能提前取消吗？" icon="xmark">
+    可以。你可以随时取消归属仓位：
+    - 已经归属的那部分 SLINQ 可以照常领取
+    - 尚未归属的 esSLINQ 会退回你的钱包
+    - 你可以重新开一个归属仓，或者直接即时兑换
+  </Accordion>
+  <Accordion title="最多能开多少个归属仓位？" icon="list">
+    你最多可以同时持有 **30 个活跃归属仓位**。已经完成的仓位可以清理掉，以释放槽位并拿回一部分 gas refund。
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 回购与销毁
+
+一部分协议手续费会被拿去 **回购 SLINQ**，然后 **永久销毁**。
+
+| 来源 | 动作 | 影响 |
+|------|------|------|
+| 交易手续费（协议份额） | 通过 PancakeSwap 回购 SLINQ | 减少流通量 |
+| 即时领取惩罚 | 其中 50% 直接销毁 | 减少总供应 |
+| 通缩压力 | 持续销毁 | 稀缺性逐步提高 |
+
+---
+
+## 代币安全性
+
+<CardGroup cols={2}>
+  <Card title="esSLINQ 不可转让" icon="shield">
+    esSLINQ 不能在二级市场流通，只能通过质押获得，再按规则换回 SLINQ。
+  </Card>
+  <Card title="团队份额线性解锁" icon="clock">
+    团队分配采用 12 个月线性解锁，保证长期一致性，不是拿完就跑。
+  </Card>
+</CardGroup>
+
+---
+
+## 代币用途
+
+<CardGroup cols={2}>
+  <Card title="质押奖励" icon="coins">
+    质押 SLINQ，赚 esSLINQ，并提高你的整体收益能力
+  </Card>
+  <Card title="治理" icon="gavel">
+    未来将用于协议治理决策
+  </Card>
+  <Card title="手续费折扣" icon="percent">
+    持有 SLINQ 可能获得平台费率优惠
+  </Card>
+  <Card title="专属权限" icon="star">
+    更早获得新功能和新活动的参与资格
+  </Card>
+</CardGroup>
+
+---
+
+## 开始使用
+
+<CardGroup cols={2}>
+  <Card title="质押 SLINQ" icon="lock" href="https://slinq.meme/stake">
+    现在就开始赚 esSLINQ 奖励
+  </Card>
+  <Card title="发一个代币" icon="rocket" href="/zh-Hans/create/overview">
+    发你的 meme 币，并开始赚 40% 手续费
+  </Card>
+</CardGroup>

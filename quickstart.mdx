@@ -8,8 +8,32 @@ description: Create your first token in under a minute
 Choose your preferred method to create a token. All options result in the same token with identical features.
 
 <Tabs>
+  <Tab title="Tokenize a Post" icon="wand-magic-sparkles">
+    The fastest way to create a token — reply to any viral tweet or cast.
+
+    <Steps>
+      <Step title="Find a great post">
+        Spot a tweet or Farcaster cast that deserves a token.
+      </Step>
+      <Step title="Reply with a keyword">
+        Reply mentioning `@SlinqBot` (Twitter) or `@slinq` (Farcaster):
+        ```
+        @SlinqBot tokenize this
+        ```
+      </Step>
+      <Step title="AI creates the token">
+        Slinq's AI generates a name, ticker, and description from the post. The original author becomes the creator.
+      </Step>
+      <Step title="Start trading">
+        The token is live instantly. Share the link from the bot's reply.
+      </Step>
+    </Steps>
+
+    <Tip>The original post author earns creator fees (30-40%). You can tokenize anyone's post — it's like gifting them a revenue stream.</Tip>
+  </Tab>
+
   <Tab title="Twitter" icon="x-twitter">
-    The fastest way to launch—directly from your Twitter feed.
+    Launch your own token directly from your Twitter feed.
 
     <Steps>
       <Step title="Compose your tweet">
@@ -44,6 +68,25 @@ Choose your preferred method to create a token. All options result in the same t
       </Step>
       <Step title="Share and trade">
         Your followers can trade immediately from the embedded link.
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Telegram" icon="paper-plane">
+    Launch and manage tokens from Telegram.
+
+    <Steps>
+      <Step title="Open the Slinq Bot">
+        Find `@SlinqBot` on Telegram and send `/start`.
+      </Step>
+      <Step title="Connect your wallet">
+        Link your wallet through the bot's Web App.
+      </Step>
+      <Step title="Create your token">
+        Follow the prompts to set your token name and symbol.
+      </Step>
+      <Step title="Launch and share">
+        Your token goes live. Share the link in your Telegram groups.
       </Step>
     </Steps>
   </Tab>
@@ -89,11 +132,13 @@ Every Slinq token has these properties:
 | Parameter | Value |
 |-----------|-------|
 | Total Supply | 100 Billion tokens |
-| Starting FDV | 50 - 50,000 BNB (you choose) |
-| Default FDV | 500 BNB |
+| Starting FDV | Depends on launch method |
+| Social Tokenization FDV | 5 WBNB |
+| Twitter/Farcaster FDV | 10 WBNB |
+| Web Interface FDV | 50 - 50,000 BNB (you choose) |
 | Trading Pair | TOKEN/WBNB |
-| Base Fee | 1% |
-| Creator Share | 40% of fees |
+| Base Fee | 1% (managed by PancakeSwap V4 hook) |
+| Creator Share | Up to 40% of fees |
 
 <Card title="Customize your token" icon="palette" href="/create/customization">
   Learn how to add images, descriptions, and social links

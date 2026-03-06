@@ -41,8 +41,14 @@ An exchange that operates without a central authority. PancakeSwap is a DEX.
 **FDV (Fully Diluted Valuation)**
 The total market cap if all tokens were in circulation. Calculated as: Token Price × Total Supply.
 
+**Fee Beneficiary**
+The wallet that receives a share of trading fees. Usually the token creator (40%), but when someone else triggers the launch, the split becomes 30% creator + 10% first buyer.
+
 **Fee Locker**
 The smart contract that holds accumulated creator fees until claimed.
+
+**First Buyer**
+The person who executes the on-chain launch transaction for a token. In social tokenization, the first buyer earns a 10% share of trading fees as a reward.
 
 ## G
 
@@ -53,6 +59,9 @@ The fee paid to process transactions on BNB Chain. Paid in BNB.
 
 **Holder**
 A wallet that owns tokens. Holder count is displayed on each token page.
+
+**Hook**
+A PancakeSwap V4 smart contract plugin that runs automatically on every trade. Slinq's hook handles dynamic fee calculation, MEV protection, and creator fee distribution. Hooks are what make Slinq tokens trade natively on PancakeSwap without needing a bonding curve.
 
 ## L
 
@@ -105,6 +114,12 @@ The difference between expected and actual trade prices. Caused by price movemen
 
 **Smart Contract**
 Self-executing code on the blockchain. Slinq's contracts handle token creation, trading, and fee distribution.
+
+**Social Feed**
+A dedicated page on Slinq showing tokens created through social tokenization (reply-based launches from Twitter and Farcaster).
+
+**Social Tokenization**
+The process of turning a social media post into a tradeable token by replying with a keyword like "tokenize this". The original author becomes the creator.
 
 ## T
 

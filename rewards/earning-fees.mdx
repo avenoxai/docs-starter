@@ -13,14 +13,14 @@ Every trade on your token generates fees. Here's how those fees flow to you.
   <Step title="Trade Happens">
     A user buys or sells your token on Slinq.
   </Step>
-  <Step title="Fee Collected">
-    1% of the trade value is automatically collected by the LP locker contract.
+  <Step title="Hook Calculates Fee">
+    The PancakeSwap V4 hook automatically calculates the fee (1% base + any dynamic premiums).
   </Step>
-  <Step title="Split Executed">
-    The fee is split: 40% to your creator wallet, 60% to the protocol.
+  <Step title="Hook Splits the Fee">
+    The fee is distributed: up to 40% to your creator wallet, 60% to the protocol.
   </Step>
   <Step title="Balance Updates">
-    Your pending balance in the fee locker increases.
+    Your pending balance in the fee locker contract increases.
   </Step>
   <Step title="Claim When Ready">
     You can claim your accumulated fees at any time.
@@ -35,15 +35,17 @@ Every trade in your token's pool generates fees:
 
 | Action | Fee Generated | Your Share |
 |--------|--------------|------------|
-| User buys token | 1% of BNB spent | 0.4% |
-| User sells token | 1% of BNB received | 0.4% |
+| User buys token | 1% of BNB spent | 0.3-0.4% |
+| User sells token | 1% of BNB received | 0.3-0.4% |
+
+Your exact share is 40% if you launched the token yourself, or 30% if someone else triggered the on-chain launch (see [fee beneficiaries](/trading/fees#fee-beneficiaries)).
 
 ### Fee Accumulation
 
 Fees accumulate in the fee locker contract:
 
 ```
-Your Balance = Sum of (0.4% × Trade Value) for all trades
+Your Balance = Sum of (Your Share % × Trade Value) for all trades
 ```
 
 <Info>

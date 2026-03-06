@@ -1,0 +1,67 @@
+---
+title: 欢迎来到 Slinq
+description: 在 BNB Chain 上把你的社交内容变成可交易代币
+---
+
+# 社交发币工厂
+
+Slinq 让你直接从 Twitter 或 Farcaster 发出可交易代币。不用写代码，也不用折腾复杂配置。发一条内容，就能开盘。
+
+<Columns cols={3}>
+  <Card title="推文发币" icon="x-twitter" href="/zh-Hans/create/twitter">
+    发一条推文就能上线代币
+  </Card>
+  <Card title="Cast 发币" icon="message" href="/zh-Hans/create/farcaster">
+    在 Farcaster 里几秒开盘
+  </Card>
+  <Card title="网页发币" icon="browser" href="/zh-Hans/create/web">
+    用完整功能的 Web 界面发币
+  </Card>
+</Columns>
+
+## 为什么选 Slinq？
+
+<Columns cols={2}>
+  <Card title="创作者拿 40% 手续费" icon="coins">
+    你的代币每一笔交易手续费里，40% 永久归你。大多数平台给创作者的长期分成是 0。
+  </Card>
+  <Card title="防 Rug 设计" icon="shield-check">
+    流动性永久锁定。创作者不能抽走资金，也不能把池子撤掉跑路。
+  </Card>
+  <Card title="MEV 保护" icon="lock">
+    动态费率会在开盘最关键的前几分钟抬高手续费，尽量把机器人和狙击盘挡在外面。
+  </Card>
+  <Card title="Season Pass 奖励" icon="trophy">
+    发币、交易都能拿积分。冲榜，拿奖励。
+  </Card>
+</Columns>
+
+## 怎么运作
+
+<Steps>
+  <Step title="创建你的代币">
+    你可以发推写 `@SlinqBot deploy $TICKER "Token Name"`，也可以直接走 Web 界面。代币几秒内就能上线。
+  </Step>
+  <Step title="开始交易">
+    你的代币会立刻在 PancakeSwap 上开放交易，流动性默认锁死。
+  </Step>
+  <Step title="开始赚手续费">
+    每一笔交易里 40% 的手续费会自动累积到你名下。你可以在创作者面板里查看收益。
+  </Step>
+</Steps>
+
+## 构建在 BNB Chain 上
+
+Slinq 跑在 BNB Chain 上，底层用的是 PancakeSwap V4 Infinity。确认快，Gas 低，流动性也深。
+
+| 特性 | Slinq |
+|------|-------|
+| 公链 | BNB Chain |
+| DEX | PancakeSwap V4 |
+| 创作者手续费分成 | 40% |
+| 流动性 | 永久锁定 |
+| 代币总量 | 1000 亿（固定） |
+
+<Card title="准备开盘？" icon="rocket" href="/zh-Hans/quickstart">
+  一分钟内发出你的第一个代币
+</Card>

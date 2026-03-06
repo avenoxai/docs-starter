@@ -1,0 +1,100 @@
+---
+title: 快速开始
+description: 一分钟内创建你的第一个代币
+---
+
+# 发出你的第一个代币
+
+你可以按自己习惯的方式发币。无论是 Twitter、Farcaster 还是 Web，最后拿到的都是同一套 Slinq 代币机制。
+
+<Tabs>
+  <Tab title="Twitter" icon="x-twitter">
+    最快的方式。直接在你的 Twitter 时间线里开盘。
+
+    <Steps>
+      <Step title="写一条推文">
+        发一条带上 `@SlinqBot` 的推文，并写上代币信息：
+        ```
+        @SlinqBot deploy $MOON "Moon Token"
+        ```
+      </Step>
+      <Step title="等确认回复">
+        几秒内你会收到回复，里面会带上代币合约地址和交易链接。
+      </Step>
+      <Step title="开始交易">
+        点进链接就能在 Slinq 看到你的代币。交易会立刻开放。
+      </Step>
+    </Steps>
+
+    <Tip>你的 Twitter 账号会被识别成创作者身份。之后所有交易手续费里，你都能拿 40%。</Tip>
+  </Tab>
+
+  <Tab title="Farcaster" icon="message">
+    在 Warpcast 或任何 Farcaster 客户端里原生发币。
+
+    <Steps>
+      <Step title="发 cast">
+        发一条带上 `@slinq` 的 cast，并填入代币信息：
+        ```
+        @slinq deploy $BASED "Based Token"
+        ```
+      </Step>
+      <Step title="收到确认">
+        Slinq 会回复你的 cast，附上代币地址和交易链接。
+      </Step>
+      <Step title="分享并交易">
+        你的关注者可以直接从嵌入链接进入交易。
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Web 界面" icon="browser">
+    想把细节都自己控住，就用这个。
+
+    <Steps>
+      <Step title="连接钱包">
+        打开 [slinq.meme](https://slinq.meme)，连接任意受支持的钱包。
+      </Step>
+      <Step title="点击 Launch Token">
+        在导航栏里找到 `Launch Token` 按钮。
+      </Step>
+      <Step title="填写代币信息">
+        输入名称、Symbol、描述，并上传图片。
+      </Step>
+      <Step title="设置 FDV">
+        选择你的初始 Fully Diluted Valuation，范围是 50 到 50,000 BNB。
+      </Step>
+      <Step title="签名并发币">
+        确认信息，签名，然后发布。
+      </Step>
+    </Steps>
+
+    <Info>Web 界面支持社交链接、自定义图片和更完整的代币描述。</Info>
+  </Tab>
+</Tabs>
+
+## 接下来会发生什么
+
+代币创建完成后：
+
+1. **流动性会被加入**，你的代币会和 BNB 在 PancakeSwap 配对。
+2. **LP 永久锁定**，任何人都无法把流动性撤走。
+3. **交易立刻开放**，所有人都能直接买卖。
+4. **你开始赚钱**，每一笔交易里的 40% 手续费都会流向你。
+
+## 代币参数
+
+每一个 Slinq 代币都带这些固定属性：
+
+| 参数 | 数值 |
+|------|------|
+| 总供应量 | 1000 亿枚 |
+| 初始 FDV | 50 - 50,000 BNB（由你决定） |
+| 默认 FDV | 500 BNB |
+| 交易对 | TOKEN/WBNB |
+| 基础手续费 | 1% |
+| 创作者分成 | 手续费的 40% |
+
+<Card title="自定义你的代币" icon="palette" href="/zh-Hans/create/customization">
+  了解图片、描述和社交链接怎么配置
+</Card>

@@ -79,18 +79,18 @@ For large purchases, consider splitting into multiple smaller trades to reduce p
 
 ## MEV Protection
 
-During the first 2 minutes after a token launches, dynamic fees protect against bots:
+During the first 2 minutes after a token launches, the hook charges higher fees on **buy orders only** to protect against bots:
 
-| Time After Launch | Fee |
-|-------------------|-----|
-| 0-30 seconds | 10% |
-| 30-60 seconds | ~7% |
-| 60-90 seconds | ~4% |
-| 90-120 seconds | ~2% |
-| After 2 minutes | 1% |
+| Time After Launch | Buy Fee | Sell Fee |
+|-------------------|---------|----------|
+| 0 seconds | 6% | 1% |
+| 30 seconds | ~3.8% | 1% |
+| 60 seconds | ~2.25% | 1% |
+| 90 seconds | ~1.3% | 1% |
+| 120 seconds+ | 1% | 1% |
 
 <Info>
-Higher early fees discourage sniping bots and give regular users a fair chance.
+Higher early buy fees discourage sniping bots and give regular users a fair chance. Sells always pay the standard 1%.
 </Info>
 
 ## Common Issues

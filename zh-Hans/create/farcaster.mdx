@@ -1,0 +1,138 @@
+---
+title: 通过 Farcaster 发币
+description: 在 Warpcast 和其他 Farcaster 客户端里部署代币
+---
+
+# Farcaster 发币
+
+你可以直接在 Warpcast 或任何 Farcaster 客户端里 @ `@slinq` 发币。
+
+## Cast 格式
+
+```
+@slinq deploy $TICKER "Token Name"
+```
+
+**示例：**
+```
+@slinq deploy $BASED "Based Token"
+@slinq create $FCAST "Farcaster Coin"
+@slinq launch $DEGEN "Degen Mode"
+```
+
+<Tip>
+`deploy`、`create`、`launch`、`make`、`build` 都能识别。
+</Tip>
+
+## 工作流程
+
+<Steps>
+  <Step title="发出 cast">
+    发一条带上 `@slinq` 的 cast，并填入 Symbol 和名称。
+  </Step>
+  <Step title="Slinq 处理请求">
+    Farcaster 机器人会校验请求，然后准备部署。
+  </Step>
+  <Step title="代币上线">
+    你的代币会在 BNB Chain 上创建，并带着锁定流动性开盘。
+  </Step>
+  <Step title="收到确认 cast">
+    Slinq 会回复你的 cast，并附上：
+    - 合约地址
+    - 交易链接
+    - 创作者面板链接
+  </Step>
+</Steps>
+
+## 要求
+
+| 要求 | 说明 |
+|------|------|
+| **Farcaster 账号** | 任何客户端里的活跃账号都可以 |
+| **Ticker** | 1-10 个字符，只能字母数字 |
+| **名称** | 1-50 个字符 |
+| **每日上限** | 每个 Farcaster ID 每天 4 个币 |
+
+## 默认参数
+
+Farcaster 发币会使用以下默认值：
+
+| 参数 | 数值 |
+|------|------|
+| 初始 FDV | 500 BNB |
+| 总供应量 | 1000 亿 |
+| 交易对 | TOKEN/WBNB |
+| 图片 | 自动生成 |
+| 描述 | 根据 cast 自动生成 |
+
+## Farcaster 特有能力
+
+### Frame 集成
+
+Slinq 的确认 cast 会带 Farcaster Frame，让你的关注者可以：
+- 一眼看代币数据
+- 直接从 Frame 里交易
+- 一键转发分享
+
+### 社交身份联动
+
+你的 Farcaster 资料会和代币自动绑定：
+- 头像会显示在代币页
+- 用户名会作为创作者展示
+- 关注你的人更容易找到你的币
+
+## 想在 Farcaster 里发得更好
+
+<Columns cols={2}>
+  <Card title="发到相关频道" icon="hashtag">
+    可以在像 /degen、/base 这样的频道里发，更容易拿到曝光。
+  </Card>
+  <Card title="用好你的人脉" icon="users">
+    @ 可能感兴趣的朋友或社区，让首波互动更快起来。
+  </Card>
+  <Card title="顺手补一句背景" icon="message">
+    最好在同一条 cast 或 thread 里顺便讲清楚这个币是什么。
+  </Card>
+  <Card title="多回回复" icon="reply">
+    愿意交流的人，就是你最早的一批社区基础。
+  </Card>
+</Columns>
+
+## 常见问题
+
+<Accordion title="我的 cast 没被识别">
+  - 确认你写的是 `@slinq`，不是 `@Slinq` 或其他变体
+  - 确认 cast 是公开可见的
+  - 处理通常只要 1-2 分钟，稍微等一下
+</Accordion>
+
+<Accordion title="Ticker 不可用">
+  Ticker 在整个平台内是唯一的。你可以试试：
+  - 加数字：`$BASED2`
+  - 改写法：比如把 `$BASED` 改成 `$BSED`
+</Accordion>
+
+<Accordion title="达到每日上限了">
+  Farcaster 每天可以发 4 个币。你可以改用 [Web 界面](/zh-Hans/create/web)，或者等到 UTC 零点重置。
+</Accordion>
+
+## 代币上线之后
+
+<Steps>
+  <Step title="转发确认 frame">
+    Recast 一下确认帖，把链接扩出去。
+  </Step>
+  <Step title="盯住交易动态">
+    在 Slinq 代币页查看成交和 Holder 变化。
+  </Step>
+  <Step title="收手续费">
+    40% 的交易手续费会流向你的创作者钱包。
+  </Step>
+  <Step title="持续发内容">
+    代币能不能活，很多时候取决于你后面有没有继续讲故事。
+  </Step>
+</Steps>
+
+<Card title="想要更多自定义？" icon="palette" href="/zh-Hans/create/web">
+  使用 Web 界面配置图片、描述和 FDV
+</Card>

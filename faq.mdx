@@ -15,9 +15,15 @@ description: Frequently asked questions about Slinq
 </Accordion>
 
 <Accordion title="How is Slinq different from pump.fun or Four.meme?">
-  **Creator rewards:** Slinq gives creators 40% of all trading fees. Most competitors give 0%.
+  **Creator rewards:** Slinq gives creators up to 40% of all trading fees. Most competitors give 0%.
 
-  **Multi-platform launch:** Create tokens from Twitter, Farcaster, or web—not just one interface.
+  **No bonding curve:** Slinq tokens trade natively on PancakeSwap V4 from the first trade — no migration needed.
+
+  **Social tokenization:** Reply "tokenize this" to any viral post to turn it into a token. The original author earns fees.
+
+  **Multi-platform:** Create tokens from Twitter, Farcaster, Telegram, or web — not just one interface.
+
+  **AI-powered:** Slinq's AI generates names, tickers, and descriptions automatically for social launches.
 
   **BNB Chain:** Lower fees than Solana or Base, with deep PancakeSwap liquidity.
 </Accordion>
@@ -38,8 +44,12 @@ description: Frequently asked questions about Slinq
 
 ## Token Creation
 
+<Accordion title="What is social tokenization?">
+  Social tokenization lets you turn any viral tweet or Farcaster cast into a tradeable token by replying with a keyword like "tokenize this" (plus the bot mention). The **original post author** automatically becomes the token creator and earns fees. Learn more on our [social tokenization page](/create/social-tokenization).
+</Accordion>
+
 <Accordion title="How much does it cost to create a token?">
-  Token creation is **free** (gasless). You only need to sign a message with your wallet—no transaction fees for deployment.
+  Token creation is **free** (gasless). You only need to sign a message with your wallet — no transaction fees for deployment.
 </Accordion>
 
 <Accordion title="Can I edit my token after launching?">
@@ -74,13 +84,19 @@ description: Frequently asked questions about Slinq
 
 <Accordion title="What are the trading fees?">
   - **Base fee:** 1% of trade value
-  - **Creator share:** 40% (0.4% of trade)
+  - **Creator share:** up to 40% (0.3-0.4% of trade)
   - **Protocol share:** 60% (0.6% of trade)
   - Plus gas fees for BNB Chain
+
+  If someone else triggered the launch of your token, the split is 30% creator + 10% first buyer instead of 40% creator.
+</Accordion>
+
+<Accordion title="What are hooks?">
+  Hooks are PancakeSwap V4's plugin system. Slinq uses a hook that runs automatically on every trade to calculate fees, protect against bots, and distribute earnings to creators. You don't need to do anything — it all happens behind the scenes.
 </Accordion>
 
 <Accordion title="What is MEV protection?">
-  MEV (Maximal Extractable Value) bots try to exploit new launches by front-running and sandwiching trades. Slinq charges higher fees (10% → 1%) during the first 2 minutes to make these attacks unprofitable.
+  MEV (Maximal Extractable Value) bots try to exploit new launches by front-running and sandwiching trades. Slinq's hook charges higher buy fees (up to 6%) during the first 2 minutes, then settles to 1%. Sell fees are always 1%. This makes sniping unprofitable.
 </Accordion>
 
 <Accordion title="Why did my transaction fail?">
@@ -99,7 +115,11 @@ description: Frequently asked questions about Slinq
 ## Creator Rewards
 
 <Accordion title="How do I earn as a creator?">
-  You automatically earn 40% of all trading fees on your token. Fees accumulate in the fee locker contract and can be claimed anytime.
+  You automatically earn up to 40% of all trading fees on your token. Fees accumulate in the fee locker contract and can be claimed anytime. The exact split depends on how the token was launched — see [fee beneficiaries](/trading/fees#fee-beneficiaries).
+</Accordion>
+
+<Accordion title="What if someone else tokenized my post?">
+  You still earn as the creator! When someone replies "tokenize this" to your tweet or cast, you're automatically set as the token creator. You earn 30% of all trading fees (the person who triggered the launch earns 10%). Fees accumulate even before you connect a wallet — just sign in later to claim.
 </Accordion>
 
 <Accordion title="When can I claim my fees?">

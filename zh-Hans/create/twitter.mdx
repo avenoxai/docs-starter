@@ -1,0 +1,119 @@
+---
+title: 通过 Twitter 发币
+description: 发一条推文就能创建代币
+---
+
+# Twitter 发币
+
+只要在推文里 @SlinqBot，你就能创建一个可交易代币。几秒内完成部署，并立刻开放交易。
+
+## 推文格式
+
+```
+@SlinqBot deploy $TICKER "Token Name"
+```
+
+**示例：**
+```
+@SlinqBot deploy $MOON "Moon Token"
+@SlinqBot create $DOGE "Super Doge"
+@SlinqBot launch $PEPE "Pepe 2.0"
+```
+
+<Tip>
+`deploy`、`create` 和 `launch` 这几个关键词效果完全一样。
+</Tip>
+
+## 工作流程
+
+<Steps>
+  <Step title="发出你的推文">
+    发一条公开推文，@ `@SlinqBot`，并带上代币 Symbol 和名称。
+  </Step>
+  <Step title="机器人处理请求">
+    Slinq 会识别你的 mention，并校验参数是否合法。
+  </Step>
+  <Step title="代币部署">
+    你的代币会在 BNB Chain 上创建，同时在 PancakeSwap 上带着锁定流动性上线。
+  </Step>
+  <Step title="收到确认回复">
+    `@SlinqBot` 会回复你的推文，并附上：
+    - 代币合约地址
+    - Slinq 交易链接
+    - 创作者面板链接
+  </Step>
+</Steps>
+
+## 要求
+
+| 要求 | 说明 |
+|------|------|
+| **Twitter 账号** | 必须是公开账号，不能是 protected/private |
+| **Ticker** | 1-10 个字符，只能是字母和数字 |
+| **名称** | 1-50 个字符 |
+| **每日上限** | 每个 Twitter 账号每天 2 个币 |
+
+## 默认参数
+
+通过 Twitter 创建的代币会使用这些默认值：
+
+| 参数 | 数值 |
+|------|------|
+| 初始 FDV | 500 BNB |
+| 总供应量 | 1000 亿 |
+| 交易对 | TOKEN/WBNB |
+| 图片 | 根据代币名自动生成 |
+| 描述 | 自动生成 |
+
+<Info>
+想要自定义图片或描述？改用 [Web 界面](/zh-Hans/create/web) 更合适。
+</Info>
+
+## 想让开盘效果更好，可以注意这些
+
+<Columns cols={2}>
+  <Card title="选一个好记的 Symbol" icon="tag">
+    像 $MOON、$BASED 这种短、顺口、能记住的 Symbol 更容易传播。
+  </Card>
+  <Card title="挑活跃时段发" icon="clock">
+    尽量在你的关注者在线时开盘，首波互动会更好。
+  </Card>
+  <Card title="置顶发币推文" icon="thumbtack">
+    把确认回复置顶，新关注你的人会更容易找到你的币。
+  </Card>
+  <Card title="把评论区做活" icon="comments">
+    多回评论，让整条 thread 继续滚起来。
+  </Card>
+</Columns>
+
+## 常见问题
+
+<Accordion title="我的推文没有被识别到">
+  - 确认你的账号是公开的，不是 protected
+  - 检查 `@SlinqBot` 是否写对
+  - 确认 Ticker 里没有特殊字符
+  - 高峰期可能会有短暂延迟，先等 2-3 分钟
+</Accordion>
+
+<Accordion title="Ticker 已经被占了">
+  每个 Ticker 只能用一次。你可以试试：
+  - 加数字：`$MOON2`、`$DOGE99`
+  - 改缩写：比如把 `$MYTOKEN` 改成 `$MTK`
+</Accordion>
+
+<Accordion title="达到频率上限了">
+  你每天可以通过 Twitter 发 2 个币。等到 UTC 零点会自动重置，或者你也可以改用 [Web 界面](/zh-Hans/create/web) 继续发。
+</Accordion>
+
+## 发完之后
+
+代币上线后，你可以做这些事：
+
+1. **分享交易链接**，直接用机器人回复里的链接。
+2. **盯交易动态**，在 Slinq 代币页里看成交情况。
+3. **收手续费**，收益会自动累积到创作者面板。
+4. **拿积分**，每一笔交易都会给你带来 Season Pass 积分。
+
+<Card title="查看你的创作者面板" icon="chart-pie" href="https://slinq.meme">
+  追踪手续费、成交量和 Holder 数
+</Card>

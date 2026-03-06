@@ -1,0 +1,161 @@
+---
+title: 通过 Web 界面发币
+description: 用 Web 发币向导完整控制你的代币设置
+---
+
+# Web 发币
+
+Web 界面能让你把代币的外观和参数都自己控住。适合做品牌化发币，也适合更认真一点的项目。
+
+## 开始之前
+
+<Steps>
+  <Step title="打开 Slinq">
+    在浏览器访问 [slinq.meme](https://slinq.meme)。
+  </Step>
+  <Step title="连接钱包">
+    点击 `Connect Wallet`，选择你常用的钱包或登录方式。
+  </Step>
+  <Step title="打开发币弹窗">
+    在导航栏或页脚点击 `Launch Token`。
+  </Step>
+</Steps>
+
+## 4 步完成发币
+
+### 第 1 步：代币信息
+
+填入代币的基础资料：
+
+| 字段 | 必填 | 说明 |
+|------|------|------|
+| **名称** | 是 | 代币全名，1-50 个字符 |
+| **Symbol** | 是 | 交易简称，比如 MOON，1-10 个字符 |
+| **描述** | 否 | 简单说明你的币是干嘛的 |
+| **图片** | 否 | 上传自定义图片，或用 AI 生成 |
+
+<Tip>
+点一下 `Generate with AI`，可以根据你的代币名自动生成描述或图片。
+</Tip>
+
+### 第 2 步：社交链接
+
+你可以加一些外部链接，增加可信度：
+
+| 链接类型 | 示例 |
+|----------|------|
+| Website | `https://mytoken.com` |
+| Twitter/X | `https://x.com/mytoken` |
+| Telegram | `https://t.me/mytoken` |
+
+<Info>
+这些链接会显示在代币详情页里，方便交易者判断项目是不是认真的。
+</Info>
+
+### 第 3 步：设置 FDV
+
+设定你的初始 Fully Diluted Valuation（FDV）：
+
+| 设置项 | 范围 | 默认值 |
+|--------|------|--------|
+| 初始 FDV | 50 - 50,000 BNB | 500 BNB |
+
+**FDV 是什么？**
+
+FDV 可以理解成“如果所有代币都流通时”的总市值，它会直接决定你的开盘价格：
+
+```
+Token Price = FDV ÷ Total Supply
+Token Price = 500 BNB ÷ 100,000,000,000 = 0.000000005 BNB
+```
+
+<Columns cols={2}>
+  <Card title="低 FDV（50-200 BNB）" icon="arrow-down">
+    上车价格更低，价格弹性更大，更容易吸引早期买盘。
+  </Card>
+  <Card title="高 FDV（5,000+ BNB）" icon="arrow-up">
+    初始观感价值更高，初始流动性更深，更适合已经有影响力的项目。
+  </Card>
+</Columns>
+
+### 第 4 步：确认并发出
+
+部署前，请按这个顺序过一遍：
+
+1. **检查所有信息**，包括名称、Symbol 和参数。
+2. **勾选服务条款**，这是必选项。
+3. **签名**，钱包会弹出签名提示。
+4. **等待部署完成**，通常需要 10-30 秒。
+
+<Warning>
+代币参数一旦发布就不能修改。签名前一定要再检查一遍。
+</Warning>
+
+## Web 独有功能
+
+| 功能 | 说明 |
+|------|------|
+| **自定义图片** | 支持上传 5MB 以内 PNG/JPG |
+| **AI 生成** | 自动生成图片和描述 |
+| **FDV 自定义** | 50 到 50,000 BNB 任意设置 |
+| **社交链接** | 可添加 Website、Twitter 和 Telegram |
+| **草稿自动保存** | 填写过程中会自动保存进度 |
+
+## 用 Web 发币时的几个建议
+
+<Columns cols={2}>
+  <Card title="图片尽量清晰" icon="image">
+    图标在列表里会被缩得很小，清晰、记忆点强的图更容易被记住。
+  </Card>
+  <Card title="描述写清楚一点" icon="align-left">
+    就算是 meme 币，有一点背景说明也会比纯空白更有说服力。
+  </Card>
+  <Card title="把社交链接补齐" icon="share-nodes">
+    链接越完整，潜在交易者越容易判断你不是随手来一发就跑。
+  </Card>
+  <Card title="认真选 FDV" icon="calculator">
+    结合你的目标用户和预期热度来定，不要乱拍。
+  </Card>
+</Columns>
+
+## 常见问题
+
+<Accordion title="发币需要 BNB 吗？">
+  不需要。创建代币是 gasless 的，你签的是消息，不是链上交易。只有在发完之后你想自己买币，才需要 BNB。
+</Accordion>
+
+<Accordion title="发完之后还能改吗？">
+  名称、Symbol、供应量这些核心参数不可改。但你仍然可以更新自己的资料页，或者在创作者页补充更多上下文。
+</Accordion>
+
+<Accordion title="图片上传失败怎么办？">
+  图片会通过 Pinata 存到 IPFS。如果上传失败：
+  - 试更小的文件（5MB 以下）
+  - 用 PNG 或 JPG
+  - 也可以直接改用 AI 图片生成
+</Accordion>
+
+<Accordion title="为什么要签名？">
+  签名是为了在不消耗 gas 的情况下证明你就是发币人。它会把你的钱包和代币绑定起来，但不会暴露私钥。
+</Accordion>
+
+## 发完之后
+
+<Steps>
+  <Step title="查看代币页">
+    部署完成后，页面会自动跳转到你的代币详情页。
+  </Step>
+  <Step title="分享到社交平台">
+    可以直接用分享按钮同步到 Twitter 或 Farcaster。
+  </Step>
+  <Step title="盯住交易数据">
+    实时查看成交、Holder 数和交易量。
+  </Step>
+  <Step title="开始收手续费">
+    你的 40% 分成会自动累积。
+  </Step>
+</Steps>
+
+<Card title="继续了解自定义能力" icon="sliders" href="/zh-Hans/create/customization">
+  深入看品牌和参数该怎么配置
+</Card>

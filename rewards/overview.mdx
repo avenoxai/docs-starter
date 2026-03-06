@@ -5,22 +5,22 @@ description: Earn 40% of all trading fees from your tokens
 
 # Creator Rewards
 
-When you create a token on Slinq, you earn 40% of all trading fees—forever. This is the highest creator share in the industry.
+When you create a token on Slinq, you earn up to 40% of all trading fees — forever. This is the highest creator share in the industry, powered by PancakeSwap V4 hooks that automatically split fees on every trade.
 
 ## How It Works
 
 <Steps>
   <Step title="Create your token">
-    Launch via Twitter, Farcaster, or the web interface.
+    Launch via Twitter, Farcaster, Telegram, social tokenization, or the web interface.
   </Step>
   <Step title="Trading begins">
     Users buy and sell your token on PancakeSwap.
   </Step>
-  <Step title="Fees accumulate">
-    40% of the 1% trading fee goes to your creator wallet.
+  <Step title="Hook splits fees automatically">
+    The Slinq hook on every trade calculates fees and sends your share to the fee locker contract.
   </Step>
   <Step title="Claim anytime">
-    Withdraw your accumulated fees whenever you want.
+    Withdraw your accumulated fees whenever you want from your creator dashboard.
   </Step>
 </Steps>
 
@@ -50,11 +50,24 @@ Most token platforms give creators **nothing** from trading fees:
 
 Slinq believes creators should benefit from the communities they build.
 
+## Fee Splits
+
+Your share depends on how the token was launched:
+
+| How the Token Was Created | Your Share | First Buyer | Protocol |
+|--------------------------|-----------|-------------|----------|
+| You launched it yourself | **40%** | — | 60% |
+| Someone else tokenized your post | **30%** | 10% | 60% |
+
+<Info>
+When someone replies "tokenize this" to your tweet or cast, you're automatically set as the creator. If a different person triggers the on-chain launch (the "first buyer"), they earn a 10% share as a reward, and you still get 30%.
+</Info>
+
 ## Key Features
 
 <Columns cols={2}>
   <Card title="Automatic Accumulation" icon="clock">
-    Fees collect automatically with every trade. No action needed.
+    The hook collects and splits fees on every trade. No action needed from you.
   </Card>
   <Card title="Claim Anytime" icon="hand-holding-dollar">
     Withdraw accumulated fees whenever you want.

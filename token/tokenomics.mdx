@@ -84,76 +84,60 @@ We've reserved 5% of the total supply (50M SLINQ) specifically to reward creator
 
 ---
 
-## Staking & esSLINQ
+## OURO Vault Staking
 
-Stake your SLINQ tokens to earn **esSLINQ** (escrowed SLINQ) and additional rewards.
+Stake your OURO tokens in the Slinq Staking Vault to earn weighted staker points and support the ecosystem.
 
 <CardGroup cols={3}>
-  <Card title="Stake SLINQ" icon="lock">
-    Lock your tokens to start earning rewards immediately
+  <Card title="Stake OURO" icon="lock">
+    Lock your tokens to start earning staker points
   </Card>
-  <Card title="Earn esSLINQ" icon="gem">
-    Receive non-transferable esSLINQ as staking rewards
+  <Card title="Choose Your Lock" icon="clock">
+    Pick a lock duration for higher point multipliers
   </Card>
-  <Card title="Convert to SLINQ" icon="rotate">
-    Vest or instant-claim your esSLINQ for SLINQ
+  <Card title="Withdraw Anytime" icon="unlock">
+    Withdraw after your lock period ends — your tokens are always yours
   </Card>
 </CardGroup>
 
-### What is esSLINQ?
+### How It Works
 
-esSLINQ (escrowed SLINQ) is a **non-transferable** reward token that can be converted to SLINQ through:
+The OURO Vault is a straightforward staking system. You lock OURO tokens for a chosen duration and earn weighted staker points based on your lock commitment.
 
-<Tabs>
-  <Tab title="21-Day Vesting">
-    **Full Value Path** - Get 100% of your esSLINQ as SLINQ
+### Lock Durations & Multipliers
 
-    - Lock esSLINQ for 21 days
-    - Claim SLINQ linearly as it vests
-    - No penalties - receive the full amount
-    - Best for long-term holders
+| Lock Duration | Multiplier | Best For |
+|---------------|-----------|----------|
+| No lock (flexible) | 1x | Testing the waters |
+| 7 days | Higher | Short-term commitment |
+| 30 days | Higher | Medium-term stakers |
+| 60 days | Highest | Long-term believers |
 
-    ```
-    100 esSLINQ → 21 days → 100 SLINQ
-    ```
-  </Tab>
-  <Tab title="Instant Claim">
-    **Quick Access** - Get 45% immediately
+<Info>
+Longer locks earn more points per token staked. The multiplier rewards patience and commitment to the ecosystem.
+</Info>
 
-    - Claim esSLINQ instantly at 45% rate
-    - 55% penalty is applied
-    - Penalty split: 50% burned, 50% recycled to staking rewards
-    - Best for immediate liquidity needs
+### Staking Details
 
-    ```
-    100 esSLINQ → Instant → 45 SLINQ
-                          → 27.5 Burned
-                          → 27.5 Back to Stakers
-    ```
-  </Tab>
-</Tabs>
-
-### Staking Economics
+| Parameter | Value |
+|-----------|-------|
+| Minimum Stake | 100 OURO |
+| Lock Options | Flexible, 7 days, 30 days, 60 days |
+| Withdrawal | After lock period ends |
+| Points | Weighted by amount and lock multiplier |
 
 <AccordionGroup>
-  <Accordion title="How are rewards distributed?" icon="chart-line">
-    Rewards stream linearly over 24-hour periods. The longer you stake, the more you earn relative to others. When new rewards are deposited, they combine with remaining rewards and redistribute over a fresh 24-hour window.
+  <Accordion title="How do staker points work?" icon="chart-line">
+    Your staker points are calculated as your staked amount multiplied by your lock multiplier. Longer locks mean more points, which translates to a larger share of rewards.
   </Accordion>
-  <Accordion title="What's the penalty recycling mechanism?" icon="recycle">
-    When users instant-claim esSLINQ at 45%, the 55% penalty is split:
-    - **50% burned** - reducing total supply permanently
-    - **50% recycled** - sent back to the staking pool as additional rewards
-
-    This creates a sustainable reward flywheel where impatient users boost rewards for patient stakers.
+  <Accordion title="Can I have multiple positions?" icon="list">
+    Yes. You can create multiple staking positions with different lock durations. Each position is tracked separately.
   </Accordion>
-  <Accordion title="Can I cancel vesting early?" icon="xmark">
-    Yes! You can cancel a vesting position at any time:
-    - Claim any SLINQ already vested
-    - Receive unvested esSLINQ back to your wallet
-    - Start a new vesting position or instant-claim the returned esSLINQ
+  <Accordion title="What happens when my lock expires?" icon="unlock">
+    Once your lock period ends, you can withdraw your full OURO amount at any time. There are no penalties for withdrawing after the lock ends.
   </Accordion>
-  <Accordion title="How many vesting positions can I have?" icon="list">
-    You can have up to **30 active vesting positions** at once. Completed positions can be cleaned up to free slots and receive a gas refund.
+  <Accordion title="Is my OURO safe?" icon="shield">
+    Your tokens are held in a smart contract vault. Only you can withdraw your positions. Not even the Slinq team can access your staked tokens.
   </Accordion>
 </AccordionGroup>
 
@@ -174,8 +158,8 @@ A portion of protocol fees are used to **buy back SLINQ** from the market and **
 ## Token Security
 
 <CardGroup cols={2}>
-  <Card title="Non-Transferable esSLINQ" icon="shield">
-    esSLINQ cannot be traded on secondary markets - it can only be earned through staking and converted to SLINQ.
+  <Card title="Secure Staking Vault" icon="shield">
+    OURO tokens are held in an audited smart contract. Only you can withdraw your staked positions.
   </Card>
   <Card title="Vested Team Tokens" icon="clock">
     Team allocation is subject to 12-month linear vesting, ensuring long-term commitment.
@@ -206,8 +190,8 @@ A portion of protocol fees are used to **buy back SLINQ** from the market and **
 ## Get Started
 
 <CardGroup cols={2}>
-  <Card title="Stake SLINQ" icon="lock" href="https://slinq.meme/stake">
-    Start earning esSLINQ rewards today
+  <Card title="Stake OURO" icon="lock" href="https://slinq.meme/stake">
+    Start earning staker points today
   </Card>
   <Card title="Launch a Token" icon="rocket" href="/create/overview">
     Create your memecoin and earn 40% of fees

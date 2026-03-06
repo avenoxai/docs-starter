@@ -1,0 +1,181 @@
+---
+title: 常见问题
+description: 关于 Slinq 的常见问答
+---
+
+# 常见问题
+
+## 基础问题
+
+<Accordion title="Slinq 是什么？">
+  Slinq 是一个跑在 BNB Chain 上的社交发币平台。你可以直接从 Twitter、Farcaster 或 Web 界面发出可交易代币。每个代币默认都会有：
+  - PancakeSwap 上的锁定流动性
+  - 40% 交易手续费分给创作者
+  - 开盘阶段的 MEV 保护
+</Accordion>
+
+<Accordion title="Slinq 和 pump.fun 或 Four.meme 有什么不一样？">
+  **创作者分成：**Slinq 会把全部交易手续费里的 40% 分给创作者。大多数同类平台给的是 0。
+
+  **多入口发币：**你可以从 Twitter、Farcaster 或网页发币，不用被绑死在单一入口。
+
+  **BNB Chain：**相比 Solana 或 Base，BNB Chain 成本更低，而且 PancakeSwap 的流动性更成熟。
+</Accordion>
+
+<Accordion title="Slinq 安全吗？">
+  Slinq 在机制上尽量把风险往下压：
+  - 流动性永久锁定，不能直接 Rug
+  - 合约开源
+  - 有 MEV 保护，减少机器人抢跑
+  - 没有团队预留或隐藏分配
+
+  但 meme 币本身就是高风险资产。只能用你亏得起的钱参与。
+</Accordion>
+
+<Accordion title="Slinq 用的是哪条链？">
+  Slinq 跑在 **BNB Chain**（Chain ID 56）上。所有代币都是在 PancakeSwap V4 Infinity 上交易的 BEP-20 代币。
+</Accordion>
+
+## 发币
+
+<Accordion title="创建一个代币要花多少钱？">
+  发币本身是 **免费的**，也是 gasless 的。你只需要用钱包签一条消息，不需要为部署额外付 gas。
+</Accordion>
+
+<Accordion title="发完之后还能改代币吗？">
+  不能。名称、Symbol、供应量、图片这些参数一旦发出就是永久的。发之前一定要再看一遍。
+</Accordion>
+
+<Accordion title="代币总量是多少？">
+  所有 Slinq 代币都是固定 **1000 亿** 枚，不能更改。
+</Accordion>
+
+<Accordion title="我能自定义供应量吗？">
+  不能。平台统一固定 1000 亿供应量，这样体验和定价逻辑会更一致。
+</Accordion>
+
+<Accordion title="FDV 是什么？我该怎么选？">
+  FDV（Fully Diluted Valuation）就是代币上线时的完全稀释市值，它会决定你的初始价格。
+
+  - **低 FDV（50-200 BNB）：**上车门槛更低，弹性更大
+  - **中 FDV（500-2,000 BNB）：**相对均衡
+  - **高 FDV（5,000+ BNB）：**初始估值更高，更吃社区强度
+</Accordion>
+
+<Accordion title="别人能抄我的币吗？">
+  Symbol 是唯一的，别人不能再用同一个 Symbol。但别人可以起一个很像的名字。所以真正的护城河还是你的内容、社区和传播。
+</Accordion>
+
+## 交易
+
+<Accordion title="代币在哪里交易？">
+  所有 Slinq 代币都在 **PancakeSwap V4 Infinity** 上成交，前端由 Slinq 集成展示。你也可以拿着合约地址直接去 PancakeSwap 交易。
+</Accordion>
+
+<Accordion title="交易手续费是多少？">
+  - **基础费率：**交易额的 1%
+  - **创作者分成：**40%（也就是每笔交易约 0.4%）
+  - **协议分成：**60%（也就是约 0.6%）
+  - 另外还要付 BNB Chain 的 gas
+</Accordion>
+
+<Accordion title="什么是 MEV 保护？">
+  MEV（Maximal Extractable Value）机器人会通过抢跑和夹子去吃新币开盘流量。Slinq 在前 2 分钟会把买单费率从高到低衰减（10% → 1%），尽量让这类攻击变得不划算。
+</Accordion>
+
+<Accordion title="为什么我的交易失败了？">
+  常见原因有：
+  - 钱包里的 BNB 不够付 gas
+  - 价格滑动太快，超过了容忍范围
+  - 链上拥堵
+
+  通常补一点 BNB，或者重新拿一口新报价再试，就能解决。
+</Accordion>
+
+<Accordion title="我能去别的 DEX 交易吗？">
+  可以。Slinq 代币本质上就是标准 BEP-20。任何支持该合约地址的地方都能交易。不过在 Slinq 之外交易时，费率和体验可能会不一样。
+</Accordion>
+
+## 创作者收益
+
+<Accordion title="作为创作者我怎么赚钱？">
+  你的代币每发生一笔交易，你都会自动拿到 40% 的手续费。收益会累积在 fee locker 合约里，随时都能提。
+</Accordion>
+
+<Accordion title="我什么时候可以提手续费？">
+  随时。没有最小门槛，也没有冷却期。去你的创作者面板点 `Claim` 就行。
+</Accordion>
+
+<Accordion title="收益是发 BNB 还是发代币？">
+  收益以 **WBNB** 形式发放。WBNB 和 BNB 是 1:1 对应的，如果你需要，也可以在 PancakeSwap 里解包回原生 BNB。
+</Accordion>
+
+<Accordion title="如果没人交易我的币怎么办？">
+  没有交易，就没有手续费。这部分很现实。你需要靠内容、社区和叙事把活跃度做起来。
+</Accordion>
+
+## Season Pass
+
+<Accordion title="怎么拿积分？">
+  主要三种方式：
+  - **交易：**每交易 1 BNB 拿 1 分
+  - **发币收益：**每拿到 1 BNB 创作者手续费拿 400 分
+  - **邀请：**拿到被邀请人积分的 25%
+</Accordion>
+
+<Accordion title="积分会过期吗？">
+  一个赛季内不会过期。新赛季开始后，积分会重置为 0。
+</Accordion>
+
+<Accordion title="积分有什么用？">
+  积分决定你在排行榜上的名次。赛季结束时，排名靠前的用户会拿到奖励。更高等级也会带来积分倍率。
+</Accordion>
+
+<Accordion title="积分可以转让或者卖掉吗？">
+  不行。积分和钱包绑定，不能转账，也不能交易。
+</Accordion>
+
+## 技术问题
+
+<Accordion title="推荐用什么钱包？">
+  任何兼容 BNB Chain 的钱包都可以：
+  - MetaMask
+  - WalletConnect
+  - Coinbase Wallet
+  - 内嵌钱包（邮箱登录）
+</Accordion>
+
+<Accordion title="怎么把 BNB Chain 添加到钱包里？">
+  大部分钱包会自动弹出添加网络。如果你要手动加：
+  - Network Name: BNB Smart Chain
+  - RPC: https://bsc-dataseed.binance.org
+  - Chain ID: 56
+  - Symbol: BNB
+  - Explorer: https://bscscan.com
+</Accordion>
+
+<Accordion title="我在哪里看自己的代币？">
+  - 钱包里（有时需要手动导入合约地址）
+  - 在 BscScan 里用你的钱包地址查询
+  - 连接 Slinq 后，在 `My Tokens` 页面查看
+</Accordion>
+
+<Accordion title="我的代币合约地址在哪里看？">
+  可以在你的代币详情页里看，也可以在创建成功后的确认推文或确认 cast 里找到。
+</Accordion>
+
+## 支持
+
+<Accordion title="我遇到问题了，怎么联系你们？">
+  - 先看这份 FAQ
+  - 加入我们的 [Telegram 社区](https://t.me/slinqxyz)
+  - 关注 [@Slinqfun](https://x.com/Slinqfun) 获取更新
+</Accordion>
+
+<Accordion title="有漏洞赏金计划吗？">
+  如果你发现安全漏洞，请通过官方渠道联系。我们会认真处理安全问题。
+</Accordion>
+
+<Accordion title="我能和 Slinq 合作吗？">
+  合作相关可以通过官方 Twitter 或 Telegram 找我们。
+</Accordion>

@@ -15,88 +15,175 @@
     "href": "https://slinq.meme"
   },
   "navigation": {
-    "tabs": [
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Launch App",
+          "href": "https://slinq.meme",
+          "icon": "rocket"
+        },
+        {
+          "anchor": "Twitter",
+          "href": "https://x.com/Slinqfun",
+          "icon": "x-twitter"
+        }
+      ]
+    },
+    "languages": [
       {
-        "tab": "Documentation",
-        "groups": [
+        "language": "en",
+        "default": true,
+        "tabs": [
           {
-            "group": "Getting Started",
-            "icon": "rocket",
-            "pages": [
-              "index",
-              "quickstart",
-              "supported-wallets"
-            ]
-          },
-          {
-            "group": "Create Tokens",
-            "icon": "sparkles",
-            "pages": [
-              "create/overview",
-              "create/twitter",
-              "create/farcaster",
-              "create/web",
-              "create/customization"
-            ]
-          },
-          {
-            "group": "Trading",
-            "icon": "chart-line",
-            "pages": [
-              "trading/overview",
-              "trading/buying",
-              "trading/selling",
-              "trading/fees"
-            ]
-          },
-          {
-            "group": "Creator Rewards",
-            "icon": "coins",
-            "pages": [
-              "rewards/overview",
-              "rewards/earning-fees",
-              "rewards/claiming"
-            ]
-          },
-          {
-            "group": "Season Pass",
-            "icon": "trophy",
-            "pages": [
-              "season/overview",
-              "season/earning-points",
-              "season/leaderboard",
-              "season/referrals"
-            ]
-          },
-          {
-            "group": "$SLINQ Token",
-            "icon": "coins",
-            "pages": [
-              "token/tokenomics"
-            ]
-          },
-          {
-            "group": "Resources",
-            "icon": "book",
-            "pages": [
-              "faq",
-              "glossary",
-              "security"
+            "tab": "Documentation",
+            "groups": [
+              {
+                "group": "Getting Started",
+                "icon": "rocket",
+                "pages": [
+                  "index",
+                  "quickstart",
+                  "supported-wallets"
+                ]
+              },
+              {
+                "group": "Create Tokens",
+                "icon": "sparkles",
+                "pages": [
+                  "create/overview",
+                  "create/twitter",
+                  "create/farcaster",
+                  "create/telegram",
+                  "create/web",
+                  "create/social-tokenization",
+                  "create/customization"
+                ]
+              },
+              {
+                "group": "Trading",
+                "icon": "chart-line",
+                "pages": [
+                  "trading/overview",
+                  "trading/buying",
+                  "trading/selling",
+                  "trading/fees"
+                ]
+              },
+              {
+                "group": "Creator Rewards",
+                "icon": "coins",
+                "pages": [
+                  "rewards/overview",
+                  "rewards/earning-fees",
+                  "rewards/claiming"
+                ]
+              },
+              {
+                "group": "Season Pass",
+                "icon": "trophy",
+                "pages": [
+                  "season/overview",
+                  "season/earning-points",
+                  "season/leaderboard",
+                  "season/referrals"
+                ]
+              },
+              {
+                "group": "$SLINQ Token",
+                "icon": "coins",
+                "pages": [
+                  "token/tokenomics"
+                ]
+              },
+              {
+                "group": "Resources",
+                "icon": "book",
+                "pages": [
+                  "faq",
+                  "glossary",
+                  "security"
+                ]
+              }
             ]
           }
         ]
-      }
-    ],
-    "anchors": [
-      {
-        "anchor": "Launch App",
-        "href": "https://slinq.meme",
-        "icon": "rocket"
       },
       {
-        "anchor": "Twitter",
-        "href": "https://x.com/Slinqfun",
-        "icon": "x-twitter"
+        "language": "zh-Hans",
+        "tabs": [
+          {
+            "tab": "文档",
+            "groups": [
+              {
+                "group": "快速开始",
+                "icon": "rocket",
+                "pages": [
+                  "zh-Hans/index",
+                  "zh-Hans/quickstart",
+                  "zh-Hans/supported-wallets"
+                ]
+              },
+              {
+                "group": "发币",
+                "icon": "sparkles",
+                "pages": [
+                  "zh-Hans/create/overview",
+                  "zh-Hans/create/twitter",
+                  "zh-Hans/create/farcaster",
+                  "zh-Hans/create/telegram",
+                  "zh-Hans/create/social-tokenization",
+                  "zh-Hans/create/web",
+                  "zh-Hans/create/customization"
+                ]
+              },
+              {
+                "group": "交易",
+                "icon": "chart-line",
+                "pages": [
+                  "zh-Hans/trading/overview",
+                  "zh-Hans/trading/buying",
+                  "zh-Hans/trading/selling",
+                  "zh-Hans/trading/fees"
+                ]
+              },
+              {
+                "group": "创作者收益",
+                "icon": "coins",
+                "pages": [
+                  "zh-Hans/rewards/overview",
+                  "zh-Hans/rewards/earning-fees",
+                  "zh-Hans/rewards/claiming"
+                ]
+              },
+              {
+                "group": "Season Pass",
+                "icon": "trophy",
+                "pages": [
+                  "zh-Hans/season/overview",
+                  "zh-Hans/season/earning-points",
+                  "zh-Hans/season/leaderboard",
+                  "zh-Hans/season/referrals"
+                ]
+              },
+              {
+                "group": "$SLINQ 代币",
+                "icon": "coins",
+                "pages": [
+                  "zh-Hans/token/tokenomics"
+                ]
+              },
+              {
+                "group": "资源",
+                "icon": "book",
+                "pages": [
+                  "zh-Hans/faq",
+                  "zh-Hans/glossary",
+                  "zh-Hans/security"
+                ]
+              }
+            ]
+          }
+        ]
       }
     ]
   },

@@ -5,7 +5,7 @@ description: Turn your social posts into tradeable tokens on BNB Chain
 
 # The Social Token Factory
 
-Slinq lets you create tradeable tokens directly from Twitter or Farcaster. No coding required, no complex setup—just post and launch.
+Slinq lets you create tradeable tokens directly from Twitter, Farcaster, Telegram, or our web app. No coding required, no complex setup — just post and launch. You can even turn someone else's viral post into a token with a single reply.
 
 <Columns cols={3}>
   <Card title="Tweet to Launch" icon="x-twitter" href="/create/twitter">
@@ -14,8 +14,8 @@ Slinq lets you create tradeable tokens directly from Twitter or Farcaster. No co
   <Card title="Cast to Launch" icon="message" href="/create/farcaster">
     Launch from Farcaster in seconds
   </Card>
-  <Card title="Web Launch" icon="browser" href="/create/web">
-    Use our full-featured web interface
+  <Card title="Tokenize Any Post" icon="wand-magic-sparkles" href="/create/social-tokenization">
+    Reply "tokenize this" to any viral post
   </Card>
 </Columns>
 
@@ -23,16 +23,16 @@ Slinq lets you create tradeable tokens directly from Twitter or Farcaster. No co
 
 <Columns cols={2}>
   <Card title="40% Creator Rewards" icon="coins">
-    Earn 40% of all trading fees from your token—forever. Most platforms give creators nothing.
+    Earn 40% of all trading fees from your token — forever. Most platforms give creators nothing.
   </Card>
   <Card title="Rug-Proof Design" icon="shield-check">
     Liquidity is locked permanently. Creators cannot pull funds or abandon the project.
   </Card>
-  <Card title="MEV Protection" icon="lock">
-    Dynamic fees protect your launch from bots and snipers during the critical first minutes.
+  <Card title="Built Into PancakeSwap" icon="plug">
+    Slinq uses PancakeSwap V4 hooks — your token trades natively on BNB Chain's largest DEX with smart fee management built right in.
   </Card>
-  <Card title="Season Pass Rewards" icon="trophy">
-    Earn points for creating and trading. Climb the leaderboard and unlock rewards.
+  <Card title="MEV Protection" icon="lock">
+    Smart hooks automatically charge higher fees in the first 2 minutes to block sniper bots, then settle to a fair 1%.
   </Card>
 </Columns>
 
@@ -40,27 +40,34 @@ Slinq lets you create tradeable tokens directly from Twitter or Farcaster. No co
 
 <Steps>
   <Step title="Create Your Token">
-    Tweet `@SlinqBot deploy $TICKER "Token Name"` or use our web interface. Your token deploys in seconds.
+    Tweet, cast, reply "tokenize this" to a viral post, or use our web interface. Slinq's AI handles the rest.
   </Step>
-  <Step title="Trading Begins">
-    Your token is instantly tradeable on PancakeSwap with locked liquidity.
+  <Step title="Trading Begins Instantly">
+    Your token is immediately tradeable on PancakeSwap with permanently locked liquidity. No bonding curve, no migration — real DEX trading from second one.
   </Step>
   <Step title="Earn Rewards">
-    Collect 40% of all trading fees automatically. Track your earnings on your creator dashboard.
+    Collect up to 40% of all trading fees automatically. Track your earnings on your creator dashboard.
   </Step>
 </Steps>
 
-## Built on BNB Chain
+## What Makes Slinq Different
 
-Slinq runs on BNB Chain with PancakeSwap V4 Infinity—fast transactions, low fees, and deep liquidity.
+Slinq is built directly into PancakeSwap V4 using **hooks** — smart contract plugins that run on every trade. This means:
 
-| Feature | Slinq |
-|---------|-------|
-| Chain | BNB Chain |
-| DEX | PancakeSwap V4 |
-| Creator Fee Share | 40% |
-| Liquidity | Permanently Locked |
-| Token Supply | 100 Billion (Fixed) |
+- **No bonding curve** — Your token trades on a real DEX from the start
+- **Dynamic fees** — The hook automatically adjusts fees to protect against bots and manipulation
+- **Creator earnings** — The hook splits fees so creators earn from every single trade
+- **Permanent liquidity** — LP is locked forever in a smart contract with no withdraw function
+
+| Feature | Slinq | Other Launchpads |
+|---------|-------|-----------------|
+| Chain | BNB Chain | Various |
+| DEX Integration | Native PancakeSwap V4 | Bonding curve + migration |
+| Creator Fee Share | 40% | 0% |
+| Liquidity | Permanently Locked | Often unlocked |
+| Token Supply | 100 Billion (Fixed) | Varies |
+| Social Tokenization | Reply to tokenize any post | Not available |
+| AI Token Generation | Names, tickers, descriptions | Manual only |
 
 <Card title="Ready to launch?" icon="rocket" href="/quickstart">
   Create your first token in under a minute

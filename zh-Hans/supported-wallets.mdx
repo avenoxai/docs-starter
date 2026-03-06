@@ -1,0 +1,71 @@
+---
+title: 支持的钱包
+description: 连接任意主流钱包来使用 Slinq
+---
+
+# 钱包支持
+
+Slinq 使用 Privy 来提供顺滑的钱包连接体验。你可以用下面这些方式进入平台。
+
+## 钱包选项
+
+<Columns cols={2}>
+  <Card title="MetaMask" icon="wallet">
+    最常见的浏览器插件钱包。桌面和移动端都能用。
+  </Card>
+  <Card title="WalletConnect" icon="link">
+    扫描二维码，连接任何兼容 WalletConnect 的移动钱包。
+  </Card>
+  <Card title="Coinbase Wallet" icon="wallet">
+    可连接 Coinbase Wallet 插件或移动 App。
+  </Card>
+  <Card title="内嵌钱包" icon="key">
+    直接用邮箱秒开钱包，不用装插件。
+  </Card>
+</Columns>
+
+## 社交登录
+
+如果你还没有加密钱包，也能直接用已有账号登录：
+
+- **邮箱**：只用邮箱就能创建内嵌钱包
+- **Twitter/X**：用你的 Twitter 账号登录
+- **Farcaster**：通过 Farcaster 身份接入
+
+<Info>
+社交登录创建的是非托管内嵌钱包。资金控制权依然在你自己手里。
+</Info>
+
+## 网络设置
+
+Slinq 跑在 **BNB Chain**（Chain ID: 56）上。大部分钱包会自动提示你切换或添加 BNB Chain。
+
+如果你需要手动添加：
+
+| 设置项 | 数值 |
+|--------|------|
+| Network Name | BNB Smart Chain |
+| RPC URL | `https://bsc-dataseed.binance.org` |
+| Chain ID | 56 |
+| Currency Symbol | BNB |
+| Block Explorer | `https://bscscan.com` |
+
+## 获取 BNB
+
+你需要一些 BNB 来支付 gas 和买币。最常见的方式如下：
+
+<Steps>
+  <Step title="在交易所购买">
+    可以在 Binance、Coinbase 或其他主流交易所购买 BNB。
+  </Step>
+  <Step title="提到你的钱包">
+    使用 **BEP-20（BSC）** 网络，把 BNB 提到你的钱包地址。
+  </Step>
+  <Step title="开始交易">
+    等 BNB 到账后，你就可以在 Slinq 上发币和交易了。
+  </Step>
+</Steps>
+
+<Warning>
+提币时务必选择 **BEP-20** 或 **BSC** 网络。走错网络，资金可能会丢失。
+</Warning>

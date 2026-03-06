@@ -59,17 +59,17 @@ MEV (Maximal Extractable Value) attacks include:
 
 ### How We Protect You
 
-Slinq uses dynamic fees that decay over 2 minutes:
+Slinq's hook charges dynamic fees that decay over 2 minutes using a parabolic curve:
 
-| Time After Launch | Fee |
-|-------------------|-----|
-| 0-30 seconds | 10% |
-| 30-60 seconds | ~7% |
-| 60-90 seconds | ~4% |
-| 90-120 seconds | ~2% |
-| After 2 minutes | 1% |
+| Time After Launch | Buy Fee | Sell Fee |
+|-------------------|---------|----------|
+| 0 seconds | 6% | 1% |
+| 30 seconds | ~3.8% | 1% |
+| 60 seconds | ~2.25% | 1% |
+| 90 seconds | ~1.3% | 1% |
+| 120 seconds+ | 1% | 1% |
 
-High early fees make MEV attacks unprofitable, giving regular users fair access.
+The MEV premium only applies to **buy orders** — sells always pay the standard 1%. This makes sniping and front-running unprofitable while letting regular users trade fairly.
 
 ## Fee Distribution Security
 
@@ -100,14 +100,15 @@ Slinq uses **Privy** for secure wallet connections:
 - Session tokens are encrypted
 - No password storage on our servers
 
-### Signature-Based Deployment
+### Gasless Lazy Launch
 
-Token creation uses EIP-712 typed signatures:
+Token creation uses a "lazy launch" system with EIP-712 typed signatures:
 
-- You sign a message, not a transaction
-- No gas fees for deployment
+- You sign a message (called a "Launch Intent"), not a transaction — no gas fees for you
+- The token only deploys on-chain when the first buyer arrives
 - Replay protection prevents duplicate deploys
 - Signature proves ownership without exposing keys
+- The first buyer's transaction atomically creates the token, adds liquidity, and executes their buy — all in one step
 
 ## Best Practices for Users
 
@@ -158,17 +159,14 @@ We take security reports seriously and appreciate responsible disclosure.
 Slinq provides the platform; investment decisions are yours alone.
 </Warning>
 
+## How Hooks Keep You Safe
+
+All of these protections are built into a **PancakeSwap V4 hook** — a smart contract plugin that automatically runs on every trade. You don't need to take any extra steps; the hook handles fee calculation, MEV protection, and creator fee distribution transparently.
+
 ## Contract Addresses
 
-For verification, here are Slinq's official contract addresses on BNB Chain:
+Official Slinq contract addresses will be published here upon mainnet launch. In the meantime, always verify addresses through the official Slinq app or our announcement channels.
 
-| Contract | Address |
-|----------|---------|
-| Zyper Factory | `0x138A3070689f094F5c9e48Eb558EfA74cfBf11d6` |
-| Zyper Hook | `0x2f8a02DeD88aFb9AE81c10A2C26f24d973011c7d` |
-| LP Locker | `0xA0c13A54499FEC6C6e25F2530aeE48B23655f0A6` |
-| Fee Locker | `0x28590aBB3c6a06856ef3c4e6E4754093D0291414` |
-
-<Info>
-Always verify contract addresses through official sources before interacting with them directly.
-</Info>
+<Warning>
+Never interact with contracts shared in DMs or unofficial channels. Only trust addresses from [slinq.meme](https://slinq.meme) or official Slinq social accounts.
+</Warning>
