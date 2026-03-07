@@ -1,0 +1,377 @@
+---
+title: Developer Documentation
+description: Technical reference for integrating with Slinq smart contracts on BNB Chain
+---
+
+# Developer Documentation
+
+Slinq is a token launchpad built on **PancakeSwap Infinity (V4)** using concentrated liquidity hooks on BNB Chain. This page covers everything you need to integrate with Slinq's on-chain infrastructure.
+
+## Architecture Overview
+
+Slinq tokens trade natively on PancakeSwap V4 concentrated liquidity pools. A **hook** contract intercepts every swap to handle dynamic fees, MEV protection, and creator fee distribution. There is no bonding curve — tokens are real DEX assets from block one.
+
+```
+Creator signs EIP-712 LaunchIntent (off-chain, gasless)
+    |
+First buyer calls executeLazyLaunchAndBuy()
+    |
+LaunchExecutor: verify signature --> Factory deploys token (CREATE2) --> init pool --> add liquidity --> lock LP --> register in hook --> execute first buy
+    |
+All subsequent trades go through SlinqRouter
+    |
+Hook: calculate fees (MEV decay + volatility) --> distribute (40% creator, 60% protocol)
+    |
+LpLocker: harvest LP fees --> burn tokens, BNB --> buyback & burn $SLINQ
+```
+
+## Contract Addresses
+
+All contracts are deployed and verified on **BSC Mainnet (Chain ID: 56)**.
+
+<Info>
+You can also fetch current addresses programmatically via `GET https://slinq.meme/api/config/contracts`
+</Info>
+
+| Contract | Address | Purpose |
+|----------|---------|---------|
+| **SlinqFactoryVNext** | [`0x35a8E02271df91196A98004e7DCe9E7c5678f1E1`](https://bscscan.com/address/0x35a8E02271df91196A98004e7DCe9E7c5678f1E1#code) | Token deployment via EIP-712 intents |
+| **SlinqHookVNext** | [`0xfA8f1C4052c0DEe5A41F296c690cb61Bd7C5B713`](https://bscscan.com/address/0xfA8f1C4052c0DEe5A41F296c690cb61Bd7C5B713#code) | PancakeSwap V4 hook — dynamic fees, MEV protection |
+| **SlinqHookVNextViewFacet** | [`0xf706df1E6f9841C646cd8e7b72019A07086F4EA7`](https://bscscan.com/address/0xf706df1E6f9841C646cd8e7b72019A07086F4EA7#code) | Read-only view functions for the hook |
+| **SlinqLaunchExecutor** | [`0xFB7a7F2815543d5c5821A526D15123765Ed2e100`](https://bscscan.com/address/0xFB7a7F2815543d5c5821A526D15123765Ed2e100#code) | Atomic lazy launch + first buy execution |
+| **SlinqRouter** | [`0xd8c5711e640196C50D7fad60abBf9c464a60e97E`](https://bscscan.com/address/0xd8c5711e640196C50D7fad60abBf9c464a60e97E#code) | Native BNB buy/sell router |
+| **SlinqQuoter** | [`0xce45a9f0310B6dC60a7452CBec79D8f364621B80`](https://bscscan.com/address/0xce45a9f0310B6dC60a7452CBec79D8f364621B80#code) | Price quotes and token lookup |
+| **SlinqFeeLocker** | [`0x89462054c284a051BD123d415EA0a2A93bbd2480`](https://bscscan.com/address/0x89462054c284a051BD123d415EA0a2A93bbd2480#code) | Creator fee accumulation and claims |
+| **SlinqLpLocker** | [`0x8B188e2DA56CC9d5b7D26B62FcFF4710Ee04AED7`](https://bscscan.com/address/0x8B188e2DA56CC9d5b7D26B62FcFF4710Ee04AED7#code) | Permanent LP lock + fee harvesting |
+| **SlinqTokenBuybackBurner** | [`0x7735ac448d67838EE8a60476eE4140CF913043ee`](https://bscscan.com/address/0x7735ac448d67838EE8a60476eE4140CF913043ee#code) | BNB-to-$SLINQ buyback and burn |
+
+### PancakeSwap Infinity Addresses (BSC)
+
+These are PancakeSwap's core contracts that Slinq interacts with:
+
+| Contract | Address |
+|----------|---------|
+| Vault | `0x238a358808379702088667322f80aC48bAd5e6c4` |
+| CL Pool Manager | `0xa0FfB9c1CE1Fe56963B0321B32E7A0302114058b` |
+| CL Position Manager | `0x55f4c8abA71A1e923edC303eb4fEfF14608cC226` |
+| CL Quoter | `0xd0737C9762912dD34c3271197E362Aa736Df0926` |
+| Permit2 | `0x31c2F6fcFf4F8759b3Bd5Bf0e1084A055615c768` |
+| WBNB | `0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c` |
+
+## Integrating Trades
+
+The **SlinqRouter** is the primary contract for trading. It wraps/unwraps native BNB automatically so users don't need to deal with WBNB.
+
+### Buying Tokens
+
+Send native BNB to buy any Slinq token:
+
+```solidity
+ISlinqRouter router = ISlinqRouter(0xd8c5711e640196C50D7fad60abBf9c464a60e97E);
+
+// Buy token with 0.1 BNB
+router.buyWithBNB{value: 0.1 ether}(
+    tokenAddress,    // Slinq token to buy
+    amountOutMin,    // Minimum tokens to receive (slippage protection)
+    deadline         // Transaction deadline (block.timestamp + 300)
+);
+```
+
+### Selling Tokens
+
+Approve the router first, then sell for native BNB:
+
+```solidity
+// 1. Approve router to spend your tokens (one-time)
+IERC20(tokenAddress).approve(address(router), type(uint256).max);
+
+// 2. Sell tokens for BNB
+router.sellForBNB(
+    tokenAddress,    // Slinq token to sell
+    amountIn,        // Amount of tokens to sell (uint128)
+    amountOutMin,    // Minimum BNB to receive (uint128)
+    deadline         // Transaction deadline
+);
+```
+
+<Warning>
+Slinq pools only support **exact-input** swaps. Exact-output swaps will revert.
+</Warning>
+
+### Getting Price Quotes
+
+Use the **SlinqQuoter** to get expected output amounts before trading:
+
+```solidity
+ISlinqQuoter quoter = ISlinqQuoter(0xce45a9f0310B6dC60a7452CBec79D8f364621B80);
+
+// Quote buying tokens with WBNB
+(uint256 tokensOut, uint256 gas) = quoter.quoteBuyToken(
+    tokenAddress,
+    uint128(0.1 ether)  // WBNB amount in
+);
+
+// Quote selling tokens for WBNB
+(uint256 bnbOut, uint256 gas) = quoter.quoteSellToken(
+    tokenAddress,
+    uint128(tokenAmount)  // Token amount in
+);
+
+// Generic quote (works both directions)
+(uint256 amountOut, uint256 gas) = quoter.quoteExactInput(
+    tokenAddress,
+    amountIn,
+    true    // true = token --> WBNB (sell), false = WBNB --> token (buy)
+);
+```
+
+### Checking if a Token is Slinq
+
+```solidity
+bool isSlinq = quoter.isSlinqToken(tokenAddress);
+PoolKey memory poolKey = quoter.getPoolKey(tokenAddress);
+```
+
+## Token Specifications
+
+Every token launched on Slinq has identical parameters:
+
+| Property | Value |
+|----------|-------|
+| Standard | ERC-20 + ERC-2612 (Permit) |
+| Total Supply | 100,000,000,000 (100B) |
+| Decimals | 18 |
+| Mintable | No |
+| Burnable | Yes (via LP fee harvesting) |
+| Owner | None (renounced) |
+| Pool Pair | Token/WBNB |
+
+<Check>
+100% of supply goes into the liquidity pool. There are zero team tokens, zero pre-mine, and zero hidden allocations.
+</Check>
+
+## Fee Structure
+
+### Hook Fees (Trading Fees)
+
+Every trade is charged a **1% base fee** (minimum), distributed as:
+
+| Recipient | Share |
+|-----------|-------|
+| Token Creator | 40% |
+| Slinq Protocol | 60% |
+
+If the token was launched by someone other than the creator (e.g. social tokenization), the split becomes 30% creator / 10% first buyer / 60% protocol.
+
+### MEV Protection (Launch Premium)
+
+For the first **120 seconds** after a token launches, buy orders pay an additional premium that decays parabolically:
+
+```
+buyFee = 1% + 5% * (timeRemaining / 120)^2
+
+t=0s:   6%    (1% + 5%)
+t=30s:  ~3.8%
+t=60s:  ~2.25%
+t=90s:  ~1.3%
+t=120s: 1%    (premium gone)
+```
+
+Sell fees are always 1%. The MEV premium makes sniping unprofitable.
+
+### Volatility Fees
+
+During high price volatility, fees scale using a **VA-squared** formula:
+
+```
+volatilityPremium = (40000 * VA^2) / 1,000,000
+totalFee = max(mevFee, baseFee + volatilityPremium)
+```
+
+Maximum total fee is **capped at 8%**.
+
+### LP Fees (0.3%)
+
+PancakeSwap's native 0.3% LP fee accrues to the locked liquidity position. Slinq harvests these:
+- **Token side** is permanently burned (deflationary)
+- **BNB side** is used to buy back and burn $SLINQ
+
+## Lazy Launch System
+
+Slinq uses a gasless "lazy launch" model. Token creation is free for creators — the token only deploys when the first buyer arrives.
+
+### How It Works
+
+<Steps>
+  <Step title="Creator signs a LaunchIntent">
+    An EIP-712 typed data signature containing the token name, symbol, image URI, and creator address. No gas required.
+  </Step>
+  <Step title="Intent is stored off-chain">
+    The signed intent is stored in Slinq's backend until a buyer arrives.
+  </Step>
+  <Step title="First buyer triggers deployment">
+    The buyer calls `executeLazyLaunchAndBuy()` on the LaunchExecutor, which atomically: deploys the token (CREATE2), initializes the pool, adds liquidity, locks LP, and executes the first buy.
+  </Step>
+  <Step title="Token is live">
+    All subsequent trades go through the SlinqRouter as normal.
+  </Step>
+</Steps>
+
+### LaunchExecutor Interface
+
+```solidity
+ISlinqLaunchExecutor executor = ISlinqLaunchExecutor(0xFB7a7F2815543d5c5821A526D15123765Ed2e100);
+
+executor.executeLazyLaunchAndBuy{value: buyAmountInBNB}(
+    intent,        // LaunchIntent struct (name, symbol, imageURI, creator, salt, deadline, fdv)
+    creatorSig,    // Creator's EIP-712 signature
+    amountOutMin,  // Minimum tokens for the first buy
+    deadline,      // Transaction deadline
+    buyerSig       // Buyer's authorization signature
+);
+```
+
+## Creator Fee Claims
+
+Creator fees accumulate in the **SlinqFeeLocker** and can be claimed at any time.
+
+```solidity
+ISlinqFeeLocker feeLocker = ISlinqFeeLocker(0x89462054c284a051BD123d415EA0a2A93bbd2480);
+
+// Claim fees for a single token
+feeLocker.claim(creatorAddress, tokenAddress);
+
+// Claim fees for multiple tokens at once
+address[] memory tokens = new address[](3);
+tokens[0] = token1;
+tokens[1] = token2;
+tokens[2] = token3;
+feeLocker.claimMultiple(creatorAddress, tokens);
+```
+
+<Info>
+Anyone can call `claim()` on behalf of a creator — the fees always go to the creator's wallet. This enables gasless claiming via relayers.
+</Info>
+
+### Checking Unclaimed Fees
+
+```solidity
+// Read unclaimed fee balance
+uint256 unclaimed = feeLocker.feesToClaim(creatorAddress, tokenAddress);
+```
+
+## API Endpoints
+
+Slinq provides a REST API for off-chain data:
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/config/contracts` | GET | Current contract addresses |
+| `/api/v1/tokens/:address` | GET | Token metadata and stats |
+| `/api/v1/tokens` | GET | List tokens (paginated) |
+| `/lazy-intent` | POST | Create a new LaunchIntent |
+| `/execute-lazy` | POST | Request lazy launch execution |
+
+## Pool Structure
+
+All Slinq pools are **Concentrated Liquidity (CL)** pools on PancakeSwap Infinity with these properties:
+
+- **Pair:** Token/WBNB (token is always `currency0`)
+- **LP Fee:** 0.3% (3000)
+- **Tick Spacing:** 10
+- **Liquidity:** Single-sided, full-range
+- **LP Lock:** Permanent (no withdraw function)
+- **Hook:** SlinqHookVNext (dynamic fees, MEV protection)
+
+### Reading Pool State
+
+```solidity
+// Get pool key for any Slinq token
+PoolKey memory key = quoter.getPoolKey(tokenAddress);
+
+// Get pool state from PancakeSwap
+(uint160 sqrtPriceX96, int24 tick, , ) = CLPoolManager(poolManager).getSlot0(key.toId());
+```
+
+## Security Model
+
+<Columns cols={2}>
+  <Card title="Permanent LP Lock" icon="lock">
+    Liquidity is locked in the SlinqLpLocker with no withdraw function. Not even the Slinq team can remove liquidity.
+  </Card>
+  <Card title="Immutable Tokens" icon="shield-check">
+    Token name, symbol, supply, and creator cannot be changed after deployment. No mint function exists.
+  </Card>
+  <Card title="On-Chain Fee Distribution" icon="coins">
+    Creator fees are held by the FeeLocker smart contract. Only the creator wallet can receive claimed fees.
+  </Card>
+  <Card title="CREATE2 Deterministic Deploy" icon="code">
+    Token addresses are deterministic based on the LaunchIntent parameters. The same intent always produces the same address.
+  </Card>
+</Columns>
+
+## Example: Full Buy Flow (ethers.js)
+
+```javascript
+import { ethers } from "ethers";
+
+const ROUTER = "0xd8c5711e640196C50D7fad60abBf9c464a60e97E";
+const QUOTER = "0xce45a9f0310B6dC60a7452CBec79D8f364621B80";
+
+const provider = new ethers.JsonRpcProvider("https://bsc-dataseed.binance.org");
+const signer = new ethers.Wallet(PRIVATE_KEY, provider);
+
+const quoter = new ethers.Contract(QUOTER, [
+  "function quoteBuyToken(address token, uint128 wbnbAmountIn) external returns (uint256 tokenAmountOut, uint256 gasEstimate)"
+], provider);
+
+const router = new ethers.Contract(ROUTER, [
+  "function buyWithBNB(address token, uint128 amountOutMin, uint256 deadline) external payable returns (uint256 amountOut)"
+], signer);
+
+// 1. Get quote
+const bnbAmount = ethers.parseEther("0.1");
+const [expectedOut] = await quoter.quoteBuyToken.staticCall(TOKEN, bnbAmount);
+
+// 2. Apply 5% slippage
+const minOut = expectedOut * 95n / 100n;
+
+// 3. Execute buy
+const deadline = Math.floor(Date.now() / 1000) + 300;
+const tx = await router.buyWithBNB(TOKEN, minOut, deadline, { value: bnbAmount });
+await tx.wait();
+```
+
+## Example: Full Sell Flow (ethers.js)
+
+```javascript
+const token = new ethers.Contract(TOKEN, [
+  "function approve(address spender, uint256 amount) external returns (bool)",
+  "function balanceOf(address account) external view returns (uint256)"
+], signer);
+
+const quoter = new ethers.Contract(QUOTER, [
+  "function quoteSellToken(address token, uint128 tokenAmountIn) external returns (uint256 wbnbAmountOut, uint256 gasEstimate)"
+], provider);
+
+const router = new ethers.Contract(ROUTER, [
+  "function sellForBNB(address token, uint128 amountIn, uint128 amountOutMin, uint256 deadline) external returns (uint256 amountOut)"
+], signer);
+
+// 1. Approve router (one-time)
+await (await token.approve(ROUTER, ethers.MaxUint256)).wait();
+
+// 2. Get balance and quote
+const balance = await token.balanceOf(signer.address);
+const [expectedBnb] = await quoter.quoteSellToken.staticCall(TOKEN, balance);
+
+// 3. Apply 5% slippage and sell
+const minBnb = expectedBnb * 95n / 100n;
+const deadline = Math.floor(Date.now() / 1000) + 300;
+const tx = await router.sellForBNB(TOKEN, balance, minBnb, deadline);
+await tx.wait();
+```
+
+<Warning>
+Always verify contract addresses against BSCScan or our `/api/config/contracts` endpoint. Never trust addresses from unofficial sources.
+</Warning>

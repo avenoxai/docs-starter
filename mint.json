@@ -96,6 +96,13 @@
                 ]
               },
               {
+                "group": "Developers",
+                "icon": "code",
+                "pages": [
+                  "developers"
+                ]
+              },
+              {
                 "group": "Resources",
                 "icon": "book",
                 "pages": [
