@@ -96,19 +96,24 @@
                 ]
               },
               {
-                "group": "Developers",
-                "icon": "code",
-                "pages": [
-                  "developers"
-                ]
-              },
-              {
                 "group": "Resources",
                 "icon": "book",
                 "pages": [
                   "faq",
                   "glossary",
                   "security"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "Developers",
+            "groups": [
+              {
+                "group": "Developer Documentation",
+                "icon": "code",
+                "pages": [
+                  "developers"
                 ]
               }
             ]
@@ -186,6 +191,18 @@
                   "zh-Hans/faq",
                   "zh-Hans/glossary",
                   "zh-Hans/security"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "开发者",
+            "groups": [
+              {
+                "group": "开发者文档",
+                "icon": "code",
+                "pages": [
+                  "zh-Hans/developers"
                 ]
               }
             ]

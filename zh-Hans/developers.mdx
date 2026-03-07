@@ -1,0 +1,377 @@
+---
+title: 开发者文档
+description: 在 BNB Chain 上集成 Slinq 智能合约的技术参考
+---
+
+# 开发者文档
+
+Slinq 是基于 **PancakeSwap Infinity (V4)** 集中流动性 Hook 构建的代币发射平台，部署在 BNB Chain 上。本页涵盖了与 Slinq 链上基础设施集成所需的全部内容。
+
+## 架构概览
+
+Slinq 代币在 PancakeSwap V4 集中流动性池中原生交易。**Hook** 合约拦截每笔交换，处理动态手续费、MEV 保护和创作者手续费分配。没有联合曲线 - 代币从第一个区块起就是真正的 DEX 资产。
+
+```
+创作者签署 EIP-712 LaunchIntent（链下，无 Gas）
+    |
+首位买家调用 executeLazyLaunchAndBuy()
+    |
+LaunchExecutor: 验证签名 --> 工厂部署代币 (CREATE2) --> 初始化池 --> 添加流动性 --> 锁定 LP --> 注册到 Hook --> 执行首笔购买
+    |
+后续所有交易通过 SlinqRouter 进行
+    |
+Hook: 计算手续费（MEV 衰减 + 波动性）--> 分配（40% 创作者，60% 协议）
+    |
+LpLocker: 收割 LP 手续费 --> 销毁代币，BNB --> 回购并销毁 $SLINQ
+```
+
+## 合约地址
+
+所有合约均已在 **BSC 主网（Chain ID: 56）** 上部署并验证。
+
+<Info>
+您也可以通过 `GET https://slinq.meme/api/config/contracts` 以编程方式获取当前地址
+</Info>
+
+| 合约 | 地址 | 用途 |
+|------|------|------|
+| **SlinqFactoryVNext** | [`0x35a8E02271df91196A98004e7DCe9E7c5678f1E1`](https://bscscan.com/address/0x35a8E02271df91196A98004e7DCe9E7c5678f1E1#code) | 通过 EIP-712 意图部署代币 |
+| **SlinqHookVNext** | [`0xfA8f1C4052c0DEe5A41F296c690cb61Bd7C5B713`](https://bscscan.com/address/0xfA8f1C4052c0DEe5A41F296c690cb61Bd7C5B713#code) | PancakeSwap V4 Hook - 动态手续费、MEV 保护 |
+| **SlinqHookVNextViewFacet** | [`0xf706df1E6f9841C646cd8e7b72019A07086F4EA7`](https://bscscan.com/address/0xf706df1E6f9841C646cd8e7b72019A07086F4EA7#code) | Hook 的只读查询函数 |
+| **SlinqLaunchExecutor** | [`0xFB7a7F2815543d5c5821A526D15123765Ed2e100`](https://bscscan.com/address/0xFB7a7F2815543d5c5821A526D15123765Ed2e100#code) | 原子化懒启动 + 首次购买执行 |
+| **SlinqRouter** | [`0xd8c5711e640196C50D7fad60abBf9c464a60e97E`](https://bscscan.com/address/0xd8c5711e640196C50D7fad60abBf9c464a60e97E#code) | 原生 BNB 买卖路由 |
+| **SlinqQuoter** | [`0xce45a9f0310B6dC60a7452CBec79D8f364621B80`](https://bscscan.com/address/0xce45a9f0310B6dC60a7452CBec79D8f364621B80#code) | 价格报价和代币查询 |
+| **SlinqFeeLocker** | [`0x89462054c284a051BD123d415EA0a2A93bbd2480`](https://bscscan.com/address/0x89462054c284a051BD123d415EA0a2A93bbd2480#code) | 创作者手续费累积和领取 |
+| **SlinqLpLocker** | [`0x8B188e2DA56CC9d5b7D26B62FcFF4710Ee04AED7`](https://bscscan.com/address/0x8B188e2DA56CC9d5b7D26B62FcFF4710Ee04AED7#code) | 永久 LP 锁定 + 手续费收割 |
+| **SlinqTokenBuybackBurner** | [`0x7735ac448d67838EE8a60476eE4140CF913043ee`](https://bscscan.com/address/0x7735ac448d67838EE8a60476eE4140CF913043ee#code) | BNB 回购并销毁 $SLINQ |
+
+### PancakeSwap Infinity 地址（BSC）
+
+以下是 Slinq 交互的 PancakeSwap 核心合约：
+
+| 合约 | 地址 |
+|------|------|
+| Vault | `0x238a358808379702088667322f80aC48bAd5e6c4` |
+| CL Pool Manager | `0xa0FfB9c1CE1Fe56963B0321B32E7A0302114058b` |
+| CL Position Manager | `0x55f4c8abA71A1e923edC303eb4fEfF14608cC226` |
+| CL Quoter | `0xd0737C9762912dD34c3271197E362Aa736Df0926` |
+| Permit2 | `0x31c2F6fcFf4F8759b3Bd5Bf0e1084A055615c768` |
+| WBNB | `0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c` |
+
+## 集成交易
+
+**SlinqRouter** 是交易的主要合约。它自动包装/解包原生 BNB，用户无需处理 WBNB。
+
+### 购买代币
+
+发送原生 BNB 购买任何 Slinq 代币：
+
+```solidity
+ISlinqRouter router = ISlinqRouter(0xd8c5711e640196C50D7fad60abBf9c464a60e97E);
+
+// 用 0.1 BNB 购买代币
+router.buyWithBNB{value: 0.1 ether}(
+    tokenAddress,    // 要购买的 Slinq 代币
+    amountOutMin,    // 最少接收代币数量（滑点保护）
+    deadline         // 交易截止时间 (block.timestamp + 300)
+);
+```
+
+### 卖出代币
+
+先授权路由合约，然后卖出获取原生 BNB：
+
+```solidity
+// 1. 授权路由合约使用你的代币（一次性）
+IERC20(tokenAddress).approve(address(router), type(uint256).max);
+
+// 2. 卖出代币获取 BNB
+router.sellForBNB(
+    tokenAddress,    // 要卖出的 Slinq 代币
+    amountIn,        // 卖出的代币数量 (uint128)
+    amountOutMin,    // 最少接收 BNB 数量 (uint128)
+    deadline         // 交易截止时间
+);
+```
+
+<Warning>
+Slinq 池仅支持 **精确输入** 交换。精确输出交换将会回滚。
+</Warning>
+
+### 获取价格报价
+
+使用 **SlinqQuoter** 在交易前获取预期输出金额：
+
+```solidity
+ISlinqQuoter quoter = ISlinqQuoter(0xce45a9f0310B6dC60a7452CBec79D8f364621B80);
+
+// 用 WBNB 购买代币的报价
+(uint256 tokensOut, uint256 gas) = quoter.quoteBuyToken(
+    tokenAddress,
+    uint128(0.1 ether)  // WBNB 输入数量
+);
+
+// 卖出代币获取 WBNB 的报价
+(uint256 bnbOut, uint256 gas) = quoter.quoteSellToken(
+    tokenAddress,
+    uint128(tokenAmount)  // 代币输入数量
+);
+
+// 通用报价（支持双向）
+(uint256 amountOut, uint256 gas) = quoter.quoteExactInput(
+    tokenAddress,
+    amountIn,
+    true    // true = 代币 --> WBNB（卖出），false = WBNB --> 代币（买入）
+);
+```
+
+### 检查代币是否为 Slinq 代币
+
+```solidity
+bool isSlinq = quoter.isSlinqToken(tokenAddress);
+PoolKey memory poolKey = quoter.getPoolKey(tokenAddress);
+```
+
+## 代币规格
+
+在 Slinq 上发行的每个代币具有相同的参数：
+
+| 属性 | 值 |
+|------|-----|
+| 标准 | ERC-20 + ERC-2612 (Permit) |
+| 总供应量 | 100,000,000,000 (1000亿) |
+| 小数位 | 18 |
+| 可铸造 | 否 |
+| 可销毁 | 是（通过 LP 手续费收割） |
+| 所有者 | 无（已放弃） |
+| 交易对 | 代币/WBNB |
+
+<Check>
+100% 的供应量进入流动性池。零团队代币、零预挖、零隐藏分配。
+</Check>
+
+## 手续费结构
+
+### Hook 手续费（交易手续费）
+
+每笔交易收取 **1% 基础手续费**（最低），分配如下：
+
+| 接收方 | 比例 |
+|--------|------|
+| 代币创作者 | 40% |
+| Slinq 协议 | 60% |
+
+如果代币由创作者以外的人发起（例如社交代币化），分配变为 30% 创作者 / 10% 首位买家 / 60% 协议。
+
+### MEV 保护（发射溢价）
+
+代币发射后的前 **120 秒**，买单需支付额外溢价，以抛物线形式衰减：
+
+```
+buyFee = 1% + 5% * (timeRemaining / 120)^2
+
+t=0秒:   6%    (1% + 5%)
+t=30秒:  ~3.8%
+t=60秒:  ~2.25%
+t=90秒:  ~1.3%
+t=120秒: 1%    (溢价消失)
+```
+
+卖出手续费始终为 1%。MEV 溢价使抢跑无利可图。
+
+### 波动性手续费
+
+在价格高度波动期间，手续费使用 **VA 平方** 公式进行缩放：
+
+```
+volatilityPremium = (40000 * VA^2) / 1,000,000
+totalFee = max(mevFee, baseFee + volatilityPremium)
+```
+
+最高总手续费**上限为 8%**。
+
+### LP 手续费 (0.3%)
+
+PancakeSwap 原生的 0.3% LP 手续费累积到锁定的流动性头寸。Slinq 收割这些手续费：
+- **代币部分** 被永久销毁（通缩）
+- **BNB 部分** 用于回购并销毁 $SLINQ
+
+## 懒启动系统
+
+Slinq 使用无 Gas 的"懒启动"模式。创作者免费创建代币 - 代币仅在首位买家出现时才会部署。
+
+### 运作方式
+
+<Steps>
+  <Step title="创作者签署 LaunchIntent">
+    一个 EIP-712 类型数据签名，包含代币名称、符号、图片 URI 和创作者地址。无需 Gas。
+  </Step>
+  <Step title="意图存储在链下">
+    签署的意图存储在 Slinq 的后端，等待买家出现。
+  </Step>
+  <Step title="首位买家触发部署">
+    买家在 LaunchExecutor 上调用 `executeLazyLaunchAndBuy()`，原子化地：部署代币 (CREATE2)、初始化池、添加流动性、锁定 LP，并执行首笔购买。
+  </Step>
+  <Step title="代币上线">
+    后续所有交易通过 SlinqRouter 正常进行。
+  </Step>
+</Steps>
+
+### LaunchExecutor 接口
+
+```solidity
+ISlinqLaunchExecutor executor = ISlinqLaunchExecutor(0xFB7a7F2815543d5c5821A526D15123765Ed2e100);
+
+executor.executeLazyLaunchAndBuy{value: buyAmountInBNB}(
+    intent,        // LaunchIntent 结构体（name, symbol, imageURI, creator, salt, deadline, fdv）
+    creatorSig,    // 创作者的 EIP-712 签名
+    amountOutMin,  // 首次购买的最少代币数量
+    deadline,      // 交易截止时间
+    buyerSig       // 买家授权签名
+);
+```
+
+## 创作者手续费领取
+
+创作者手续费在 **SlinqFeeLocker** 中累积，可随时领取。
+
+```solidity
+ISlinqFeeLocker feeLocker = ISlinqFeeLocker(0x89462054c284a051BD123d415EA0a2A93bbd2480);
+
+// 领取单个代币的手续费
+feeLocker.claim(creatorAddress, tokenAddress);
+
+// 一次领取多个代币的手续费
+address[] memory tokens = new address[](3);
+tokens[0] = token1;
+tokens[1] = token2;
+tokens[2] = token3;
+feeLocker.claimMultiple(creatorAddress, tokens);
+```
+
+<Info>
+任何人都可以代替创作者调用 `claim()` - 手续费始终发送到创作者的钱包。这使得通过中继器进行无 Gas 领取成为可能。
+</Info>
+
+### 查询未领取的手续费
+
+```solidity
+// 读取未领取的手续费余额
+uint256 unclaimed = feeLocker.feesToClaim(creatorAddress, tokenAddress);
+```
+
+## API 端点
+
+Slinq 提供 REST API 用于链下数据：
+
+| 端点 | 方法 | 描述 |
+|------|------|------|
+| `/api/config/contracts` | GET | 当前合约地址 |
+| `/api/v1/tokens/:address` | GET | 代币元数据和统计 |
+| `/api/v1/tokens` | GET | 代币列表（分页） |
+| `/lazy-intent` | POST | 创建新的 LaunchIntent |
+| `/execute-lazy` | POST | 请求懒启动执行 |
+
+## 池结构
+
+所有 Slinq 池都是 PancakeSwap Infinity 上的 **集中流动性 (CL)** 池，具有以下属性：
+
+- **交易对:** Token/WBNB（代币始终为 `currency0`）
+- **LP 手续费:** 0.3% (3000)
+- **Tick 间距:** 10
+- **流动性:** 单边，全范围
+- **LP 锁定:** 永久（无提取函数）
+- **Hook:** SlinqHookVNext（动态手续费，MEV 保护）
+
+### 读取池状态
+
+```solidity
+// 获取任何 Slinq 代币的池密钥
+PoolKey memory key = quoter.getPoolKey(tokenAddress);
+
+// 从 PancakeSwap 获取池状态
+(uint160 sqrtPriceX96, int24 tick, , ) = CLPoolManager(poolManager).getSlot0(key.toId());
+```
+
+## 安全模型
+
+<Columns cols={2}>
+  <Card title="永久 LP 锁定" icon="lock">
+    流动性锁定在 SlinqLpLocker 中，没有提取函数。即使 Slinq 团队也无法移除流动性。
+  </Card>
+  <Card title="不可变代币" icon="shield-check">
+    代币名称、符号、供应量和创作者在部署后无法更改。不存在铸造函数。
+  </Card>
+  <Card title="链上手续费分配" icon="coins">
+    创作者手续费由 FeeLocker 智能合约持有。只有创作者钱包才能接收已领取的手续费。
+  </Card>
+  <Card title="CREATE2 确定性部署" icon="code">
+    代币地址基于 LaunchIntent 参数确定性生成。相同的意图始终产生相同的地址。
+  </Card>
+</Columns>
+
+## 示例：完整购买流程 (ethers.js)
+
+```javascript
+import { ethers } from "ethers";
+
+const ROUTER = "0xd8c5711e640196C50D7fad60abBf9c464a60e97E";
+const QUOTER = "0xce45a9f0310B6dC60a7452CBec79D8f364621B80";
+
+const provider = new ethers.JsonRpcProvider("https://bsc-dataseed.binance.org");
+const signer = new ethers.Wallet(PRIVATE_KEY, provider);
+
+const quoter = new ethers.Contract(QUOTER, [
+  "function quoteBuyToken(address token, uint128 wbnbAmountIn) external returns (uint256 tokenAmountOut, uint256 gasEstimate)"
+], provider);
+
+const router = new ethers.Contract(ROUTER, [
+  "function buyWithBNB(address token, uint128 amountOutMin, uint256 deadline) external payable returns (uint256 amountOut)"
+], signer);
+
+// 1. 获取报价
+const bnbAmount = ethers.parseEther("0.1");
+const [expectedOut] = await quoter.quoteBuyToken.staticCall(TOKEN, bnbAmount);
+
+// 2. 应用 5% 滑点
+const minOut = expectedOut * 95n / 100n;
+
+// 3. 执行购买
+const deadline = Math.floor(Date.now() / 1000) + 300;
+const tx = await router.buyWithBNB(TOKEN, minOut, deadline, { value: bnbAmount });
+await tx.wait();
+```
+
+## 示例：完整卖出流程 (ethers.js)
+
+```javascript
+const token = new ethers.Contract(TOKEN, [
+  "function approve(address spender, uint256 amount) external returns (bool)",
+  "function balanceOf(address account) external view returns (uint256)"
+], signer);
+
+const quoter = new ethers.Contract(QUOTER, [
+  "function quoteSellToken(address token, uint128 tokenAmountIn) external returns (uint256 wbnbAmountOut, uint256 gasEstimate)"
+], provider);
+
+const router = new ethers.Contract(ROUTER, [
+  "function sellForBNB(address token, uint128 amountIn, uint128 amountOutMin, uint256 deadline) external returns (uint256 amountOut)"
+], signer);
+
+// 1. 授权路由合约（一次性）
+await (await token.approve(ROUTER, ethers.MaxUint256)).wait();
+
+// 2. 获取余额和报价
+const balance = await token.balanceOf(signer.address);
+const [expectedBnb] = await quoter.quoteSellToken.staticCall(TOKEN, balance);
+
+// 3. 应用 5% 滑点并卖出
+const minBnb = expectedBnb * 95n / 100n;
+const deadline = Math.floor(Date.now() / 1000) + 300;
+const tx = await router.sellForBNB(TOKEN, balance, minBnb, deadline);
+await tx.wait();
+```
+
+<Warning>
+请始终通过 BSCScan 或我们的 `/api/config/contracts` 端点验证合约地址。切勿信任非官方来源的地址。
+</Warning>
