@@ -12,7 +12,7 @@ Every trade on Slinq includes a dynamic fee that starts at 1% but adjusts based 
 Hooks are PancakeSwap V4's way of letting protocols like Slinq add custom logic to every trade. Think of them as an automatic middleman that:
 
 - **Calculates the right fee** based on market conditions
-- **Protects against bots** during the first 2 minutes of a launch
+- **Protects against bots** during the first 30 seconds of a launch
 - **Splits fees** between the token creator and the protocol
 - **Adjusts for volatility** to protect against manipulation
 
@@ -37,9 +37,9 @@ When you launch your own token, you receive the full **40% creator share**. But 
 | Scenario | Creator | First Buyer | Protocol |
 |----------|---------|-------------|----------|
 | **You launch your own token** | 40% | — | 60% |
-| **Someone else triggers your launch** | 30% | 10% | 60% |
+| **Someone else triggers your launch** | 35% | 5% | 60% |
 
-The "first buyer" is the person who actually executes the launch transaction on-chain. They receive a 10% share as a reward for putting your token live, while you still earn 30% as the creator.
+The "first buyer" is the person who actually executes the launch transaction on-chain. They receive a 5% share as a reward for putting your token live, while you still earn 35% as the creator.
 
 <Tip>
 Both scenarios give creators significant ongoing income. The 10% first-buyer reward incentivizes people to launch tokens they discover, creating a healthy ecosystem.
@@ -55,8 +55,8 @@ The **1% base fee** (plus any dynamic premiums) is the **hook fee** — collecte
 
 | Recipient | Share | Purpose |
 |-----------|-------|---------|
-| **Token Creator** | 40% (or 30%) | Rewards the token creator |
-| **First Buyer** | 0% (or 10%) | Rewards the person who launched the token |
+| **Token Creator** | 40% (or 35%) | Rewards the token creator |
+| **First Buyer** | 0% (or 5%) | Rewards the person who launched the token |
 | **Slinq Protocol** | 60% | Platform sustainability |
 
 <Info>
@@ -102,15 +102,14 @@ Every trade on Slinq contributes to deflation through LP fees - both for the tok
 
 ## MEV Protection Fees
 
-During the first 2 minutes after launch, a premium is added to **buy orders only** to protect against sniper bots. The premium decays using a **parabolic (x²) curve**:
+During the first 30 seconds after launch, a premium is added to **buy orders only** to protect against sniper bots. The premium decays using a **parabolic (x²) curve**:
 
 | Time After Launch | Buy Fee | Sell Fee |
 |-------------------|---------|----------|
 | 0 seconds | 6% | 1% |
-| 30 seconds | ~3.8% | 1% |
-| 60 seconds | ~2.25% | 1% |
-| 90 seconds | ~1.3% | 1% |
-| 120 seconds+ | 1% | 1% |
+| 10 seconds | ~3.2% | 1% |
+| 20 seconds | ~1.6% | 1% |
+| 30 seconds+ | 1% | 1% |
 
 ### The Math Behind MEV Protection
 
@@ -118,19 +117,19 @@ The MEV premium follows a parabolic decay formula:
 
 <Card title="MEV Premium Formula" icon="function">
 ```
-mevPremium = 5% × (timeRemaining / 120)²
+mevPremium = 5% × (timeRemaining / 30)²
 
 totalBuyFee = baseFee + mevPremium
-           = 1% + 5% × (timeRemaining / 120)²
+           = 1% + 5% × (timeRemaining / 30)²
 ```
 
-Where `timeRemaining` = 120 seconds - elapsed time since launch
+Where `timeRemaining` = 30 seconds - elapsed time since launch
 </Card>
 
 **Example calculations:**
-- At launch (t=0): `1% + 5% × (120/120)² = 1% + 5% = 6%`
-- At 60 seconds: `1% + 5% × (60/120)² = 1% + 1.25% = 2.25%`
-- At 90 seconds: `1% + 5% × (30/120)² = 1% + 0.31% = 1.31%`
+- At launch (t=0): `1% + 5% × (30/30)² = 1% + 5% = 6%`
+- At 10 seconds: `1% + 5% × (20/30)² = 1% + 2.22% = 3.22%`
+- At 20 seconds: `1% + 5% × (10/30)² = 1% + 0.56% = 1.56%`
 
 ### Why MEV Protection?
 
@@ -142,7 +141,7 @@ MEV (Maximal Extractable Value) bots try to:
 High early fees make these attacks unprofitable, giving regular users a fair chance.
 
 <Tip>
-If you're not in a rush, waiting 2 minutes after launch means you pay standard 1% fees.
+If you're not in a rush, waiting 30 seconds after launch means you pay standard 1% fees.
 </Tip>
 
 ## Volatility Fees
@@ -154,10 +153,9 @@ During periods of high price volatility, fees increase to protect liquidity prov
 | **Normal** | 1% | Typical trading conditions |
 | **Elevated** | 1-3% | Moderate price swings |
 | **High** | 3-5% | Significant price movement |
-| **Extreme** | 5-8% | Rapid pumps or dumps |
 
 <Warning>
-The maximum total fee is capped at **8%** regardless of how volatile the market becomes.
+The maximum total hook fee is capped at **5%** regardless of how volatile the market becomes.
 </Warning>
 
 ### The Math Behind Volatility Fees
@@ -186,7 +184,7 @@ The VA accumulates based on how far the price moves from a reference point, then
 **Example calculations:**
 - VA = 500 (5% price move): `40,000 × 500² / 1,000,000 = 1% premium`
 - VA = 1000 (10% move): `40,000 × 1000² / 1,000,000 = 4% premium`
-- VA = 1500 (15% move): `40,000 × 1500² / 1,000,000 = 9%` → capped at 8%
+- VA = 1500 (15% move): `40,000 × 1500² / 1,000,000 = 9%` → capped at 5%
 
 <Info>
 The VA² formula means small moves have minimal impact, but large rapid moves trigger significant protection for LPs.
@@ -223,7 +221,7 @@ Gas fees go to BNB Chain validators, not Slinq. They vary based on network conge
 ## Fee FAQ
 
 <Accordion title="Do I pay fees on both buys and sells?">
-  Yes, the base 1% fee applies to every trade. However, the MEV premium (during the first 2 minutes) only applies to **buy orders** - sells always pay the standard fee.
+  Yes, the base 1% fee applies to every trade. However, the MEV premium (during the first 30 seconds) only applies to **buy orders** - sells always pay the standard fee.
 </Accordion>
 
 <Accordion title="Are fees included in the quote?">
@@ -231,11 +229,11 @@ Gas fees go to BNB Chain validators, not Slinq. They vary based on network conge
 </Accordion>
 
 <Accordion title="Can I avoid MEV fees?">
-  Wait 2 minutes after launch to pay standard 1% fees. The MEV decay is automatic. Or sell instead of buy - MEV fees only apply to buys.
+  Wait 30 seconds after launch to pay standard 1% fees. The MEV decay is automatic. Or sell instead of buy - MEV fees only apply to buys.
 </Accordion>
 
 <Accordion title="What's the maximum fee I could ever pay?">
-  The absolute maximum is **8%**, which only happens during extreme volatility (rapid pumps/dumps). Under normal conditions, you'll pay 1-2%.
+  The absolute maximum hook fee is **5%**, which only happens during extreme volatility combined with MEV protection at launch. Under normal conditions, you'll pay 1-2%.
 </Accordion>
 
 <Accordion title="Where can I see my fee contributions?">
@@ -266,7 +264,7 @@ Slinq's fee model aligns incentives:
     - Transparent 1% base fee
     - MEV protection at launch (buy-only premium)
     - Volatility fees protect against manipulation
-    - Max 8% cap even in extreme conditions
+    - Max 5% cap even in extreme conditions
   </Card>
   <Card title="For Creators" icon="star">
     - 40% of all trading fees
