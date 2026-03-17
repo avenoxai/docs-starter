@@ -161,11 +161,29 @@ Slinq provides the platform; investment decisions are yours alone.
 
 ## How Hooks Keep You Safe
 
-All of these protections are built into a **PancakeSwap V4 hook** — a smart contract plugin that automatically runs on every trade. You don't need to take any extra steps; the hook handles fee calculation, MEV protection, and creator fee distribution transparently.
+All of these protections are built into **PancakeSwap V4 hooks** and **V3 LP locking** — smart contract plugins that automatically run on every trade. You don't need to take any extra steps; the contracts handle fee calculation, MEV protection, and creator fee distribution transparently.
 
 ## Contract Addresses
 
-Official Slinq contract addresses will be published here upon mainnet launch. In the meantime, always verify addresses through the official Slinq app or our announcement channels.
+All Slinq contracts are deployed and **verified on BscScan** (BSC Mainnet, Chain ID 56):
+
+| Contract | Address |
+|----------|---------|
+| SlinqFactoryInfinity | [`0xBB722F0eFa774c62f910C02f66F1b54279c9C366`](https://bscscan.com/address/0xBB722F0eFa774c62f910C02f66F1b54279c9C366#code) |
+| SlinqHookInfinity | [`0xa834E5d5eE71c75Fa9e4A214927aa6546CFEB700`](https://bscscan.com/address/0xa834E5d5eE71c75Fa9e4A214927aa6546CFEB700#code) |
+| SlinqLaunchExecutorInfinity | [`0x5630Dd2DF49cDb893D897C3d3e540eF4A723DB0d`](https://bscscan.com/address/0x5630Dd2DF49cDb893D897C3d3e540eF4A723DB0d#code) |
+| SlinqRouterInfinity | [`0xcc22c884a5aa4b86C491a19C53E7b266dc791C3D`](https://bscscan.com/address/0xcc22c884a5aa4b86C491a19C53E7b266dc791C3D#code) |
+| SlinqQuoterInfinity | [`0x53c89d646aAcD4ec51c21D47C3f3c80Ad309602B`](https://bscscan.com/address/0x53c89d646aAcD4ec51c21D47C3f3c80Ad309602B#code) |
+| SlinqFeeLockerInfinity | [`0xB42ff2b3928ba988b9CDF50c2dEaB68d9aA2d07A`](https://bscscan.com/address/0xB42ff2b3928ba988b9CDF50c2dEaB68d9aA2d07A#code) |
+| SlinqLpLockerInfinity | [`0x8C6c893c2A1d1965c78BA3E048791ae5Af7668D9`](https://bscscan.com/address/0x8C6c893c2A1d1965c78BA3E048791ae5Af7668D9#code) |
+| SlinqFactoryV3 | [`0x9f16F119426c43486Ecaf5Df1BD99eA84BCb456d`](https://bscscan.com/address/0x9f16F119426c43486Ecaf5Df1BD99eA84BCb456d#code) |
+| SlinqLpLockerV3 | [`0xA77dEc189be820A11259Dc34C936F42D13AFf5D0`](https://bscscan.com/address/0xA77dEc189be820A11259Dc34C936F42D13AFf5D0#code) |
+| SlinqRouterV3 | [`0x59C6a7326bC7EA60195dE31321188b2932906e59`](https://bscscan.com/address/0x59C6a7326bC7EA60195dE31321188b2932906e59#code) |
+| SlinqQuoterV3 | [`0xdBD0cE8F770e89Ca543f0dC459E101b0C5716D45`](https://bscscan.com/address/0xdBD0cE8F770e89Ca543f0dC459E101b0C5716D45#code) |
+
+<Info>
+You can also fetch current addresses programmatically via `GET https://slinq.meme/api/config/contracts`
+</Info>
 
 <Warning>
 Never interact with contracts shared in DMs or unofficial channels. Only trust addresses from [slinq.meme](https://slinq.meme) or official Slinq social accounts.

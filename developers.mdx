@@ -33,17 +33,28 @@ All contracts are deployed and verified on **BSC Mainnet (Chain ID: 56)**.
 You can also fetch current addresses programmatically via `GET https://slinq.meme/api/config/contracts`
 </Info>
 
+### Infinity (V4) Contracts
+
 | Contract | Address | Purpose |
 |----------|---------|---------|
-| **SlinqFactoryVNext** | [`0x35a8E02271df91196A98004e7DCe9E7c5678f1E1`](https://bscscan.com/address/0x35a8E02271df91196A98004e7DCe9E7c5678f1E1#code) | Token deployment via EIP-712 intents |
-| **SlinqHookVNext** | [`0xfA8f1C4052c0DEe5A41F296c690cb61Bd7C5B713`](https://bscscan.com/address/0xfA8f1C4052c0DEe5A41F296c690cb61Bd7C5B713#code) | PancakeSwap V4 hook — dynamic fees, MEV protection |
-| **SlinqHookVNextViewFacet** | [`0xf706df1E6f9841C646cd8e7b72019A07086F4EA7`](https://bscscan.com/address/0xf706df1E6f9841C646cd8e7b72019A07086F4EA7#code) | Read-only view functions for the hook |
-| **SlinqLaunchExecutor** | [`0xFB7a7F2815543d5c5821A526D15123765Ed2e100`](https://bscscan.com/address/0xFB7a7F2815543d5c5821A526D15123765Ed2e100#code) | Atomic lazy launch + first buy execution |
-| **SlinqRouter** | [`0xd8c5711e640196C50D7fad60abBf9c464a60e97E`](https://bscscan.com/address/0xd8c5711e640196C50D7fad60abBf9c464a60e97E#code) | Native BNB buy/sell router |
-| **SlinqQuoter** | [`0xce45a9f0310B6dC60a7452CBec79D8f364621B80`](https://bscscan.com/address/0xce45a9f0310B6dC60a7452CBec79D8f364621B80#code) | Price quotes and token lookup |
-| **SlinqFeeLocker** | [`0x89462054c284a051BD123d415EA0a2A93bbd2480`](https://bscscan.com/address/0x89462054c284a051BD123d415EA0a2A93bbd2480#code) | Creator fee accumulation and claims |
-| **SlinqLpLocker** | [`0x8B188e2DA56CC9d5b7D26B62FcFF4710Ee04AED7`](https://bscscan.com/address/0x8B188e2DA56CC9d5b7D26B62FcFF4710Ee04AED7#code) | Permanent LP lock + fee harvesting |
-| **SlinqTokenBuybackBurner** | [`0x7735ac448d67838EE8a60476eE4140CF913043ee`](https://bscscan.com/address/0x7735ac448d67838EE8a60476eE4140CF913043ee#code) | BNB-to-$SLINQ buyback and burn |
+| **SlinqFactoryInfinity** | [`0xBB722F0eFa774c62f910C02f66F1b54279c9C366`](https://bscscan.com/address/0xBB722F0eFa774c62f910C02f66F1b54279c9C366#code) | Token deployment via EIP-712 intents |
+| **SlinqHookInfinity** | [`0xa834E5d5eE71c75Fa9e4A214927aa6546CFEB700`](https://bscscan.com/address/0xa834E5d5eE71c75Fa9e4A214927aa6546CFEB700#code) | PancakeSwap V4 hook — dynamic fees, MEV protection |
+| **SlinqHookInfinityViewFacet** | [`0x8E933B3cB842607C21c74E620d443dD90eBD85cD`](https://bscscan.com/address/0x8E933B3cB842607C21c74E620d443dD90eBD85cD#code) | Read-only view functions for the hook |
+| **SlinqLaunchExecutorInfinity** | [`0x5630Dd2DF49cDb893D897C3d3e540eF4A723DB0d`](https://bscscan.com/address/0x5630Dd2DF49cDb893D897C3d3e540eF4A723DB0d#code) | Atomic lazy launch + first buy execution |
+| **SlinqRouterInfinity** | [`0xcc22c884a5aa4b86C491a19C53E7b266dc791C3D`](https://bscscan.com/address/0xcc22c884a5aa4b86C491a19C53E7b266dc791C3D#code) | Native BNB buy/sell router |
+| **SlinqQuoterInfinity** | [`0x53c89d646aAcD4ec51c21D47C3f3c80Ad309602B`](https://bscscan.com/address/0x53c89d646aAcD4ec51c21D47C3f3c80Ad309602B#code) | Price quotes and token lookup |
+| **SlinqFeeLockerInfinity** | [`0xB42ff2b3928ba988b9CDF50c2dEaB68d9aA2d07A`](https://bscscan.com/address/0xB42ff2b3928ba988b9CDF50c2dEaB68d9aA2d07A#code) | Creator fee accumulation and claims |
+| **SlinqLpLockerInfinity** | [`0x8C6c893c2A1d1965c78BA3E048791ae5Af7668D9`](https://bscscan.com/address/0x8C6c893c2A1d1965c78BA3E048791ae5Af7668D9#code) | Permanent LP lock + fee harvesting |
+| **SlinqTokenBuybackBurner** | [`0x183B25b94109e12f4aF00EBC7BE0f2966a919239`](https://bscscan.com/address/0x183B25b94109e12f4aF00EBC7BE0f2966a919239#code) | BNB-to-$SLINQ buyback and burn |
+
+### PancakeSwap V3 Contracts
+
+| Contract | Address | Purpose |
+|----------|---------|---------|
+| **SlinqFactoryV3** | [`0x9f16F119426c43486Ecaf5Df1BD99eA84BCb456d`](https://bscscan.com/address/0x9f16F119426c43486Ecaf5Df1BD99eA84BCb456d#code) | V3 token deployment + lazy launch |
+| **SlinqLpLockerV3** | [`0xA77dEc189be820A11259Dc34C936F42D13AFf5D0`](https://bscscan.com/address/0xA77dEc189be820A11259Dc34C936F42D13AFf5D0#code) | V3 permanent LP lock + fee harvesting |
+| **SlinqRouterV3** | [`0x59C6a7326bC7EA60195dE31321188b2932906e59`](https://bscscan.com/address/0x59C6a7326bC7EA60195dE31321188b2932906e59#code) | V3 native BNB buy/sell router |
+| **SlinqQuoterV3** | [`0xdBD0cE8F770e89Ca543f0dC459E101b0C5716D45`](https://bscscan.com/address/0xdBD0cE8F770e89Ca543f0dC459E101b0C5716D45#code) | V3 price quotes |
 
 ### PancakeSwap Infinity Addresses (BSC)
 
@@ -67,7 +78,7 @@ The **SlinqRouter** is the primary contract for trading. It wraps/unwraps native
 Send native BNB to buy any Slinq token:
 
 ```solidity
-ISlinqRouter router = ISlinqRouter(0xd8c5711e640196C50D7fad60abBf9c464a60e97E);
+ISlinqRouter router = ISlinqRouter(0xcc22c884a5aa4b86C491a19C53E7b266dc791C3D);
 
 // Buy token with 0.1 BNB
 router.buyWithBNB{value: 0.1 ether}(
@@ -103,7 +114,7 @@ Slinq pools only support **exact-input** swaps. Exact-output swaps will revert.
 Use the **SlinqQuoter** to get expected output amounts before trading:
 
 ```solidity
-ISlinqQuoter quoter = ISlinqQuoter(0xce45a9f0310B6dC60a7452CBec79D8f364621B80);
+ISlinqQuoter quoter = ISlinqQuoter(0x53c89d646aAcD4ec51c21D47C3f3c80Ad309602B);
 
 // Quote buying tokens with WBNB
 (uint256 tokensOut, uint256 gas) = quoter.quoteBuyToken(
@@ -161,7 +172,7 @@ Every trade is charged a **1% base fee** (minimum), distributed as:
 | Token Creator | 40% |
 | Slinq Protocol | 60% |
 
-If the token was launched by someone other than the creator (e.g. social tokenization), the split becomes 30% creator / 10% first buyer / 60% protocol.
+If the token was launched by someone other than the creator (e.g. social tokenization), the split becomes 35% creator / 5% first buyer / 60% protocol.
 
 ### MEV Protection (Launch Premium)
 
@@ -220,7 +231,7 @@ Slinq uses a gasless "lazy launch" model. Token creation is free for creators �
 ### LaunchExecutor Interface
 
 ```solidity
-ISlinqLaunchExecutor executor = ISlinqLaunchExecutor(0xFB7a7F2815543d5c5821A526D15123765Ed2e100);
+ISlinqLaunchExecutor executor = ISlinqLaunchExecutor(0x5630Dd2DF49cDb893D897C3d3e540eF4A723DB0d);
 
 executor.executeLazyLaunchAndBuy{value: buyAmountInBNB}(
     intent,        // LaunchIntent struct (name, symbol, imageURI, creator, salt, deadline, fdv)
@@ -236,7 +247,7 @@ executor.executeLazyLaunchAndBuy{value: buyAmountInBNB}(
 Creator fees accumulate in the **SlinqFeeLocker** and can be claimed at any time.
 
 ```solidity
-ISlinqFeeLocker feeLocker = ISlinqFeeLocker(0x89462054c284a051BD123d415EA0a2A93bbd2480);
+ISlinqFeeLocker feeLocker = ISlinqFeeLocker(0xB42ff2b3928ba988b9CDF50c2dEaB68d9aA2d07A);
 
 // Claim fees for a single token
 feeLocker.claim(creatorAddress, tokenAddress);
@@ -274,14 +285,23 @@ Slinq provides a REST API for off-chain data:
 
 ## Pool Structure
 
-All Slinq pools are **Concentrated Liquidity (CL)** pools on PancakeSwap Infinity with these properties:
+Slinq tokens trade on **Concentrated Liquidity (CL)** pools on PancakeSwap:
 
+### Infinity (V4) Pools
 - **Pair:** Token/WBNB (token is always `currency0`)
 - **LP Fee:** 0.3% (3000)
 - **Tick Spacing:** 10
 - **Liquidity:** Single-sided, full-range
 - **LP Lock:** Permanent (no withdraw function)
-- **Hook:** SlinqHookVNext (dynamic fees, MEV protection)
+- **Hook:** SlinqHookInfinity (dynamic fees, MEV protection)
+
+### PancakeSwap V3 Pools
+- **Pair:** Token/WBNB (or Token/USDT, Token/USD1)
+- **Fee Tier:** 1% (10000)
+- **Tick Spacing:** 200
+- **Liquidity:** Full-range, single position
+- **LP Lock:** Permanent NFT lock in SlinqLpLockerV3
+- **Creator Rewards:** From harvested LP fees (no hook required)
 
 ### Reading Pool State
 
@@ -315,8 +335,8 @@ PoolKey memory key = quoter.getPoolKey(tokenAddress);
 ```javascript
 import { ethers } from "ethers";
 
-const ROUTER = "0xd8c5711e640196C50D7fad60abBf9c464a60e97E";
-const QUOTER = "0xce45a9f0310B6dC60a7452CBec79D8f364621B80";
+const ROUTER = "0xcc22c884a5aa4b86C491a19C53E7b266dc791C3D";
+const QUOTER = "0x53c89d646aAcD4ec51c21D47C3f3c80Ad309602B";
 
 const provider = new ethers.JsonRpcProvider("https://bsc-dataseed.binance.org");
 const signer = new ethers.Wallet(PRIVATE_KEY, provider);
