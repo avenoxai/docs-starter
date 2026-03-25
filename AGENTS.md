@@ -30,7 +30,7 @@ For runtime address discovery, the public docs should point readers to:
 - Avoid exposing backend storage details, internal job flows, or unnecessary implementation plumbing in end-user pages.
 - The `developers` tab can be more technical, but it should still prefer stable integration guidance over internal architecture trivia.
 - Treat PancakeSwap Infinity / vNext as the current production stack unless a page is explicitly labeled historical or legacy.
-- If legacy V3 contracts are mentioned, label them clearly as historical or legacy reference material.
+- V3 contracts are actively used for V3 pools alongside the Infinity contracts.
 
 ## Consistency Rules
 

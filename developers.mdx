@@ -51,7 +51,7 @@ You can also fetch current addresses programmatically via `GET https://slinq.mem
 | **SlinqLpLockerInfinity** | [`0x8C6c893c2A1d1965c78BA3E048791ae5Af7668D9`](https://bscscan.com/address/0x8C6c893c2A1d1965c78BA3E048791ae5Af7668D9#code) | Permanent LP lock + fee harvesting |
 | **SlinqTokenBuybackBurner** | [`0x183B25b94109e12f4aF00EBC7BE0f2966a919239`](https://bscscan.com/address/0x183B25b94109e12f4aF00EBC7BE0f2966a919239#code) | BNB-to-$SLINQ buyback and burn |
 
-### Legacy V3 Contracts (Historical Reference)
+### V3 Contracts
 
 | Contract | Address | Purpose |
 |----------|---------|---------|
@@ -295,8 +295,8 @@ Slinq tokens trade on **Concentrated Liquidity (CL)** pools on PancakeSwap:
 - **LP Lock:** Permanent (no withdraw function).
 - **Hook:** SlinqHookInfinity (dynamic fees, launch protection, fee distribution).
 
-### Legacy V3 Pools
-- **Pair:** Legacy deployments may use Token/WBNB or other quote pairs.
+### V3 Pools
+- **Pair:** V3 deployments use Token/WBNB pairs.
 - **LP Lock:** Permanent NFT lock in SlinqLpLockerV3.
 - **Creator Rewards:** Harvested from LP fees rather than Infinity hook fees.
 
