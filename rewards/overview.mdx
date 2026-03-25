@@ -1,11 +1,11 @@
 ---
 title: Creator Rewards Overview
-description: Earn 40% of all trading fees from your tokens
+description: Earn creator trading fees from your tokens
 ---
 
 # Creator Rewards
 
-When you create a token on Slinq, you earn up to 40% of all trading fees — forever. This is the highest creator share in the industry, powered by PancakeSwap V4 hooks that automatically split fees on every trade.
+When you create a token on Slinq, you earn creator trading fees on every trade. Self-launched tokens pay **40%** of the hook fee to the creator. If someone else triggers the on-chain launch, the creator receives **35%** and the initializer receives **5%**.
 
 ## How It Works
 
@@ -17,7 +17,7 @@ When you create a token on Slinq, you earn up to 40% of all trading fees — for
     Users buy and sell your token on PancakeSwap.
   </Step>
   <Step title="Hook splits fees automatically">
-    The Slinq hook on every trade calculates fees and sends your share to the fee locker contract.
+    The Slinq hook on every trade calculates fees and credits your share to the claimable balance for the beneficiary wallet.
   </Step>
   <Step title="Claim anytime">
     Withdraw your accumulated fees whenever you want from your creator dashboard.
@@ -36,6 +36,13 @@ When you create a token on Slinq, you earn up to 40% of all trading fees — for
 <Info>
 Your earnings scale directly with trading activity. More volume = more rewards.
 </Info>
+
+## Fee Splits
+
+| How the Token Was Created | Creator | Initializer | Protocol |
+|--------------------------|---------|-------------|----------|
+| You launched it yourself | 40% | — | 60% |
+| Someone else triggered launch | 35% | 5% | 60% |
 
 ## Why 40%?
 
@@ -67,7 +74,7 @@ When someone replies "tokenize this" to your tweet or cast, you're automatically
 
 <Columns cols={2}>
   <Card title="Automatic Accumulation" icon="clock">
-    The hook collects and splits fees on every trade. No action needed from you.
+    The hook collects and splits fees on every trade. Your share builds up automatically.
   </Card>
   <Card title="Claim Anytime" icon="hand-holding-dollar">
     Withdraw accumulated fees whenever you want.

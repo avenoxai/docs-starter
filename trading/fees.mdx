@@ -42,7 +42,7 @@ When you launch your own token, you receive the full **40% creator share**. But 
 The "first buyer" is the person who actually executes the launch transaction on-chain. They receive a 5% share as a reward for putting your token live, while you still earn 35% as the creator.
 
 <Tip>
-Both scenarios give creators significant ongoing income. The 10% first-buyer reward incentivizes people to launch tokens they discover, creating a healthy ecosystem.
+Both scenarios give creators significant ongoing income. The 5% first-buyer reward incentivizes people to launch tokens they discover, creating a healthy ecosystem.
 </Tip>
 
 ## Two Types of Fees
@@ -93,7 +93,7 @@ Every trade on Slinq contributes to deflation through LP fees - both for the tok
     The fee is split: 40% to creator, 60% to protocol.
   </Step>
   <Step title="Creator accumulates">
-    Creator fees accumulate in the fee locker contract.
+    Creator rewards accumulate automatically in the claimable balance for the designated beneficiary wallet.
   </Step>
   <Step title="Claimable anytime">
     Creators can claim their accumulated fees whenever they want.
@@ -102,11 +102,11 @@ Every trade on Slinq contributes to deflation through LP fees - both for the tok
 
 ## MEV Protection Fees
 
-During the first 30 seconds after launch, a premium is added to **buy orders only** to protect against sniper bots. The premium decays using a **parabolic (x²) curve**:
+During the first 30 seconds after launch, a premium is added to **buy orders only** to protect against sniper bots. The premium decays using a **parabolic (x²) curve**, and the total hook fee is capped at **5%**:
 
 | Time After Launch | Buy Fee | Sell Fee |
 |-------------------|---------|----------|
-| 0 seconds | 6% | 1% |
+| 0 seconds | 5% | 1% |
 | 10 seconds | ~3.2% | 1% |
 | 20 seconds | ~1.6% | 1% |
 | 30 seconds+ | 1% | 1% |
@@ -119,15 +119,15 @@ The MEV premium follows a parabolic decay formula:
 ```
 mevPremium = 5% × (timeRemaining / 30)²
 
-totalBuyFee = baseFee + mevPremium
-           = 1% + 5% × (timeRemaining / 30)²
+totalBuyFee = min(5%, baseFee + mevPremium)
+           = min(5%, 1% + 5% × (timeRemaining / 30)²)
 ```
 
 Where `timeRemaining` = 30 seconds - elapsed time since launch
 </Card>
 
 **Example calculations:**
-- At launch (t=0): `1% + 5% × (30/30)² = 1% + 5% = 6%`
+- At launch (t=0): `min(5%, 1% + 5% × (30/30)²) = 5%`
 - At 10 seconds: `1% + 5% × (20/30)² = 1% + 2.22% = 3.22%`
 - At 20 seconds: `1% + 5% × (10/30)² = 1% + 0.56% = 1.56%`
 
@@ -233,7 +233,7 @@ Gas fees go to BNB Chain validators, not Slinq. They vary based on network conge
 </Accordion>
 
 <Accordion title="What's the maximum fee I could ever pay?">
-  The absolute maximum hook fee is **5%**, which only happens during extreme volatility combined with MEV protection at launch. Under normal conditions, you'll pay 1-2%.
+  The absolute maximum hook fee is **5%**. Under normal conditions, you'll usually pay close to the 1% base fee.
 </Accordion>
 
 <Accordion title="Where can I see my fee contributions?">

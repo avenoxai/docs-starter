@@ -59,26 +59,25 @@ MEV（Maximal Extractable Value）攻击通常包括：
 
 ### 我们怎么防
 
-Slinq 使用会在 2 分钟内衰减的动态费率：
+Slinq 的开盘保护会在前 30 秒对买单启用动态费率。总 hook 手续费上限是 5%，之后会回到 1% 的基础费率。
 
-| 上线后的时间 | 手续费 |
-|--------------|--------|
-| 0-30 秒 | 10% |
-| 30-60 秒 | ~7% |
-| 60-90 秒 | ~4% |
-| 90-120 秒 | ~2% |
-| 2 分钟后 | 1% |
+| 上线后的时间 | 买入费率 | 卖出费率 |
+|--------------|----------|----------|
+| 0 秒 | 5% | 1% |
+| 10 秒 | ~3.2% | 1% |
+| 20 秒 | ~1.6% | 1% |
+| 30 秒后 | 1% | 1% |
 
-开盘初期手续费高，能让很多 MEV 玩法直接变得不划算，给普通用户更公平的入场窗口。
+开盘初期买入费率更高，能让很多 MEV 玩法直接变得不划算，给普通用户更公平的入场窗口。
 
 ## 手续费分发安全
 
 ### 智能合约托管
 
-创作者收益由 **Fee Locker** 智能合约托管：
+创作者收益会在链上记录，并且只能打到当前被设置为收益接收方的钱包：
 
 - 不由 Slinq 团队人工控制
-- 只有创作者钱包能提取
+- 只有当前收益接收方钱包能收到领取结果
 - 无法被重定向或盗走
 - 全程链上可验证
 
@@ -160,15 +159,33 @@ Slinq 提供的是平台和机制，不替你做投资判断。
 
 ## 合约地址
 
-下面是 Slinq 在 BNB Chain 上的官方合约地址，便于你校验：
+当前主网发币和交易相关合约已部署在 **BSC 主网（Chain ID 56）** 并在 BscScan 上完成验证：
 
 | 合约 | 地址 |
 |------|------|
-| Zyper Factory | `0x138A3070689f094F5c9e48Eb558EfA74cfBf11d6` |
-| Zyper Hook | `0x2f8a02DeD88aFb9AE81c10A2C26f24d973011c7d` |
-| LP Locker | `0xA0c13A54499FEC6C6e25F2530aeE48B23655f0A6` |
-| Fee Locker | `0x28590aBB3c6a06856ef3c4e6E4754093D0291414` |
+| SlinqFactoryInfinity | [`0xBB722F0eFa774c62f910C02f66F1b54279c9C366`](https://bscscan.com/address/0xBB722F0eFa774c62f910C02f66F1b54279c9C366#code) |
+| SlinqHookInfinity | [`0xa834E5d5eE71c75Fa9e4A214927aa6546CFEB700`](https://bscscan.com/address/0xa834E5d5eE71c75Fa9e4A214927aa6546CFEB700#code) |
+| SlinqHookInfinityViewFacet | [`0x8E933B3cB842607C21c74E620d443dD90eBD85cD`](https://bscscan.com/address/0x8E933B3cB842607C21c74E620d443dD90eBD85cD#code) |
+| SlinqLaunchExecutorInfinity | [`0x5630Dd2DF49cDb893D897C3d3e540eF4A723DB0d`](https://bscscan.com/address/0x5630Dd2DF49cDb893D897C3d3e540eF4A723DB0d#code) |
+| SlinqRouterInfinity | [`0xcc22c884a5aa4b86C491a19C53E7b266dc791C3D`](https://bscscan.com/address/0xcc22c884a5aa4b86C491a19C53E7b266dc791C3D#code) |
+| SlinqQuoterInfinity | [`0x53c89d646aAcD4ec51c21D47C3f3c80Ad309602B`](https://bscscan.com/address/0x53c89d646aAcD4ec51c21D47C3f3c80Ad309602B#code) |
+| SlinqFeeLockerInfinity | [`0xB42ff2b3928ba988b9CDF50c2dEaB68d9aA2d07A`](https://bscscan.com/address/0xB42ff2b3928ba988b9CDF50c2dEaB68d9aA2d07A#code) |
+| SlinqLpLockerInfinity | [`0x8C6c893c2A1d1965c78BA3E048791ae5Af7668D9`](https://bscscan.com/address/0x8C6c893c2A1d1965c78BA3E048791ae5Af7668D9#code) |
+| SlinqTokenBuybackBurner | [`0x183B25b94109e12f4aF00EBC7BE0f2966a919239`](https://bscscan.com/address/0x183B25b94109e12f4aF00EBC7BE0f2966a919239#code) |
+
+### Legacy V3 合约（历史参考）
+
+| 合约 | 地址 |
+|------|------|
+| SlinqFactoryV3 | [`0x9f16F119426c43486Ecaf5Df1BD99eA84BCb456d`](https://bscscan.com/address/0x9f16F119426c43486Ecaf5Df1BD99eA84BCb456d#code) |
+| SlinqLpLockerV3 | [`0xA77dEc189be820A11259Dc34C936F42D13AFf5D0`](https://bscscan.com/address/0xA77dEc189be820A11259Dc34C936F42D13AFf5D0#code) |
+| SlinqRouterV3 | [`0x59C6a7326bC7EA60195dE31321188b2932906e59`](https://bscscan.com/address/0x59C6a7326bC7EA60195dE31321188b2932906e59#code) |
+| SlinqQuoterV3 | [`0xdBD0cE8F770e89Ca543f0dC459E101b0C5716D45`](https://bscscan.com/address/0xdBD0cE8F770e89Ca543f0dC459E101b0C5716D45#code) |
 
 <Info>
-与合约直接交互前，请始终通过官方渠道再次核对地址。
+你也可以通过 `GET https://slinq.meme/api/config/contracts` 接口动态获取最新地址。
 </Info>
+
+<Warning>
+不要信任私信或非官方渠道中分享的合约地址。只信任 [slinq.meme](https://slinq.meme) 或 Slinq 官方社交账号发布的地址。
+</Warning>

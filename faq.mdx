@@ -79,7 +79,7 @@ description: Frequently asked questions about Slinq
 ## Trading
 
 <Accordion title="Where are tokens traded?">
-  All Slinq tokens trade on **PancakeSwap V4 Infinity** through our integrated interface. You can also trade directly on PancakeSwap using the token's contract address.
+  New Slinq tokens trade on **PancakeSwap Infinity** through our integrated interface. You can also trade directly on PancakeSwap using the token's contract address.
 </Accordion>
 
 <Accordion title="What are the trading fees?">
@@ -96,7 +96,7 @@ description: Frequently asked questions about Slinq
 </Accordion>
 
 <Accordion title="What is MEV protection?">
-  MEV (Maximal Extractable Value) bots try to exploit new launches by front-running and sandwiching trades. Slinq's hook charges higher buy fees (up to 6%) during the first 30 seconds, then settles to 1%. Sell fees are always 1%. This makes sniping unprofitable.
+  MEV (Maximal Extractable Value) bots try to exploit new launches by front-running and sandwiching trades. Slinq's hook can raise buy fees as high as 5% during the first 30 seconds, then it settles back to the 1% base fee. Sell fees stay at 1%. This makes sniping much less attractive.
 </Accordion>
 
 <Accordion title="Why did my transaction fail?">
@@ -115,7 +115,7 @@ description: Frequently asked questions about Slinq
 ## Creator Rewards
 
 <Accordion title="How do I earn as a creator?">
-  You automatically earn up to 40% of all trading fees on your token. Fees accumulate in the fee locker contract and can be claimed anytime. The exact split depends on how the token was launched — see [fee beneficiaries](/trading/fees#fee-beneficiaries).
+  You automatically earn creator trading fees on your token. If you launched it yourself, you receive 40% of the hook fee. If someone else triggered the on-chain launch, you receive 35% and the initializer receives 5%. Rewards accumulate onchain and can be claimed anytime from your dashboard.
 </Accordion>
 
 <Accordion title="What if someone else tokenized my post?">

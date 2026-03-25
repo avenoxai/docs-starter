@@ -59,15 +59,14 @@ MEV (Maximal Extractable Value) attacks include:
 
 ### How We Protect You
 
-Slinq's hook charges dynamic fees that decay over 2 minutes using a parabolic curve:
+Slinq's launch protection uses dynamic buy fees during the first 30 seconds after launch. The total hook fee is capped at 5% and then settles back to the 1% base fee.
 
 | Time After Launch | Buy Fee | Sell Fee |
 |-------------------|---------|----------|
-| 0 seconds | 6% | 1% |
-| 30 seconds | ~3.8% | 1% |
-| 60 seconds | ~2.25% | 1% |
-| 90 seconds | ~1.3% | 1% |
-| 120 seconds+ | 1% | 1% |
+| 0 seconds | 5% | 1% |
+| 10 seconds | ~3.2% | 1% |
+| 20 seconds | ~1.6% | 1% |
+| 30 seconds+ | 1% | 1% |
 
 The MEV premium only applies to **buy orders** — sells always pay the standard 1%. This makes sniping and front-running unprofitable while letting regular users trade fairly.
 
@@ -75,10 +74,10 @@ The MEV premium only applies to **buy orders** — sells always pay the standard
 
 ### Smart Contract Custody
 
-Creator fees are held by the **Fee Locker** smart contract:
+Creator rewards are tracked onchain and can only be claimed by the wallet currently set to receive them:
 
 - Not controlled by Slinq team
-- Only the creator wallet can claim
+- Only the designated beneficiary wallet can receive claims
 - Cannot be redirected or stolen
 - Transparent on-chain
 
@@ -161,21 +160,28 @@ Slinq provides the platform; investment decisions are yours alone.
 
 ## How Hooks Keep You Safe
 
-All of these protections are built into **PancakeSwap V4 hooks** and **V3 LP locking** — smart contract plugins that automatically run on every trade. You don't need to take any extra steps; the contracts handle fee calculation, MEV protection, and creator fee distribution transparently.
+All of these protections are built into **PancakeSwap Infinity hooks** and Slinq's permanent liquidity locking. You don't need to take any extra steps; the contracts handle fee calculation, MEV protection, and creator fee distribution transparently.
 
 ## Contract Addresses
 
-All Slinq contracts are deployed and **verified on BscScan** (BSC Mainnet, Chain ID 56):
+Current mainnet launch and trading contracts are deployed and **verified on BscScan** (BSC Mainnet, Chain ID 56):
 
 | Contract | Address |
 |----------|---------|
 | SlinqFactoryInfinity | [`0xBB722F0eFa774c62f910C02f66F1b54279c9C366`](https://bscscan.com/address/0xBB722F0eFa774c62f910C02f66F1b54279c9C366#code) |
 | SlinqHookInfinity | [`0xa834E5d5eE71c75Fa9e4A214927aa6546CFEB700`](https://bscscan.com/address/0xa834E5d5eE71c75Fa9e4A214927aa6546CFEB700#code) |
+| SlinqHookInfinityViewFacet | [`0x8E933B3cB842607C21c74E620d443dD90eBD85cD`](https://bscscan.com/address/0x8E933B3cB842607C21c74E620d443dD90eBD85cD#code) |
 | SlinqLaunchExecutorInfinity | [`0x5630Dd2DF49cDb893D897C3d3e540eF4A723DB0d`](https://bscscan.com/address/0x5630Dd2DF49cDb893D897C3d3e540eF4A723DB0d#code) |
 | SlinqRouterInfinity | [`0xcc22c884a5aa4b86C491a19C53E7b266dc791C3D`](https://bscscan.com/address/0xcc22c884a5aa4b86C491a19C53E7b266dc791C3D#code) |
 | SlinqQuoterInfinity | [`0x53c89d646aAcD4ec51c21D47C3f3c80Ad309602B`](https://bscscan.com/address/0x53c89d646aAcD4ec51c21D47C3f3c80Ad309602B#code) |
 | SlinqFeeLockerInfinity | [`0xB42ff2b3928ba988b9CDF50c2dEaB68d9aA2d07A`](https://bscscan.com/address/0xB42ff2b3928ba988b9CDF50c2dEaB68d9aA2d07A#code) |
 | SlinqLpLockerInfinity | [`0x8C6c893c2A1d1965c78BA3E048791ae5Af7668D9`](https://bscscan.com/address/0x8C6c893c2A1d1965c78BA3E048791ae5Af7668D9#code) |
+| SlinqTokenBuybackBurner | [`0x183B25b94109e12f4aF00EBC7BE0f2966a919239`](https://bscscan.com/address/0x183B25b94109e12f4aF00EBC7BE0f2966a919239#code) |
+
+### Legacy V3 Contracts (Historical Reference)
+
+| Contract | Address |
+|----------|---------|
 | SlinqFactoryV3 | [`0x9f16F119426c43486Ecaf5Df1BD99eA84BCb456d`](https://bscscan.com/address/0x9f16F119426c43486Ecaf5Df1BD99eA84BCb456d#code) |
 | SlinqLpLockerV3 | [`0xA77dEc189be820A11259Dc34C936F42D13AFf5D0`](https://bscscan.com/address/0xA77dEc189be820A11259Dc34C936F42D13AFf5D0#code) |
 | SlinqRouterV3 | [`0x59C6a7326bC7EA60195dE31321188b2932906e59`](https://bscscan.com/address/0x59C6a7326bC7EA60195dE31321188b2932906e59#code) |

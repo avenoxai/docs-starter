@@ -5,7 +5,11 @@ description: Technical reference for integrating with Slinq smart contracts on B
 
 # Developer Documentation
 
-Slinq is a token launchpad built on **PancakeSwap Infinity (V4)** using concentrated liquidity hooks on BNB Chain. This page covers everything you need to integrate with Slinq's on-chain infrastructure.
+Slinq is a token launchpad built on **PancakeSwap Infinity** using concentrated liquidity hooks on BNB Chain. This page is the builder-facing reference for the current mainnet stack.
+
+<Info>
+This Mintlify page is a helpful reference, but runtime addresses should be fetched from `GET https://slinq.meme/api/config/contracts`. For production integrations, use verified contracts and current ABIs as the source of truth.
+</Info>
 
 ## Architecture Overview
 
@@ -33,7 +37,7 @@ All contracts are deployed and verified on **BSC Mainnet (Chain ID: 56)**.
 You can also fetch current addresses programmatically via `GET https://slinq.meme/api/config/contracts`
 </Info>
 
-### Infinity (V4) Contracts
+### Current Mainnet Contracts (Infinity)
 
 | Contract | Address | Purpose |
 |----------|---------|---------|
@@ -47,7 +51,7 @@ You can also fetch current addresses programmatically via `GET https://slinq.mem
 | **SlinqLpLockerInfinity** | [`0x8C6c893c2A1d1965c78BA3E048791ae5Af7668D9`](https://bscscan.com/address/0x8C6c893c2A1d1965c78BA3E048791ae5Af7668D9#code) | Permanent LP lock + fee harvesting |
 | **SlinqTokenBuybackBurner** | [`0x183B25b94109e12f4aF00EBC7BE0f2966a919239`](https://bscscan.com/address/0x183B25b94109e12f4aF00EBC7BE0f2966a919239#code) | BNB-to-$SLINQ buyback and burn |
 
-### PancakeSwap V3 Contracts
+### Legacy V3 Contracts (Historical Reference)
 
 | Contract | Address | Purpose |
 |----------|---------|---------|
@@ -71,14 +75,14 @@ These are PancakeSwap's core contracts that Slinq interacts with:
 
 ## Integrating Trades
 
-The **SlinqRouter** is the primary contract for trading. It wraps/unwraps native BNB automatically so users don't need to deal with WBNB.
+The **SlinqRouterInfinity** contract is the primary trading entrypoint for native BNB flows.
 
 ### Buying Tokens
 
 Send native BNB to buy any Slinq token:
 
 ```solidity
-ISlinqRouter router = ISlinqRouter(0xcc22c884a5aa4b86C491a19C53E7b266dc791C3D);
+ISlinqRouterInfinity router = ISlinqRouterInfinity(0xcc22c884a5aa4b86C491a19C53E7b266dc791C3D);
 
 // Buy token with 0.1 BNB
 router.buyWithBNB{value: 0.1 ether}(
@@ -111,10 +115,10 @@ Slinq pools only support **exact-input** swaps. Exact-output swaps will revert.
 
 ### Getting Price Quotes
 
-Use the **SlinqQuoter** to get expected output amounts before trading:
+Use the **SlinqQuoterInfinity** contract to get expected output amounts before trading:
 
 ```solidity
-ISlinqQuoter quoter = ISlinqQuoter(0x53c89d646aAcD4ec51c21D47C3f3c80Ad309602B);
+ISlinqQuoterInfinity quoter = ISlinqQuoterInfinity(0x53c89d646aAcD4ec51c21D47C3f3c80Ad309602B);
 
 // Quote buying tokens with WBNB
 (uint256 tokensOut, uint256 gas) = quoter.quoteBuyToken(
@@ -176,16 +180,15 @@ If the token was launched by someone other than the creator (e.g. social tokeniz
 
 ### MEV Protection (Launch Premium)
 
-For the first **120 seconds** after a token launches, buy orders pay an additional premium that decays parabolically:
+For the first **30 seconds** after a token launches, buy orders can pay an additional premium that decays parabolically. The total hook fee is always capped at **5%**.
 
 ```
-buyFee = 1% + 5% * (timeRemaining / 120)^2
+buyFee = min(5%, 1% + 5% * (timeRemaining / 30)^2)
 
-t=0s:   6%    (1% + 5%)
-t=30s:  ~3.8%
-t=60s:  ~2.25%
-t=90s:  ~1.3%
-t=120s: 1%    (premium gone)
+t=0s:   5.0%  (capped)
+t=10s:  ~3.2%
+t=20s:  ~1.6%
+t=30s:  1.0%
 ```
 
 Sell fees are always 1%. The MEV premium makes sniping unprofitable.
@@ -199,7 +202,7 @@ volatilityPremium = (40000 * VA^2) / 1,000,000
 totalFee = max(mevFee, baseFee + volatilityPremium)
 ```
 
-Maximum total fee is **capped at 8%**.
+Maximum total hook fee is **capped at 5%**.
 
 ### LP Fees (0.3%)
 
@@ -215,7 +218,7 @@ Slinq uses a gasless "lazy launch" model. Token creation is free for creators â€
 
 <Steps>
   <Step title="Creator signs a LaunchIntent">
-    An EIP-712 typed data signature containing the token name, symbol, image URI, and creator address. No gas required.
+    An EIP-712 typed data signature containing the launch parameters: creator, name, symbol, paired token, fee tier, tick spacing, starting tick, nonce, and deadline. No gas required.
   </Step>
   <Step title="Intent is stored off-chain">
     The signed intent is stored in Slinq's backend until a buyer arrives.
@@ -231,11 +234,11 @@ Slinq uses a gasless "lazy launch" model. Token creation is free for creators â€
 ### LaunchExecutor Interface
 
 ```solidity
-ISlinqLaunchExecutor executor = ISlinqLaunchExecutor(0x5630Dd2DF49cDb893D897C3d3e540eF4A723DB0d);
+ISlinqLaunchExecutorInfinity executor = ISlinqLaunchExecutorInfinity(0x5630Dd2DF49cDb893D897C3d3e540eF4A723DB0d);
 
 executor.executeLazyLaunchAndBuy{value: buyAmountInBNB}(
-    intent,        // LaunchIntent struct (name, symbol, imageURI, creator, salt, deadline, fdv)
-    creatorSig,    // Creator's EIP-712 signature
+    intent,        // LaunchIntent struct (creator, name, symbol, pairedToken, fee, tickSpacing, startingTick, nonce, deadline)
+    signature,     // Creator's EIP-712 signature
     amountOutMin,  // Minimum tokens for the first buy
     deadline,      // Transaction deadline
     buyerSig       // Buyer's authorization signature
@@ -247,7 +250,7 @@ executor.executeLazyLaunchAndBuy{value: buyAmountInBNB}(
 Creator fees accumulate in the **SlinqFeeLocker** and can be claimed at any time.
 
 ```solidity
-ISlinqFeeLocker feeLocker = ISlinqFeeLocker(0xB42ff2b3928ba988b9CDF50c2dEaB68d9aA2d07A);
+ISlinqFeeLockerInfinity feeLocker = ISlinqFeeLockerInfinity(0xB42ff2b3928ba988b9CDF50c2dEaB68d9aA2d07A);
 
 // Claim fees for a single token
 feeLocker.claim(creatorAddress, tokenAddress);
@@ -271,37 +274,31 @@ Anyone can call `claim()` on behalf of a creator â€” the fees always go to the c
 uint256 unclaimed = feeLocker.feesToClaim(creatorAddress, tokenAddress);
 ```
 
-## API Endpoints
+## Runtime Discovery
 
-Slinq provides a REST API for off-chain data:
+For runtime address discovery, use:
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/api/config/contracts` | GET | Current contract addresses |
-| `/api/v1/tokens/:address` | GET | Token metadata and stats |
-| `/api/v1/tokens` | GET | List tokens (paginated) |
-| `/lazy-intent` | POST | Create a new LaunchIntent |
-| `/execute-lazy` | POST | Request lazy launch execution |
+| `/api/config/contracts` | GET | Current deployed contract addresses |
+
+App-layer REST endpoints evolve separately from the on-chain interface surface. For builder integrations, treat verified contracts and their current ABIs as canonical.
 
 ## Pool Structure
 
 Slinq tokens trade on **Concentrated Liquidity (CL)** pools on PancakeSwap:
 
-### Infinity (V4) Pools
-- **Pair:** Token/WBNB (token is always `currency0`)
-- **LP Fee:** 0.3% (3000)
-- **Tick Spacing:** 10
-- **Liquidity:** Single-sided, full-range
-- **LP Lock:** Permanent (no withdraw function)
-- **Hook:** SlinqHookInfinity (dynamic fees, MEV protection)
+### Current Infinity Pools
+- **Pair:** Launch-configured quote pair. Standard mainnet launches use Token/WBNB.
+- **Hook Fee:** 1% base, dynamically adjusted up to a 5% total cap.
+- **Liquidity:** Concentrated liquidity placed by the launcher and locked permanently.
+- **LP Lock:** Permanent (no withdraw function).
+- **Hook:** SlinqHookInfinity (dynamic fees, launch protection, fee distribution).
 
-### PancakeSwap V3 Pools
-- **Pair:** Token/WBNB (or Token/USDT, Token/USD1)
-- **Fee Tier:** 1% (10000)
-- **Tick Spacing:** 200
-- **Liquidity:** Full-range, single position
-- **LP Lock:** Permanent NFT lock in SlinqLpLockerV3
-- **Creator Rewards:** From harvested LP fees (no hook required)
+### Legacy V3 Pools
+- **Pair:** Legacy deployments may use Token/WBNB or other quote pairs.
+- **LP Lock:** Permanent NFT lock in SlinqLpLockerV3.
+- **Creator Rewards:** Harvested from LP fees rather than Infinity hook fees.
 
 ### Reading Pool State
 
@@ -323,7 +320,7 @@ PoolKey memory key = quoter.getPoolKey(tokenAddress);
     Token name, symbol, supply, and creator cannot be changed after deployment. No mint function exists.
   </Card>
   <Card title="On-Chain Fee Distribution" icon="coins">
-    Creator fees are held by the FeeLocker smart contract. Only the creator wallet can receive claimed fees.
+    Creator rewards are tracked onchain and can only be claimed to the configured beneficiary wallet.
   </Card>
   <Card title="CREATE2 Deterministic Deploy" icon="code">
     Token addresses are deterministic based on the LaunchIntent parameters. The same intent always produces the same address.

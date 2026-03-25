@@ -20,7 +20,7 @@ Every trade on your token generates fees. Here's how those fees flow to you.
     The fee is distributed: up to 40% to your creator wallet, 60% to the protocol.
   </Step>
   <Step title="Balance Updates">
-    Your pending balance in the fee locker contract increases.
+    Your claimable creator balance increases automatically.
   </Step>
   <Step title="Claim When Ready">
     You can claim your accumulated fees at any time.
@@ -35,17 +35,17 @@ Every trade in your token's pool generates fees:
 
 | Action | Fee Generated | Your Share |
 |--------|--------------|------------|
-| User buys token | 1% of BNB spent | 0.3-0.4% |
-| User sells token | 1% of BNB received | 0.3-0.4% |
+| User buys token | 1% base fee, plus any active launch or volatility premium | 0.35-0.4% of the hook fee |
+| User sells token | 1% base fee, plus any active volatility premium | 0.35-0.4% of the hook fee |
 
 Your exact share is 40% if you launched the token yourself, or 35% if someone else triggered the on-chain launch (see [fee beneficiaries](/trading/fees#fee-beneficiaries)).
 
 ### Fee Accumulation
 
-Fees accumulate in the fee locker contract:
+Your rewards accumulate onchain as claimable creator fees:
 
 ```
-Your Balance = Sum of (Your Share % × Trade Value) for all trades
+Your Balance = Sum of (Your Share % × Hook Fee Collected) across all trades
 ```
 
 <Info>
@@ -147,7 +147,7 @@ Points from fee earnings count toward your Season Pass rank and rewards.
 </Accordion>
 
 <Accordion title="Can fees be lost?">
-  No. Fees are secured in a smart contract. They cannot be lost, stolen, or redirected.
+  No. Fees are tracked onchain and can only be claimed to the configured beneficiary wallet.
 </Accordion>
 
 <Accordion title="What if my token has no trading?">
