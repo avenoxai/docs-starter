@@ -22,8 +22,8 @@ When you're ready, withdraw your accumulated creator fees from your claimable ba
   <Step title="Click Claim">
     Select the amount to withdraw and confirm the transaction.
   </Step>
-  <Step title="Receive WBNB">
-    Funds arrive in your wallet after the transaction confirms.
+  <Step title="Receive funds">
+    Funds arrive in your wallet after the transaction confirms. BNB Chain rewards arrive as WBNB; Ethereum rewards follow the ETH claim flow.
   </Step>
 </Steps>
 
@@ -40,8 +40,9 @@ Claiming requires a small gas fee:
 
 | Action | Typical Cost |
 |--------|--------------|
-| Single claim | ~0.001-0.002 BNB |
-| Batch claim | ~0.002-0.004 BNB |
+| BNB Chain single claim | ~0.001-0.002 BNB |
+| BNB Chain batch claim | ~0.002-0.004 BNB |
+| Ethereum claim | Variable ETH gas |
 
 <Tip>
 Wait until you've accumulated enough to make the gas fee worthwhile. There's no rush—your fees are safe in the contract.
@@ -68,13 +69,13 @@ Wait until you've accumulated enough to make the gas fee worthwhile. There's no 
 
 Once you claim:
 
-1. **WBNB arrives** — Check your wallet balance
+1. **Funds arrive** — Check your wallet balance
 2. **Unwrap if needed** — Convert WBNB to BNB on PancakeSwap
 3. **Use or hold** — Your BNB is yours to use however you want
 
 ## What is WBNB?
 
-Fees are paid in WBNB (Wrapped BNB):
+BNB Chain hook fees are paid in WBNB (Wrapped BNB):
 
 - WBNB is an ERC-20 version of BNB
 - 1 WBNB = 1 BNB (always)
@@ -95,10 +96,10 @@ Most DeFi activities accept WBNB directly, so you often don't need to unwrap it.
 
 <Accordion title="Claim transaction failed">
   Common causes:
-  - Insufficient BNB for gas
+  - Insufficient ETH or BNB for gas
   - Network congestion
 
-  **Fix**: Add more BNB and try again with default gas settings.
+  **Fix**: Add the correct chain currency and try again with default gas settings.
 </Accordion>
 
 <Accordion title="Claimed but didn't receive funds">

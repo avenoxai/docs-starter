@@ -15,10 +15,10 @@ A decentralized exchange mechanism that uses liquidity pools instead of order bo
 ## B
 
 **BEP-20**
-The token standard on BNB Chain (similar to ERC-20 on Ethereum). All Slinq tokens are BEP-20.
+The token standard on BNB Chain (similar to ERC-20 on Ethereum). BNB Chain Slinq tokens are BEP-20.
 
 **BNB Chain**
-The blockchain network Slinq operates on. Formerly known as Binance Smart Chain (BSC).
+One of Slinq's supported networks. Formerly known as Binance Smart Chain (BSC). BNB Chain Slinq launches trade through PancakeSwap.
 
 ## C
 
@@ -29,12 +29,18 @@ A post on Farcaster (similar to a tweet). You can create tokens by casting at `@
 A liquidity provision method where funds are focused in specific price ranges. PancakeSwap V4 uses this for better capital efficiency.
 
 **Creator**
-The wallet that launched a token. Creators earn 40% of all trading fees.
+The account or wallet assigned as the token creator. Creators earn chain-specific creator revenue.
+
+**Clanker Wrapper**
+Slinq's Ethereum launch rail. It uses Slinq's wrapper around Clanker's SDK and contracts so Slinq tokens can launch through the Clanker-compatible Ethereum flow.
 
 ## D
 
 **DEX (Decentralized Exchange)**
 An exchange that operates without a central authority. PancakeSwap is a DEX.
+
+**Ethereum**
+One of Slinq's supported networks. Ethereum launches use Slinq's Clanker wrapper and trade in ETH/WETH terms.
 
 ## F
 
@@ -53,7 +59,7 @@ The person who executes the on-chain launch transaction for a token. In social t
 ## G
 
 **Gas**
-The fee paid to process transactions on BNB Chain. Paid in BNB.
+The fee paid to process transactions. Paid in ETH on Ethereum and BNB on BNB Chain.
 
 ## H
 
@@ -61,7 +67,7 @@ The fee paid to process transactions on BNB Chain. Paid in BNB.
 A wallet that owns tokens. Holder count is displayed on each token page.
 
 **Hook**
-A PancakeSwap V4 smart contract plugin that runs automatically on every trade. Slinq's hook handles dynamic fee calculation, MEV protection, and creator fee distribution. Hooks are what make Slinq tokens trade natively on PancakeSwap without needing a bonding curve.
+A PancakeSwap V4 smart contract plugin that runs automatically on BNB Chain Infinity trades. Slinq's hook handles dynamic fee calculation, MEV protection, and creator fee distribution for that launch rail.
 
 ## L
 
@@ -69,7 +75,7 @@ A PancakeSwap V4 smart contract plugin that runs automatically on every trade. S
 The availability of tokens for trading. More liquidity = better prices and lower slippage.
 
 **LP (Liquidity Pool)**
-A pool of tokens locked in a smart contract that enables trading. Slinq tokens are paired with WBNB in LP.
+A pool of tokens locked in a smart contract that enables trading. Slinq tokens pair with WETH on Ethereum or WBNB on BNB Chain.
 
 **LP Lock**
 When liquidity is permanently deposited and cannot be withdrawn. All Slinq tokens have locked LP.
@@ -88,7 +94,7 @@ A cryptocurrency created primarily for entertainment or community, often based o
 ## P
 
 **PancakeSwap**
-The largest DEX on BNB Chain. Slinq tokens trade on PancakeSwap V4 Infinity.
+The largest DEX on BNB Chain. BNB Chain Slinq tokens trade on PancakeSwap Infinity or V3.
 
 **Points**
 Season Pass points earned through trading, creating, and referrals.
@@ -127,12 +133,12 @@ The process of turning a social media post into a tradeable token by replying wi
 The short identifier for a token (e.g., $MOON, $DEGEN). Limited to 1-10 characters.
 
 **Token**
-A digital asset on the blockchain. Slinq creates BEP-20 tokens on BNB Chain.
+A digital asset on the blockchain. Slinq creates ERC-20 tokens on Ethereum and BEP-20 tokens on BNB Chain.
 
 ## V
 
 **Volume**
-The total value of tokens traded over a period. Usually measured in BNB or USD.
+The total value of tokens traded over a period. Usually measured in ETH, BNB, or USD.
 
 ## W
 
@@ -141,6 +147,9 @@ Software that stores your private keys and lets you interact with the blockchain
 
 **WBNB (Wrapped BNB)**
 An ERC-20 compatible version of BNB. Used in DeFi protocols. 1 WBNB = 1 BNB always.
+
+**WETH (Wrapped ETH)**
+An ERC-20 compatible version of ETH. Used in DeFi protocols. 1 WETH = 1 ETH.
 
 ---
 

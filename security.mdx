@@ -11,7 +11,7 @@ Slinq is designed with security as a priority. Here's how we protect you.
 
 ### Locked Liquidity
 
-Every Slinq token has **permanently locked liquidity**:
+BNB Chain Slinq tokens have **permanently locked liquidity**:
 
 - LP tokens are sent to the LP Locker contract
 - There is no withdraw function
@@ -46,7 +46,7 @@ Slinq tokens have:
 - 0% pre-mine
 - No hidden wallets
 
-The creator only earns through trading fees, not token holdings.
+The creator only earns through creator revenue, not token holdings.
 
 ## MEV Protection
 
@@ -59,7 +59,7 @@ MEV (Maximal Extractable Value) attacks include:
 
 ### How We Protect You
 
-Slinq's launch protection uses dynamic buy fees during the first 30 seconds after launch. The total hook fee is capped at 5% and then settles back to the 1% base fee.
+On BNB Chain Infinity launches, Slinq's launch protection uses dynamic buy fees during the first 30 seconds after launch. The total hook fee is capped at 5% and then settles back to the 1% base fee.
 
 | Time After Launch | Buy Fee | Sell Fee |
 |-------------------|---------|----------|
@@ -101,7 +101,7 @@ Slinq uses **Privy** for secure wallet connections:
 
 ### Gasless Lazy Launch
 
-Token creation uses a "lazy launch" system with EIP-712 typed signatures:
+BNB Chain token creation uses a "lazy launch" system with EIP-712 typed signatures. Ethereum launches use Slinq's Clanker wrapper flow.
 
 - You sign a message (called a "Launch Intent"), not a transaction — no gas fees for you
 - The token only deploys on-chain when the first buyer arrives
@@ -160,11 +160,11 @@ Slinq provides the platform; investment decisions are yours alone.
 
 ## How Hooks Keep You Safe
 
-All of these protections are built into **PancakeSwap Infinity hooks** and Slinq's permanent liquidity locking. You don't need to take any extra steps; the contracts handle fee calculation, MEV protection, and creator fee distribution transparently.
+BNB Chain protections are built into **PancakeSwap Infinity hooks** and Slinq's permanent liquidity locking. Ethereum launches use the Slinq Clanker wrapper flow. You don't need to take extra steps; the app shows the correct route for each token.
 
 ## Contract Addresses
 
-Current mainnet launch and trading contracts are deployed and **verified on BscScan** (BSC Mainnet, Chain ID 56):
+Current BNB Chain launch and trading contracts are deployed and **verified on BscScan** (BSC Mainnet, Chain ID 56):
 
 | Contract | Address |
 |----------|---------|
@@ -188,7 +188,7 @@ Current mainnet launch and trading contracts are deployed and **verified on BscS
 | SlinqQuoterV3 | [`0xdBD0cE8F770e89Ca543f0dC459E101b0C5716D45`](https://bscscan.com/address/0xdBD0cE8F770e89Ca543f0dC459E101b0C5716D45#code) |
 
 <Info>
-You can also fetch current addresses programmatically via `GET https://slinq.meme/api/config/contracts`
+You can also fetch current BNB Chain addresses programmatically via `GET https://slinq.meme/api/config/contracts`. Ethereum Clanker-wrapper addresses are handled by the app's Ethereum launch route.
 </Info>
 
 <Warning>

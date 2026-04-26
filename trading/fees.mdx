@@ -5,7 +5,17 @@ description: Understanding fees and how they're distributed
 
 # Trading Fees Explained
 
-Every trade on Slinq includes a dynamic fee that starts at 1% but adjusts based on market conditions. These fees are managed by a **hook** — a smart contract plugin built into PancakeSwap V4 that runs automatically on every trade.
+Slinq supports two fee models. Ethereum launches use Slinq's Clanker wrapper and show creator-facing revenue in ETH terms. BNB Chain Infinity launches use a PancakeSwap hook with a 1% base fee plus dynamic launch and volatility protection.
+
+## Ethereum vs BNB Chain Fees
+
+| Chain | How fees work |
+|-------|---------------|
+| **Ethereum** | Launches route through the Slinq Clanker wrapper. Creator-facing revenue combines the creator and initializer-side revenue Slinq exposes to the creator dashboard. |
+| **BNB Chain Infinity** | A PancakeSwap hook collects a 1% base fee, can add launch/volatility premiums up to a 5% cap, and splits fees between creator, initializer, and protocol. |
+| **BNB Chain V3** | No hooks. Creator rewards come from harvested LP fees on the locked V3 position. |
+
+The sections below explain the BNB Chain Infinity hook model.
 
 ## What Are Hooks?
 
@@ -267,7 +277,7 @@ Slinq's fee model aligns incentives:
     - Max 5% cap even in extreme conditions
   </Card>
   <Card title="For Creators" icon="star">
-    - 40% of all trading fees
+    - Up to 40% of BNB Chain hook fees
     - Passive income from every trade
     - Higher fees during volatility = more earnings
     - Incentive to build community

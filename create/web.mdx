@@ -5,7 +5,7 @@ description: Full control over your token with the web launch wizard
 
 # Web Interface Launch
 
-The web interface gives you complete control over your token's appearance and settings. Perfect for branded launches and custom projects.
+The web interface gives you complete control over your token's appearance, chain, and settings. Perfect for branded launches and custom projects.
 
 ## Getting Started
 
@@ -54,11 +54,12 @@ Social links appear on your token's page, helping traders verify your project.
 
 ### Step 3: FDV Configuration
 
-Set your starting Fully Diluted Valuation (FDV):
+Choose your launch chain and set your starting Fully Diluted Valuation (FDV):
 
 | Setting | Range | Default |
 |---------|-------|---------|
-| Starting FDV | 50 - 50,000 BNB | 10 BNB |
+| Ethereum Starting FDV | 1 / 2 / 5 / 10 ETH presets | 2 ETH |
+| BNB Chain Starting FDV | 50 - 50,000 BNB | 10 BNB |
 
 **What is FDV?**
 
@@ -66,7 +67,7 @@ FDV is the total market cap if all tokens were in circulation. It determines you
 
 ```
 Token Price = FDV ÷ Total Supply
-Token Price = 10 BNB ÷ 100,000,000,000 = 0.0000000001 BNB
+Token Price = Starting FDV ÷ Total Supply
 ```
 
 <Columns cols={2}>
@@ -97,7 +98,8 @@ Token details cannot be changed after launch. Double-check everything before sig
 |---------|---------|
 | **Custom Images** | Upload PNG/JPG up to 5MB |
 | **AI Generation** | Generate images and descriptions automatically |
-| **FDV Control** | Set any value from 50 to 50,000 BNB |
+| **Chain Selection** | Launch through Ethereum's Clanker wrapper or BNB Chain's PancakeSwap stack |
+| **FDV Control** | Use ETH presets or BNB Chain custom FDV settings |
 | **Social Links** | Add website, Twitter, and Telegram |
 | **Progress Saving** | Your draft saves automatically |
 
@@ -121,7 +123,7 @@ Token details cannot be changed after launch. Double-check everything before sig
 ## Common Questions
 
 <Accordion title="Do I need BNB to launch?">
-  No—token creation is gasless. You sign a message, not a transaction. You only need BNB if you want to buy your own token after launch.
+  Creating an intent is gasless. You sign a message, not a transaction. You only need ETH or BNB if you want to buy your own token or execute a chain transaction after launch.
 </Accordion>
 
 <Accordion title="Can I edit my token after launch?">
@@ -152,7 +154,7 @@ Token details cannot be changed after launch. Double-check everything before sig
     Watch real-time trades, holder counts, and volume.
   </Step>
   <Step title="Collect rewards">
-    Your 40% fee share accumulates automatically.
+    Your creator revenue accumulates automatically according to the launch rail.
   </Step>
 </Steps>
 

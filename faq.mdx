@@ -8,16 +8,16 @@ description: Frequently asked questions about Slinq
 ## General
 
 <Accordion title="What is Slinq?">
-  Slinq is a social token factory on BNB Chain. You can create tradeable tokens directly from Twitter, Farcaster, or our web interface. Every token automatically gets:
-  - Locked liquidity on PancakeSwap
-  - 40% of trading fees going to the creator
-  - MEV protection during launch
+  Slinq is a social token factory for Ethereum and BNB Chain. You can create tradeable tokens directly from Twitter, Farcaster, Telegram, or our web interface. Launches route through:
+  - Ethereum via Slinq's Clanker wrapper
+  - BNB Chain via PancakeSwap Infinity or V3
+  - Creator revenue for the token creator or beneficiary
 </Accordion>
 
 <Accordion title="How is Slinq different from pump.fun or Four.meme?">
-  **Creator rewards:** Slinq gives creators up to 40% of all trading fees. Most competitors give 0%.
+  **Creator rewards:** Slinq routes creator revenue to the token creator or beneficiary. On BNB Chain hook launches, creators can receive up to 40% of the hook fee.
 
-  **No bonding curve:** Slinq tokens trade natively on PancakeSwap V4 from the first trade — no migration needed.
+  **No bonding curve:** Slinq tokens launch directly onto their trading rail — Clanker-compatible Ethereum launches or PancakeSwap BNB Chain launches.
 
   **Social tokenization:** Reply "tokenize this" to any viral post to turn it into a token. The original author earns fees.
 
@@ -25,7 +25,7 @@ description: Frequently asked questions about Slinq
 
   **AI-powered:** Slinq's AI generates names, tickers, and descriptions automatically for social launches.
 
-  **BNB Chain:** Lower fees than Solana or Base, with deep PancakeSwap liquidity.
+  **Dual-chain design:** Ethereum for Clanker-native distribution, BNB Chain for PancakeSwap-native launches.
 </Accordion>
 
 <Accordion title="Is Slinq safe?">
@@ -39,7 +39,7 @@ description: Frequently asked questions about Slinq
 </Accordion>
 
 <Accordion title="What blockchain does Slinq use?">
-  Slinq runs on **BNB Chain** (Chain ID 56). All tokens are BEP-20 tokens traded on PancakeSwap V4 Infinity.
+  Slinq supports **Ethereum Mainnet** (Chain ID 1) and **BNB Chain** (Chain ID 56). Ethereum launches use Slinq's Clanker wrapper. BNB Chain launches use PancakeSwap Infinity or V3.
 </Accordion>
 
 ## Token Creation
@@ -67,9 +67,8 @@ description: Frequently asked questions about Slinq
 <Accordion title="What's FDV and how do I choose it?">
   FDV (Fully Diluted Valuation) is the total market cap at launch. It determines your token's initial price.
 
-  - **Low FDV (50-200 BNB):** Lower entry price, more growth potential
-  - **Medium FDV (500-2,000 BNB):** Balanced approach
-  - **High FDV (5,000+ BNB):** Higher initial value, needs strong community
+  - **Ethereum:** 1 / 2 / 5 / 10 ETH presets, with 2 ETH as the default
+  - **BNB Chain:** 50-50,000 BNB in the web flow, with 10 BNB as the common default
 </Accordion>
 
 <Accordion title="Can someone copy my token?">
@@ -79,14 +78,15 @@ description: Frequently asked questions about Slinq
 ## Trading
 
 <Accordion title="Where are tokens traded?">
-  New Slinq tokens trade on **PancakeSwap Infinity** through our integrated interface. You can also trade directly on PancakeSwap using the token's contract address.
+  Ethereum Slinq tokens trade through the Clanker wrapper route. BNB Chain tokens trade on PancakeSwap Infinity or V3 through our integrated interface.
 </Accordion>
 
 <Accordion title="What are the trading fees?">
-  - **Base fee:** 1% of trade value
-  - **Creator share:** up to 40% (0.3-0.4% of trade)
-  - **Protocol share:** 60% (0.6% of trade)
-  - Plus gas fees for BNB Chain
+  Fees depend on the launch rail:
+  - **Ethereum:** creator-facing Clanker/Slinq revenue shown in ETH terms
+  - **BNB Chain Infinity:** 1% base hook fee, with up to 40% of hook fees for the creator
+  - **BNB Chain V3:** creator rewards come from harvested LP fees
+  - Plus ETH or BNB gas fees
 
   If someone else triggered the launch of your token, the split is 35% creator + 5% first buyer instead of 40% creator.
 </Accordion>
@@ -101,21 +101,21 @@ description: Frequently asked questions about Slinq
 
 <Accordion title="Why did my transaction fail?">
   Common reasons:
-  - Insufficient BNB for gas
+  - Insufficient ETH or BNB for gas
   - Price moved too much (slippage)
   - Network congestion
 
-  Try again with more BNB in your wallet.
+  Try again with more of the correct chain currency in your wallet.
 </Accordion>
 
 <Accordion title="Can I trade on other DEXs?">
-  Yes. Slinq tokens are standard BEP-20 tokens. You can trade them anywhere that supports the contract address. However, trading outside Slinq may have different fees.
+  Yes. Slinq tokens are standard tokens on their launch chain. BNB Chain tokens are BEP-20; Ethereum tokens are ERC-20. Trading outside Slinq may have different routing or fees.
 </Accordion>
 
 ## Creator Rewards
 
 <Accordion title="How do I earn as a creator?">
-  You automatically earn creator trading fees on your token. If you launched it yourself, you receive 40% of the hook fee. If someone else triggered the on-chain launch, you receive 35% and the initializer receives 5%. Rewards accumulate onchain and can be claimed anytime from your dashboard.
+  You automatically earn creator revenue on your token. Ethereum launches expose the creator-facing Clanker/Slinq revenue in your dashboard. On BNB Chain hook launches, self-launched tokens receive 40% of the hook fee; if someone else triggered the on-chain launch, the creator receives 35% and the initializer receives 5%.
 </Accordion>
 
 <Accordion title="What if someone else tokenized my post?">
@@ -127,7 +127,7 @@ description: Frequently asked questions about Slinq
 </Accordion>
 
 <Accordion title="Are fees paid in BNB or the token?">
-  Fees are paid in **WBNB** (Wrapped BNB), which is equivalent to BNB. You can unwrap it on PancakeSwap if needed.
+  BNB Chain hook fees are paid in **WBNB** (Wrapped BNB), which is equivalent to BNB. Ethereum creator revenue follows the ETH claim flow.
 </Accordion>
 
 <Accordion title="What if no one trades my token?">
@@ -138,8 +138,8 @@ description: Frequently asked questions about Slinq
 
 <Accordion title="How do I earn points?">
   Three ways:
-  - **Trading:** 1 point per BNB traded
-  - **Creating:** 400 points per BNB in creator fees
+  - **Trading:** points based on normalized trading volume
+  - **Creating:** points based on creator fee revenue
   - **Referring:** 25% of your referrals' points
 </Accordion>
 
@@ -158,7 +158,7 @@ description: Frequently asked questions about Slinq
 ## Technical
 
 <Accordion title="What wallet should I use?">
-  Any BNB Chain compatible wallet:
+  Any Ethereum and BNB Chain compatible wallet:
   - MetaMask
   - WalletConnect
   - Coinbase Wallet

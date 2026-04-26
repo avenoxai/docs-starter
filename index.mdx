@@ -1,11 +1,11 @@
 ---
 title: Welcome to Slinq
-description: Turn your social posts into tradeable tokens on BNB Chain
+description: Turn your social posts into tradeable tokens on Ethereum or BNB Chain
 ---
 
 # The Social Token Factory
 
-Slinq lets you create tradeable tokens directly from Twitter, Farcaster, Telegram, or our web app. No coding required, no complex setup — just post and launch. You can even turn someone else's viral post into a token with a single reply.
+Slinq lets you create tradeable tokens directly from Twitter, Farcaster, Telegram, or our web app. No coding required, no complex setup — just post and launch. Tokens can launch on Ethereum through Slinq's Clanker wrapper or on BNB Chain through PancakeSwap.
 
 <Columns cols={3}>
   <Card title="Tweet to Launch" icon="x-twitter" href="/create/twitter">
@@ -22,17 +22,17 @@ Slinq lets you create tradeable tokens directly from Twitter, Farcaster, Telegra
 ## Why Slinq?
 
 <Columns cols={2}>
-  <Card title="40% Creator Rewards" icon="coins">
-    Earn 40% of all trading fees from your token — forever. Most platforms give creators nothing.
+  <Card title="Creator Rewards" icon="coins">
+    Earn creator revenue from your token — forever. BNB Chain hook launches can route up to 40% of hook fees to creators.
   </Card>
   <Card title="Rug-Proof Design" icon="shield-check">
     Liquidity is locked permanently. Creators cannot pull funds or abandon the project.
   </Card>
-  <Card title="Built Into PancakeSwap" icon="plug">
-    Slinq uses PancakeSwap Infinity — your token trades natively on BNB Chain's largest DEX with smart fee management built right in.
+  <Card title="ETH + BNB Launch Rails" icon="link">
+    Launch on Ethereum through Clanker-compatible contracts or on BNB Chain through PancakeSwap. Slinq handles the routing behind the scenes.
   </Card>
   <Card title="MEV Protection" icon="lock">
-    Smart hooks can raise buy fees during the first 30 seconds to block sniper bots, then settle back to the 1% base fee.
+    BNB Chain hook launches can raise buy fees during the first 30 seconds to block sniper bots, then settle back to the 1% base fee.
   </Card>
 </Columns>
 
@@ -43,16 +43,16 @@ Slinq lets you create tradeable tokens directly from Twitter, Farcaster, Telegra
     Tweet, cast, reply "tokenize this" to a viral post, or use our web interface. Slinq's AI handles the rest.
   </Step>
   <Step title="Trading Begins Instantly">
-    Your token is immediately tradeable on PancakeSwap with permanently locked liquidity. No bonding curve, no migration — real DEX trading from second one.
+    Your token is immediately tradeable on its launch rail: Ethereum via the Slinq Clanker wrapper, or BNB Chain via PancakeSwap. No bonding curve, no migration — real DEX trading from second one.
   </Step>
   <Step title="Earn Rewards">
-    Collect up to 40% of all trading fees automatically. Track your earnings on your creator dashboard.
+    Collect creator revenue automatically. Track your earnings on your creator dashboard.
   </Step>
 </Steps>
 
 ## What Makes Slinq Different
 
-Slinq is built directly into PancakeSwap V4 using **hooks** — smart contract plugins that run on every trade. This means:
+Slinq has a dual design: Ethereum launches use our Clanker wrapper, while BNB Chain launches use PancakeSwap Infinity or V3. On the BNB Chain Infinity path, Slinq uses **hooks** — smart contract plugins that run on every trade. This means:
 
 - **No bonding curve** — Your token trades on a real DEX from the start
 - **Dynamic fees** — The hook automatically adjusts fees to protect against bots and manipulation
@@ -61,9 +61,9 @@ Slinq is built directly into PancakeSwap V4 using **hooks** — smart contract p
 
 | Feature | Slinq | Other Launchpads |
 |---------|-------|-----------------|
-| Chain | BNB Chain | Various |
-| DEX Integration | Native PancakeSwap V4 | Bonding curve + migration |
-| Creator Fee Share | 40% | 0% |
+| Chain | Ethereum + BNB Chain | Various |
+| DEX Integration | Clanker wrapper + native PancakeSwap | Bonding curve + migration |
+| Creator Fee Share | Up to 40% on BSC, creator revenue on ETH | 0% |
 | Liquidity | Permanently Locked | Often unlocked |
 | Token Supply | 100 Billion (Fixed) | Varies |
 | Social Tokenization | Reply to tokenize any post | Not available |

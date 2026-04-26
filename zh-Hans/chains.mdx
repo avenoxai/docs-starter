@@ -1,0 +1,34 @@
+---
+title: 支持的链
+description: Slinq 如何在 Ethereum 和 BNB Chain 上发币
+---
+
+# 支持的链
+
+Slinq 现在有两条发币路线：**Ethereum 通过 Slinq 的 Clanker wrapper**，以及 **BNB Chain 通过 PancakeSwap**。你在前端或社交平台发起请求时，Slinq 会帮你处理底层路线。
+
+## 简单版
+
+| 链 | 发币路线 | 适合 |
+|----|----------|------|
+| **Ethereum** | Slinq ETH Clanker wrapper | 默认社交发币、AI agent 发币、Ethereum 原生社区 |
+| **BNB Chain** | PancakeSwap Infinity 或 PancakeSwap V3 | BNB 低成本交易、PancakeSwap 原生发币、Slinq hook fee 模型 |
+
+<Info>
+如果你不指定链，社交和 agent 发币默认走 Ethereum。想走 BNB Chain，请明确写 `on BSC`、`on BNB` 或 `on PancakeSwap`。
+</Info>
+
+## 对用户有什么影响？
+
+| 项目 | Ethereum | BNB Chain |
+|------|----------|-----------|
+| Gas token | ETH | BNB |
+| 交易对 | TOKEN/WETH | TOKEN/WBNB |
+| 默认初始 FDV | 2 ETH | 普通发币默认 10 BNB |
+| 社交发币默认 | 是 | 需要明确要求 |
+| 交易路线 | Clanker wrapper 流程 | PancakeSwap Infinity 或 V3 |
+| 创作者收益 | 以 ETH 展示创作者侧收益 | Infinity hook 发币最高 40%，或 V3 LP fee 收益 |
+
+<Card title="开始发币" icon="rocket" href="/zh-Hans/quickstart">
+  选择你的发币方式，Slinq 会引导对应链路
+</Card>

@@ -5,7 +5,11 @@ description: Create your first token in under a minute
 
 # Launch Your First Token
 
-Choose your preferred method to create a token. All options result in the same token with identical features.
+Choose your preferred method to create a token. Slinq supports Ethereum launches through its Clanker wrapper and BNB Chain launches through PancakeSwap.
+
+<Info>
+Social and agent launches default to Ethereum unless you explicitly ask for BNB Chain with wording like "on BSC", "on BNB", or "on PancakeSwap".
+</Info>
 
 <Tabs>
   <Tab title="Tokenize a Post" icon="wand-magic-sparkles">
@@ -29,7 +33,7 @@ Choose your preferred method to create a token. All options result in the same t
       </Step>
     </Steps>
 
-    <Tip>The original post author earns creator fees (30-40%). You can tokenize anyone's post — it's like gifting them a revenue stream.</Tip>
+    <Tip>The original post author earns creator revenue. You can tokenize anyone's post — it's like gifting them a revenue stream.</Tip>
   </Tab>
 
   <Tab title="Twitter" icon="x-twitter">
@@ -50,7 +54,7 @@ Choose your preferred method to create a token. All options result in the same t
       </Step>
     </Steps>
 
-    <Tip>Your Twitter handle becomes the token creator. You'll earn 40% of all trading fees.</Tip>
+    <Tip>Your Twitter handle becomes the token creator. On BNB Chain hook launches, creators can earn up to 40% of the Slinq hook fee.</Tip>
   </Tab>
 
   <Tab title="Farcaster" icon="message">
@@ -105,7 +109,7 @@ Choose your preferred method to create a token. All options result in the same t
         Enter your token name, symbol, description, and upload an image.
       </Step>
       <Step title="Set your FDV">
-        Choose your starting Fully Diluted Valuation (50-50,000 BNB).
+        Choose your launch chain and starting Fully Diluted Valuation. Ethereum uses ETH presets; BNB Chain uses BNB settings.
       </Step>
       <Step title="Sign and deploy">
         Review your token, sign the transaction, and launch.
@@ -120,10 +124,10 @@ Choose your preferred method to create a token. All options result in the same t
 
 Once your token is created:
 
-1. **Liquidity is added** — Your token is paired with BNB on PancakeSwap
-2. **LP is locked forever** — The liquidity cannot be removed by anyone
+1. **Liquidity is added** — Your token is paired with ETH/WETH on Ethereum or BNB/WBNB on BNB Chain
+2. **LP is locked or routed through the launch rail** — BNB Chain liquidity is locked permanently; Ethereum follows the Clanker wrapper flow
 3. **Trading goes live** — Anyone can buy and sell your token immediately
-4. **You start earning** — 40% of every trade's fees flow to you
+4. **You start earning** — Creator revenue accumulates according to the launch rail
 
 ## Token Parameters
 
@@ -133,12 +137,12 @@ Every Slinq token has these properties:
 |-----------|-------|
 | Total Supply | 100 Billion tokens |
 | Starting FDV | Depends on launch method |
-| Social Tokenization FDV | 5 WBNB |
-| Twitter/Farcaster FDV | 10 WBNB |
-| Web Interface FDV | 50 - 50,000 BNB (default 10) |
-| Trading Pair | TOKEN/WBNB |
-| Base Fee | 1% (managed by PancakeSwap V4 hook) |
-| Creator Share | Up to 40% of fees |
+| Ethereum Default FDV | 2 ETH |
+| Ethereum Presets | 1 / 2 / 5 / 10 ETH |
+| BNB Chain Default FDV | 10 BNB |
+| BNB Chain Web FDV | 50 - 50,000 BNB |
+| Trading Pair | TOKEN/WETH on Ethereum, TOKEN/WBNB on BNB Chain |
+| Creator Share | Chain-specific creator revenue; up to 40% on BNB Chain hook launches |
 
 <Card title="Customize your token" icon="palette" href="/create/customization">
   Learn how to add images, descriptions, and social links

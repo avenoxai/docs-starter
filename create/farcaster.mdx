@@ -34,7 +34,7 @@ Keywords `deploy`, `create`, `launch`, `make`, and `build` all work.
     The Farcaster bot validates your request and prepares the deployment.
   </Step>
   <Step title="Token goes live">
-    Your token deploys on BNB Chain with locked liquidity.
+    Your token launches on Ethereum through the Slinq Clanker wrapper by default, or on BNB Chain when you explicitly ask for BSC/BNB/PancakeSwap.
   </Step>
   <Step title="Confirmation cast">
     Slinq replies to your cast with:
@@ -59,9 +59,11 @@ Farcaster launches use these defaults:
 
 | Parameter | Value |
 |-----------|-------|
-| Starting FDV | 10 WBNB |
+| Default Chain | Ethereum |
+| Ethereum Starting FDV | 2 ETH |
+| BNB Chain Starting FDV | 10 BNB |
 | Total Supply | 100 Billion |
-| Trading Pair | TOKEN/WBNB |
+| Trading Pair | TOKEN/WETH on Ethereum, TOKEN/WBNB on BNB Chain |
 | Image | Custom upload or AI-generated |
 | Description | AI-generated from your cast |
 
@@ -140,7 +142,7 @@ Social tokenization keywords: tokenize, tokenise, make this a token, coin this, 
     Watch trades and holders on your token's Slinq page.
   </Step>
   <Step title="Collect rewards">
-    40% of trading fees go to your creator wallet.
+    Creator revenue goes to your linked creator wallet.
   </Step>
   <Step title="Build community">
     Keep casting about your token to maintain engagement.

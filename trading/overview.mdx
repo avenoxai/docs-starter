@@ -5,7 +5,7 @@ description: Buy and sell tokens on Slinq
 
 # Trading on Slinq
 
-Every new Slinq token is tradeable instantly after launch — no bonding curve, no migration. Trading happens natively on PancakeSwap Infinity through our integrated interface, powered by a hook that manages fees and launch protection automatically.
+Every new Slinq token is tradeable instantly after launch — no bonding curve, no migration. Ethereum tokens trade through Slinq's Clanker wrapper flow, while BNB Chain tokens trade through PancakeSwap Infinity or V3.
 
 ## How Trading Works
 
@@ -17,7 +17,7 @@ Every new Slinq token is tradeable instantly after launch — no bonding curve, 
     Click "Connect Wallet" and choose your preferred method.
   </Step>
   <Step title="Enter trade amount">
-    Type how much BNB you want to spend (buying) or tokens to sell.
+    Type how much ETH or BNB you want to spend, depending on the token's launch chain.
   </Step>
   <Step title="Confirm and sign">
     Review the quote and sign the transaction in your wallet.
@@ -43,7 +43,7 @@ Each token page includes:
     See exactly how many tokens you'll receive before trading.
   </Card>
   <Card title="MEV Protection" icon="shield">
-    Dynamic fees protect you from bots during launches.
+    BNB Chain hook launches use dynamic fees to protect against bots during launch.
   </Card>
   <Card title="Low Slippage" icon="chart-line">
     Concentrated liquidity means better prices.
@@ -57,14 +57,14 @@ Each token page includes:
 
 | Fee Type | Amount | Who Gets It |
 |----------|--------|-------------|
-| Base Fee | 1% | Split below |
-| Creator Share | 0.35-0.4% | Token creator or beneficiary |
-| First Buyer Share | 0-0.05% | Person who triggered the on-chain launch |
-| Protocol Share | 0.6% | Slinq platform |
-| Gas | Variable | BNB network |
+| Fee Type | Ethereum | BNB Chain |
+|----------|----------|-----------|
+| Creator revenue | Clanker/Slinq creator-facing revenue shown in ETH terms | Up to 40% of Slinq hook fees, or V3 harvested fee rewards |
+| Launch protection | Clanker wrapper flow | PancakeSwap hook protection on Infinity launches |
+| Gas | ETH | BNB |
 
 <Info>
-Fees are managed by a PancakeSwap V4 hook and automatically deducted from your trade. The quote you see includes all fees.
+The quote you see includes the relevant route fees for that chain.
 </Info>
 
 ## What You Need
@@ -72,8 +72,8 @@ Fees are managed by a PancakeSwap V4 hook and automatically deducted from your t
 To trade on Slinq:
 
 1. **A wallet** — MetaMask, WalletConnect, or embedded wallet
-2. **BNB** — For gas fees and buying tokens
-3. **Connected to BNB Chain** — Chain ID 56
+2. **ETH or BNB** — For gas fees and buying tokens
+3. **The right network** — Ethereum for ETH launches, BNB Chain for BSC launches
 
 <Card title="Set up your wallet" icon="wallet" href="/supported-wallets">
   Guide to connecting and funding your wallet

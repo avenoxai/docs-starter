@@ -5,15 +5,15 @@ description: How to buy tokens on Slinq
 
 # How to Buy Tokens
 
-Purchase any Slinq token using BNB. The process takes just a few clicks.
+Purchase any Slinq token using the token's launch-chain currency: ETH on Ethereum or BNB on BNB Chain. The process takes just a few clicks.
 
 ## Before You Buy
 
 Make sure you have:
 
 - [ ] Wallet connected to Slinq
-- [ ] BNB in your wallet (for purchase + gas)
-- [ ] Wallet on BNB Chain (Chain ID 56)
+- [ ] ETH or BNB in your wallet (for purchase + gas)
+- [ ] Wallet on the token's launch chain
 
 <Warning>
 Only buy with funds you can afford to lose. Memecoins are highly volatile and speculative.
@@ -32,7 +32,7 @@ Only buy with funds you can afford to lose. Memecoins are highly volatile and sp
     On the token page, locate the trading panel. Make sure "Buy" is selected.
   </Step>
   <Step title="Enter your amount">
-    Type how much BNB you want to spend. You'll see:
+    Type how much ETH or BNB you want to spend. You'll see:
     - Estimated tokens received
     - Price per token
     - Total including fees
@@ -57,9 +57,9 @@ When you enter an amount, you'll see:
 
 | Field | Meaning |
 |-------|---------|
-| **You Pay** | BNB amount leaving your wallet |
+| **You Pay** | ETH or BNB amount leaving your wallet |
 | **You Receive** | Tokens you'll get |
-| **Price** | Current token price in BNB |
+| **Price** | Current token price in ETH or BNB |
 | **Price Impact** | How much your trade moves the price |
 | **Fee** | 1% trading fee included |
 
@@ -69,9 +69,9 @@ Large trades move the price. This is called price impact or slippage.
 
 | Trade Size | Typical Impact |
 |------------|---------------|
-| Small (< 0.1 BNB) | < 0.1% |
-| Medium (0.1-1 BNB) | 0.1-1% |
-| Large (> 1 BNB) | 1%+ |
+| Small | < 0.1% |
+| Medium | 0.1-1% |
+| Large | 1%+ |
 
 <Tip>
 For large purchases, consider splitting into multiple smaller trades to reduce price impact.
@@ -79,7 +79,7 @@ For large purchases, consider splitting into multiple smaller trades to reduce p
 
 ## MEV Protection
 
-During the first 30 seconds after a token launches, the hook can charge higher fees on **buy orders only** to protect against bots. The total hook fee is capped at 5%:
+On BNB Chain Infinity launches, the hook can charge higher fees on **buy orders only** during the first 30 seconds to protect against bots. The total hook fee is capped at 5%:
 
 | Time After Launch | Buy Fee | Sell Fee |
 |-------------------|---------|----------|
@@ -96,11 +96,11 @@ Higher early buy fees discourage sniping bots and give regular users a fair chan
 
 <Accordion title="Transaction failed">
   Common causes:
-  - **Insufficient BNB**: You need BNB for the purchase AND gas fees
+  - **Insufficient funds**: You need ETH or BNB for the purchase AND gas fees
   - **Slippage too low**: The price moved while you were confirming
   - **Network congestion**: Try again with higher gas
 
-  **Fix**: Add more BNB to your wallet and retry.
+  **Fix**: Add the correct chain currency to your wallet and retry.
 </Accordion>
 
 <Accordion title="Price changed">
@@ -113,7 +113,7 @@ Higher early buy fees discourage sniping bots and give regular users a fair chan
 
 <Accordion title="Tokens not appearing">
   After buying, tokens should appear immediately. If not:
-  1. Wait for the transaction to confirm (check BscScan)
+  1. Wait for the transaction to confirm on the correct explorer
   2. Add the token address to your wallet manually
   3. Refresh your wallet's token list
 </Accordion>

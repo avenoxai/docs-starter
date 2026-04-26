@@ -43,6 +43,7 @@
                 "pages": [
                   "index",
                   "quickstart",
+                  "chains",
                   "supported-wallets"
                 ]
               },
@@ -132,6 +133,7 @@
                 "pages": [
                   "zh-Hans/index",
                   "zh-Hans/quickstart",
+                  "zh-Hans/chains",
                   "zh-Hans/supported-wallets"
                 ]
               },

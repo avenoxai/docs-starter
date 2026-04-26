@@ -34,7 +34,7 @@ Keywords `deploy`, `create`, and `launch` all work the same way.
     Slinq detects your mention and validates the parameters.
   </Step>
   <Step title="Token deploys">
-    Your token is created on BNB Chain with locked liquidity on PancakeSwap.
+    Your token is created on Ethereum through the Slinq Clanker wrapper by default, or on BNB Chain if you explicitly ask for BSC/BNB/PancakeSwap.
   </Step>
   <Step title="Receive confirmation">
     `@slinqmeme` replies to your tweet with:
@@ -59,9 +59,11 @@ Tokens created via Twitter use these defaults:
 
 | Parameter | Value |
 |-----------|-------|
-| Starting FDV | 10 WBNB |
+| Default Chain | Ethereum |
+| Ethereum Starting FDV | 2 ETH |
+| BNB Chain Starting FDV | 10 BNB |
 | Total Supply | 100 Billion |
-| Trading Pair | TOKEN/WBNB |
+| Trading Pair | TOKEN/WETH on Ethereum, TOKEN/WBNB on BNB Chain |
 | Image | Custom upload or AI-generated |
 | Description | AI-generated from your tweet |
 
@@ -113,7 +115,7 @@ You can also turn someone else's tweet into a token by replying:
 @slinqmeme tokenize this
 ```
 
-The **original tweet author** becomes the token creator and earns fees. This is called [social tokenization](/create/social-tokenization).
+The **original tweet author** becomes the token creator and earns creator revenue. This is called [social tokenization](/create/social-tokenization).
 
 <Tip>
 Social tokenization keywords: tokenize, tokenise, make this a token, coin this, launch this, mint this

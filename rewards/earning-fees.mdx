@@ -5,7 +5,7 @@ description: Understanding the fee collection and distribution process
 
 # How Fees Accumulate
 
-Every trade on your token generates fees. Here's how those fees flow to you.
+Every trade on your token generates creator revenue. The exact mechanics depend on whether your token launched through Ethereum's Clanker wrapper or BNB Chain's PancakeSwap stack.
 
 ## The Fee Flow
 
@@ -13,11 +13,11 @@ Every trade on your token generates fees. Here's how those fees flow to you.
   <Step title="Trade Happens">
     A user buys or sells your token on Slinq.
   </Step>
-  <Step title="Hook Calculates Fee">
-    The PancakeSwap V4 hook automatically calculates the fee (1% base + any dynamic premiums).
+  <Step title="Route Calculates Fee">
+    Ethereum launches use the Clanker wrapper flow. BNB Chain hook launches use the PancakeSwap V4 hook fee model.
   </Step>
-  <Step title="Hook Splits the Fee">
-    The fee is distributed: up to 40% to your creator wallet, 60% to the protocol.
+  <Step title="Revenue Is Credited">
+    Your creator revenue is credited to the claimable balance for the beneficiary wallet.
   </Step>
   <Step title="Balance Updates">
     Your claimable creator balance increases automatically.
@@ -31,7 +31,7 @@ Every trade on your token generates fees. Here's how those fees flow to you.
 
 ### What Generates Fees
 
-Every trade in your token's pool generates fees:
+On BNB Chain Infinity, every trade in your token's pool generates hook fees:
 
 | Action | Fee Generated | Your Share |
 |--------|--------------|------------|
@@ -49,7 +49,7 @@ Your Balance = Sum of (Your Share % × Hook Fee Collected) across all trades
 ```
 
 <Info>
-Fees are paid in WBNB (Wrapped BNB), which is equivalent to BNB and automatically unwrapped when you claim.
+BNB Chain hook rewards are paid in WBNB. Ethereum creator revenue is shown and claimed in the Ethereum flow.
 </Info>
 
 ## Routing Rewards to Third Parties

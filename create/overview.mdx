@@ -1,11 +1,11 @@
 ---
 title: Token Creation Overview
-description: Five ways to launch your token on Slinq
+description: Ways to launch your token on Ethereum or BNB Chain
 ---
 
 # Creating Tokens
 
-Slinq offers multiple ways to create tokens — from a quick tweet to a full web launch. You can even let AI create tokens from viral posts automatically.
+Slinq offers multiple ways to create tokens — from a quick tweet to a full web launch. Under the hood, launches can route to Ethereum through Slinq's Clanker wrapper or to BNB Chain through PancakeSwap.
 
 <Columns cols={3}>
   <Card title="Twitter" icon="x-twitter" href="/create/twitter">
@@ -36,14 +36,14 @@ Regardless of how you create it, every Slinq token includes:
 |---------|---------|
 | **Fixed Supply** | 100 billion tokens (no inflation) |
 | **Locked Liquidity** | LP locked permanently — no rugs possible |
-| **Creator Rewards** | Up to 40% of all trading fees go to the creator |
-| **MEV Protection** | Smart hooks protect against bots at launch |
-| **Native DEX Trading** | Instant trading on PancakeSwap V4 — no bonding curve |
+| **Creator Rewards** | Creator revenue flows to the launch creator or beneficiary |
+| **MEV Protection** | BNB Chain hook launches include launch protection against bots |
+| **Native DEX Trading** | Ethereum launches use the Clanker wrapper; BNB launches trade on PancakeSwap |
 | **AI-Powered** | Names, tickers, and descriptions generated automatically for social launches |
 
 ## How Slinq Is Different
 
-Unlike other launchpads that use bonding curves and then "migrate" to a DEX, Slinq tokens **trade natively on PancakeSwap from the very first trade**. This is possible because Slinq is built using PancakeSwap V4 **hooks** — smart contract plugins that run automatically on every trade to handle fees, MEV protection, and creator earnings.
+Unlike launchpads that use bonding curves and then "migrate" to a DEX, Slinq tokens start on their real launch venue. Ethereum launches use Slinq's Clanker wrapper, while BNB Chain launches trade through PancakeSwap Infinity or V3. BNB Chain Infinity launches use PancakeSwap **hooks** to handle fees, launch protection, and creator earnings.
 
 ## Comparison
 
@@ -52,7 +52,8 @@ Unlike other launchpads that use bonding curves and then "migrate" to a DEX, Sli
 | Speed | Instant | Instant | Instant | Instant | ~30 seconds |
 | Custom Image | Yes | Yes | Yes | No | Yes |
 | Description | AI-generated | AI-generated | AI-generated | AI-generated | Custom |
-| FDV | 10 WBNB | 10 WBNB | 10 WBNB (or custom) | 5 WBNB | 50-50,000 BNB |
+| Default Chain | Ethereum | Ethereum | BNB Chain | Ethereum | User-selected |
+| FDV | 2 ETH default | 2 ETH default | 10 BNB or custom | 2 ETH default | ETH presets or BNB settings |
 | Wallet Needed | No | No | Yes | No | Yes |
 | Who's the Creator | You | You | You | Original author | You |
 
@@ -92,24 +93,23 @@ Unlike other launchpads that use bonding curves and then "migrate" to a DEX, Sli
 Slinq has a dedicated API that allows AI agents and bots to create tokens programmatically. If you're building an AI agent, trading bot, or automated tool, you can:
 
 - **Launch tokens** via API — no manual interaction needed
-- **Get 1 free gas-sponsored launch per day** — the protocol covers the on-chain transaction cost
+- **Use payload mode for launches** — agents can prepare launches and let the user or caller execute when needed
 - **Set custom fee beneficiaries** — direct creator earnings to any wallet, Twitter handle, or Farcaster username
 - **Trade tokens** — buy and sell through the API with a provisioned wallet
 
 <Info>
-AI agent tokens appear alongside all other tokens on Slinq. They have the same features — locked liquidity, creator fee sharing, and MEV protection through hooks.
+  AI agent tokens appear alongside all other tokens on Slinq. Ethereum launches use the Clanker wrapper; BNB Chain launches use Slinq's PancakeSwap stack.
 </Info>
 
 ## Rate Limits
 
 To maintain platform quality, each user has daily creation limits:
 
-| Platform | Tokens Per Day |
-|----------|---------------|
-| Twitter | 2 |
-| Farcaster | 4 |
-| Telegram | 3 |
-| Web | 3 |
+| Limit | Value |
+|-------|-------|
+| Total launch intents | 3 per requester per 24 hours |
+| Sponsored BNB Chain launches | 1 per requester per 24 hours |
+| Ethereum wrapper launches | Not gas-sponsored by Slinq; they wait for first buy or execution |
 
 <Info>
 Rate limits reset at midnight UTC. If you need higher limits for a legitimate project, contact us.

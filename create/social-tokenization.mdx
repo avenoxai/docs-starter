@@ -5,7 +5,7 @@ description: Turn any viral post into a tradeable token with a simple reply
 
 # Social Tokenization
 
-See a tweet or cast going viral? You can turn it into a tradeable token just by replying with a keyword. The original author automatically becomes the token creator and earns fees from every trade.
+See a tweet or cast going viral? You can turn it into a tradeable token just by replying with a keyword. The original author automatically becomes the token creator and earns creator revenue from every trade.
 
 ## How It Works
 
@@ -20,7 +20,7 @@ See a tweet or cast going viral? You can turn it into a tradeable token just by 
     Slinq's AI reads the original post and automatically generates a fitting token name, ticker, and description.
   </Step>
   <Step title="Token goes live">
-    The token deploys with the **original author** as the creator. They earn 40% of all trading fees.
+    The token deploys with the **original author** as the creator. Social tokenization defaults to Ethereum through Slinq's Clanker wrapper unless BNB Chain is explicitly requested.
   </Step>
 </Steps>
 
@@ -53,8 +53,8 @@ This is the key difference from a normal launch:
 
 | Launch Method | Who is the Creator | Who Earns Fees |
 |---------------|-------------------|----------------|
-| **Social Tokenization** (reply) | Original post author | Original post author (40%) |
-| **Normal Launch** (direct request) | The person requesting | The person requesting (40%) |
+| **Social Tokenization** (reply) | Original post author | Original post author |
+| **Normal Launch** (direct request) | The person requesting | The person requesting |
 
 <Info>
 The person who replies with "tokenize this" is **not** the creator. The author of the original post is. This means you can gift someone a token and they'll earn from it.
@@ -62,18 +62,19 @@ The person who replies with "tokenize this" is **not** the creator. The author o
 
 ## Token Parameters
 
-Socially tokenized posts use these settings:
+Socially tokenized posts use these settings by default:
 
 | Parameter | Value |
 |-----------|-------|
-| Starting FDV | 5 WBNB |
+| Launch Chain | Ethereum |
+| Starting FDV | 2 ETH |
 | Total Supply | 100 Billion |
 | Name & Ticker | AI-generated from the post content |
 | Description | AI-generated summary of the post |
 | Image | Auto-generated |
 
 <Info>
-The lower 5 WBNB starting FDV (compared to 10 WBNB for normal launches) makes it easy for anyone to get in early on viral moments.
+Ask for BNB Chain explicitly if you want the PancakeSwap launch rail instead.
 </Info>
 
 ## Where Do These Tokens Appear?
@@ -94,7 +95,7 @@ You don't need to specify any parameters — the AI handles everything.
 
 ## Fee Sharing
 
-When someone else tokenizes your post, you earn as the creator:
+When someone else tokenizes your post, you earn as the creator. On BNB Chain hook launches, the creator/initializer split is:
 
 | Scenario | Creator Share | First Buyer Share | Protocol |
 |----------|-------------|-------------------|----------|

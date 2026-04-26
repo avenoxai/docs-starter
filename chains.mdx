@@ -1,0 +1,87 @@
+---
+title: Supported Chains
+description: How Slinq launches tokens on Ethereum and BNB Chain
+---
+
+# Supported Chains
+
+Slinq now supports two launch rails: **Ethereum through the Slinq Clanker wrapper** and **BNB Chain through PancakeSwap**. The app handles the routing for you, so creators can launch from social or web without learning the underlying contracts.
+
+## The Short Version
+
+| Chain | Launch rail | Best for |
+|-------|-------------|----------|
+| **Ethereum** | Slinq ETH Clanker wrapper | Default social and agent launches, Ethereum-native communities, Clanker ecosystem distribution |
+| **BNB Chain** | PancakeSwap Infinity or PancakeSwap V3 | Low-cost BNB trading, Slinq hook fees, PancakeSwap-native launches |
+
+<Info>
+If you do not choose a chain, Slinq routes social and agent launches to Ethereum by default. Use explicit wording like "on BSC", "on BNB", or "on PancakeSwap" when you want the BNB Chain path.
+</Info>
+
+## Ethereum Launches
+
+Ethereum launches use Slinq's wrapper around Clanker's SDK and contracts. You still launch from Slinq, but the token is created through the proven Clanker flow on Ethereum.
+
+<Columns cols={2}>
+  <Card title="Clanker-Based Launches" icon="bolt">
+    Slinq prepares the launch through its ETH wrapper and routes it through Clanker-compatible contracts.
+  </Card>
+  <Card title="ETH/WETH Market" icon="ethereum">
+    Ethereum tokens trade against ETH/WETH, and creator revenue is shown in ETH terms.
+  </Card>
+  <Card title="Claim Vaults" icon="vault">
+    Social creators can earn before connecting a wallet. Their claim identity is held until they connect and claim.
+  </Card>
+  <Card title="Simple FDV Presets" icon="sliders">
+    Ethereum launches use ETH-based starting FDV presets, with 2 ETH as the default.
+  </Card>
+</Columns>
+
+## BNB Chain Launches
+
+BNB Chain launches use Slinq's PancakeSwap stack. Depending on the launch route, tokens can use PancakeSwap Infinity hooks or PancakeSwap V3.
+
+<Columns cols={2}>
+  <Card title="PancakeSwap Infinity" icon="plug">
+    Hook-based trading with dynamic launch protection and Slinq creator fee sharing.
+  </Card>
+  <Card title="PancakeSwap V3" icon="chart-line">
+    PancakeSwap V3 support for broader pool visibility and harvested LP-fee rewards.
+  </Card>
+  <Card title="BNB/WBNB Market" icon="coins">
+    BNB Chain tokens trade against BNB/WBNB through the Slinq interface.
+  </Card>
+  <Card title="Locked Liquidity" icon="shield-check">
+    Slinq locks liquidity permanently so creators cannot withdraw the trading pool.
+  </Card>
+</Columns>
+
+## What Changes For Users?
+
+| Topic | Ethereum | BNB Chain |
+|-------|----------|-----------|
+| Gas token | ETH | BNB |
+| Pair | TOKEN/WETH | TOKEN/WBNB |
+| Default starting FDV | 2 ETH | 10 BNB for normal launches |
+| Social launch default | Yes | Only when explicitly requested |
+| Trading venue | Clanker-compatible Ethereum flow | PancakeSwap Infinity or V3 |
+| Creator rewards | Creator-facing Clanker/Slinq revenue shown in ETH | Up to 40% creator share on Slinq hook or V3 harvested fee rewards |
+
+## Which Chain Should I Pick?
+
+<Tabs>
+  <Tab title="Pick Ethereum" icon="ethereum">
+    - Your audience already trades on Ethereum
+    - You want the Clanker ecosystem launch route
+    - You are launching through a social or AI-agent flow and do not need BNB-specific routing
+  </Tab>
+  <Tab title="Pick BNB Chain" icon="coins">
+    - Your community prefers BNB Chain
+    - You want PancakeSwap-native trading
+    - You want Slinq's BSC hook-based creator fee model and launch protection
+  </Tab>
+</Tabs>
+
+<Card title="Launch your token" icon="rocket" href="/quickstart">
+  Choose your launch method and Slinq will guide the chain flow
+</Card>
