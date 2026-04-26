@@ -29,6 +29,28 @@ Slinq 现在有两条发币路线：**Ethereum 通过 Slinq 的 Clanker wrapper*
 | 交易路线 | Clanker wrapper 流程 | PancakeSwap Infinity 或 V3 |
 | 创作者收益 | 以 ETH 展示创作者侧收益 | Infinity hook 发币最高 40%，或 V3 LP fee 收益 |
 
+## Clanker 参考链接
+
+Slinq 的 Ethereum 路线会引用 Clanker 的公开部署。直接交互前，请始终从 Clanker 官方文档或 Etherscan 验证地址。
+
+| 合约 | Ethereum Mainnet 地址 |
+|------|-----------------------|
+| Clanker | [`0x6C8599779B03B00AAaE63C6378830919Abb75473`](https://etherscan.io/address/0x6C8599779B03B00AAaE63C6378830919Abb75473#code) |
+| ClankerFeeLocker | [`0xA9C0a423f0092176fC48d7B50a1fCae8cf5BB441`](https://etherscan.io/address/0xA9C0a423f0092176fC48d7B50a1fCae8cf5BB441#code) |
+| ClankerLpLockerFeeConversion | [`0x00C4b21889145CF0D99f2e05919103e0c3991974`](https://etherscan.io/address/0x00C4b21889145CF0D99f2e05919103e0c3991974#code) |
+| ClankerVault | [`0xa1da0600Eb4A9F3D4a892feAa2c2caf80A4A2f14`](https://etherscan.io/address/0xa1da0600Eb4A9F3D4a892feAa2c2caf80A4A2f14#code) |
+| ClankerUniv4EthDevBuy | [`0x70aDdc06fE89a5cF9E533aea8D025dB06795e492`](https://etherscan.io/address/0x70aDdc06fE89a5cF9E533aea8D025dB06795e492#code) |
+| ClankerHookStaticFee | [`0x6C24D0bCC264EF6A740754A11cA579b9d225e8Cc`](https://etherscan.io/address/0x6C24D0bCC264EF6A740754A11cA579b9d225e8Cc#code) |
+
+<CardGroup cols={2}>
+  <Card title="Clanker 官方部署" icon="file-contract" href="https://clanker.gitbook.io/clanker-documentation/references/deployed-contracts">
+    查看 Clanker 在各网络发布的合约地址。
+  </Card>
+  <Card title="Clanker 审计" icon="shield-check" href="https://clanker.gitbook.io/clanker-documentation/references/audits">
+    查看 Clanker 发布的 Macro、Cantina 和 Quantstamp 审计报告。
+  </Card>
+</CardGroup>
+
 <Card title="开始发币" icon="rocket" href="/zh-Hans/quickstart">
   选择你的发币方式，Slinq 会引导对应链路
 </Card>
